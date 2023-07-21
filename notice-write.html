@@ -226,23 +226,32 @@
 						<li class="breadcrumb-item active" aria-current="page">공지사항</li>
 					</ol>
 				</nav>
-				<div>
-					<!-- Text input -->
-					<div class="mb-3">
-						<label for="text-input" class="form-label">Text</label>
-						<input class="form-control" type="text" id="text-input" value="Artisanal kale" />
+				<!-- Page title + filters-->
+				<div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
+					<div class="col-lg-5">
+						<h1 class="mb-lg-0">공지사항</h1>
 					</div>
+				</div>
+				<!-- Post-->
+				<div class="row mt-lg-5">
+					<div class="col col-lg-8" style="margin: 0 auto">
+						<div class="mb-4">
+							<label class="form-label mb-2">제목</label>
+							<input class="form-control" type="text" value="제목을 입력해주세요." />
+						</div>
 
-					<!-- Search input -->
-					<div class="mb-3">
-						<label for="search-input" class="form-label">Search</label>
-						<input class="form-control" type="search" id="search-input" value="How do I shoot web" />
-					</div>
+						<div class="mb-4">
+							<label class="form-label mb-2">내용</label>
+							<textarea class="form-control" rows="15">에디터 자리</textarea>
+						</div>
 
-					<!-- Email input -->
-					<div class="mb-3">
-						<label for="email-input" class="form-label">Email</label>
-						<input class="form-control" type="email" id="email-input" value="email@example.com" />
+						<div>
+							<label class="form-label mb-2">첨부파일</label>
+							<input class="form-control mb-2" type="file" id="file-input" />
+							<input class="form-control mb-2" type="file" id="file-input" />
+							<input class="form-control mb-2" type="file" id="file-input" />
+							<input class="form-control" type="file" id="file-input" />
+						</div>
 					</div>
 				</div>
 			</div>
