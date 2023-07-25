@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="admin">
 	<head>
 		<meta charset="utf-8" />
-		<title>한국보육진흥원</title>
+		<title>Around | Portfolio Grid View v.1</title>
 		<!-- SEO Meta Tags-->
 		<meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
 		<meta
@@ -140,7 +140,7 @@
 		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
 	</head>
 	<!-- Body-->
-	<body>
+	<body class="bg-secondary">
 		<!-- Page loading spinner-->
 		<div class="page-loading active">
 			<div class="page-loading-inner">
@@ -154,31 +154,19 @@
 			<header class="navbar navbar-expand-lg fixed-top">
 				<div class="container">
 					<a class="navbar-brand pe-sm-3" href="index.html">
-						<img src="/assets/images/logo.png" alt="" />
-						<p>어린이집 평가제 개편 시범사업</p>
+						<img src="/assets/images/logo-admin.png" alt="" />
+						<p>관리자 페이지</p>
 					</a>
 
 					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
 						<a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 							<div class="ps-2">
 								<div class="fs-xs lh-1 opacity-60">안녕하세요.</div>
-								<div class="fs-sm dropdown-toggle">새싹어린이집 님</div>
+								<div class="fs-sm dropdown-toggle">관리자 님</div>
 							</div></a
 						>
 						<div class="dropdown-menu dropdown-menu-end my-1">
-							<h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">Account</h6>
-							<a class="dropdown-item" href="account-overview.html"><i class="ai-user-check fs-lg opacity-70 me-2"></i>Overview</a
-							><a class="dropdown-item" href="account-settings.html"><i class="ai-settings fs-lg opacity-70 me-2"></i>Settings</a
-							><a class="dropdown-item" href="account-billing.html"><i class="ai-wallet fs-base opacity-70 me-2 mt-n1"></i>Billing</a>
-							<div class="dropdown-divider"></div>
-							<h6 class="dropdown-header fs-xs fw-medium text-muted text-uppercase pb-1">Dashboard</h6>
-							<a class="dropdown-item" href="account-orders.html"><i class="ai-cart fs-lg opacity-70 me-2"></i>Orders</a
-							><a class="dropdown-item" href="account-earnings.html"><i class="ai-activity fs-lg opacity-70 me-2"></i>Earnings</a
-							><a class="dropdown-item d-flex align-items-center" href="account-chat.html"
-								><i class="ai-messages fs-lg opacity-70 me-2"></i>Chat<span class="badge bg-danger ms-auto">4</span></a
-							><a class="dropdown-item" href="account-favorites.html"><i class="ai-heart fs-lg opacity-70 me-2"></i>Favorites</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="account-signin.html"><i class="ai-logout fs-lg opacity-70 me-2"></i>Sign out</a>
+							<a class="dropdown-item" href=""><i class="ai-logout fs-lg opacity-70 me-2"></i>로그아웃</a>
 						</div>
 					</div>
 					<button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -187,39 +175,24 @@
 					<nav class="collapse navbar-collapse" id="navbarNav">
 						<ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">사업안내</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">게시판 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="account-overview.html">사업안내</a></li>
-									<li><a class="dropdown-item" href="account-settings.html">공지사항</a></li>
-									<li><a class="dropdown-item" href="account-billing.html">자주하는 질문</a></li>
+									<li><a class="dropdown-item" href="notice-write.html">공지사항 등록</a></li>
+									<li><a class="dropdown-item" href="faq-write.html">자주하는 질문 등록</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 현황</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="account-overview.html">어린이집 정보</a></li>
-									<li><a class="dropdown-item" href="account-settings.html">자체평가 위원회</a></li>
+									<li><a class="dropdown-item" href="kindergarden-list.html">어린이집 현황</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">자체평가 보고서</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">평가 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="account-overview.html">보육과정</a></li>
-									<li><a class="dropdown-item" href="account-settings.html">운영관리</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="account-overview.html">현장평가일 조회</a></li>
-									<li><a class="dropdown-item" href="account-settings.html">평가결과서 조회</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">참여확인서</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="account-overview.html">만족도 조사</a></li>
-									<li><a class="dropdown-item" href="account-settings.html">증명서 조회‧출력</a></li>
+									<li><a class="dropdown-item" href="">현장평가자 조회</a></li>
+									<li><a class="dropdown-item" href="">현장평가자 조구성 입력</a></li>
+									<li><a class="dropdown-item" href="">현장평가자 배치 입력</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -236,15 +209,51 @@
 				</div>
 			</header>
 			<!-- Page content-->
-			<div class="container overflow-hidden py-5 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
+			<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
 				<!-- Breadcrumb-->
 				<nav aria-label="breadcrumb">
 					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Portfolio grid v.1</li>
+						<li class="breadcrumb-item"><a href="index.html">게시판 관리</a></li>
+						<li class="breadcrumb-item active" aria-current="page">자주하는 질문 등록</li>
 					</ol>
 				</nav>
-				page
+				<!-- Page title + filters-->
+				<div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
+					<div class="col-lg-5">
+						<h1 class="mb-lg-0">자주하는 질문 등록</h1>
+					</div>
+				</div>
+				<!-- Post-->
+				<div class="row">
+					<div class="col col-lg-8" style="margin: 0 auto">
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
+							<div class="card-body">
+								<div class="mb-4">
+									<label class="form-label mb-2">제목</label>
+									<input class="form-control" type="text" value="제목을 입력해주세요." />
+								</div>
+
+								<div class="mb-4">
+									<label class="form-label mb-2">내용</label>
+									<textarea class="form-control" rows="15">에디터 자리</textarea>
+								</div>
+
+								<div class="mb-4">
+									<label class="form-label mb-2">첨부파일</label>
+									<input class="form-control mb-2" type="file" id="file-input" />
+									<input class="form-control mb-2" type="file" id="file-input" />
+									<input class="form-control mb-2" type="file" id="file-input" />
+									<input class="form-control" type="file" id="file-input" />
+								</div>
+
+								<div class="mt-4 text-end">
+									<button class="btn btn-lg btn-primary" type="submit">저장</button>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
 			</div>
 		</main>
 		<!-- Footer-->
@@ -255,7 +264,6 @@
 				</p>
 			</div>
 		</footer>
-
 		<!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
 			<svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg

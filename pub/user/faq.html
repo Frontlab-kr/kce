@@ -155,7 +155,6 @@
 				<div class="container">
 					<a class="navbar-brand pe-sm-3" href="index.html">
 						<img src="/assets/images/logo.png" alt="" />
-						<p>어린이집 평가제 개편 시범사업</p>
 					</a>
 
 					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
@@ -193,7 +192,8 @@
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">자체평가 보고서</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="report.html">자체평가 보고서</a></li>
+									<li><a class="dropdown-item" href="report01.html">자체평가 보고서 작성</a></li>
+									<li><a class="dropdown-item" href="report.html">자체평가 보고서 확인</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
@@ -231,31 +231,126 @@
 					<div class="col-lg-5">
 						<h1 class="mb-lg-0">자주하는 질문</h1>
 					</div>
+					<div class="col-xl-2 offset-xl-1 col-lg-3 col-sm-5"></div>
+					<div class="col-lg-4 col-sm-7">
+						<div class="position-relative">
+							<i class="ai-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+							<input class="form-control ps-5" type="search" placeholder="검색어를 입력해주세요." />
+						</div>
+					</div>
 				</div>
 				<!-- Post-->
-				<div class="row mt-lg-5">
-					<div class="col col-lg-8" style="margin: 0 auto">
-						<div class="mb-4">
-							<label class="form-label mb-2">제목</label>
-							<input class="form-control" type="text" value="제목을 입력해주세요." />
+				<!-- Default accordion -->
+				<div class="accordion" id="accordionDefault">
+					<!-- Item -->
+					<div class="accordion-item">
+						<h3 class="accordion-header" id="headingOne">
+							<button
+								class="accordion-button"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseOne"
+								aria-expanded="true"
+								aria-controls="collapseOne"
+							>
+								의무평가제에서는 어린이집에서 평가를 신청하는 것이 아니라 한국보육진흥원에서 평가대상을 선정하여 통보한다고 하는데 평가대상 선정은 어떻게
+								이루어지나요?
+							</button>
+						</h3>
+						<div class="accordion-collapse collapse show" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#accordionDefault">
+							<div class="accordion-body fs-sm">
+								평가제에서는 한국보육진흥원이 평가주기에 따라 평가대상을 선정하여 통보하고, 선정통보일로부터 6개월 경과 시 현장평가를 진행합니다. 이때 평가
+								어린이집은 평가 도래 시기(인증유지 어린이집은 기존 인증유효기간과 연계하여 만료 전 평가 실시)에 맞추어 평가를 실시하고 신규평가 어린이집은
+								개원일(또는 운영재개일)로부터 6개월 경과 후 평가대상으로 선정합니다.
+							</div>
 						</div>
+					</div>
 
-						<div class="mb-4">
-							<label class="form-label mb-2">내용</label>
-							<textarea class="form-control" rows="15">에디터 자리</textarea>
+					<!-- Item -->
+					<div class="accordion-item">
+						<h3 class="accordion-header" id="headingTwo">
+							<button
+								class="accordion-button collapsed"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseTwo"
+								aria-expanded="false"
+								aria-controls="collapseTwo"
+							>
+								인증유지 어린이집입니다. 대표자 변경을 앞두고 있습니다. 대표자 변경 이후 평가대상으로 언제 통보되나요?
+							</button>
+						</h3>
+						<div class="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionDefault">
+							<div class="accordion-body fs-sm">
+								인증유지 어린이집에서 대표자가 변경될 경우, 구(舊)법에 따라 인증유효기간 종료 처리가 진행되며, 인증유효기간 종료 처리 후 변경인가일로부터 3개월
+								이내에 선정통보를 진행합니다.<br />
+								※ 단, 매월 평가 진행 개소수에 따라 평가시기가 조정될 수 있음
+							</div>
 						</div>
+					</div>
 
-						<div>
-							<label class="form-label mb-2">첨부파일</label>
-							<input class="form-control mb-2" type="file" id="file-input" />
-							<input class="form-control mb-2" type="file" id="file-input" />
-							<input class="form-control mb-2" type="file" id="file-input" />
-							<input class="form-control" type="file" id="file-input" />
+					<!-- Item -->
+					<div class="accordion-item">
+						<h3 class="accordion-header" id="headingThree">
+							<button
+								class="accordion-button collapsed"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseThree"
+								aria-expanded="false"
+								aria-controls="collapseThree"
+							>
+								인증유지 어린이집입니다. 대표자 변경을 앞두고 있습니다. 대표자 변경 이후 평가대상으로 언제 통보되나요?
+							</button>
+						</h3>
+						<div class="accordion-collapse collapse" id="collapseThree" aria-labelledby="headingThree" data-bs-parent="#accordionDefault">
+							<div class="accordion-body fs-sm">
+								인증유지 어린이집에서 대표자가 변경될 경우, 구(舊)법에 따라 인증유효기간 종료 처리가 진행되며, 인증유효기간 종료 처리 후 변경인가일로부터 3개월
+								이내에 선정통보를 진행합니다.<br />
+								※ 단, 매월 평가 진행 개소수에 따라 평가시기가 조정될 수 있음
+							</div>
 						</div>
+					</div>
+				</div>
 
-						<div class="mt-4 text-end">
-							<button class="btn btn-lg btn-primary" type="submit">저장</button>
-						</div>
+				<!-- Pagination-->
+				<div class="row gy-3 align-items-center mt-lg-5 pt-2 pt-md-3 pt-lg-0 mb-md-2 mb-xl-4">
+					<div class="col">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-center">
+								<li class="page-item">
+									<a href="#" class="page-link">
+										<i class="ai-arrow-left fs-xl"></i>
+									</a>
+								</li>
+								<li class="page-item d-sm-none">
+									<span class="page-link pe-none">2 / 5</span>
+								</li>
+								<li class="page-item d-none d-sm-block">
+									<a href="#" class="page-link">1</a>
+								</li>
+								<li class="page-item active d-none d-sm-block" aria-current="page">
+									<span class="page-link">
+										2
+										<span class="visually-hidden">(current)</span>
+									</span>
+								</li>
+								<li class="page-item d-none d-sm-block">
+									<a href="#" class="page-link">3</a>
+								</li>
+								<li class="page-item d-none d-sm-block">
+									<a href="#" class="page-link">4</a>
+								</li>
+								<li class="page-item d-none d-sm-block">
+									<a href="#" class="page-link">5</a>
+								</li>
+								<li class="page-item">
+									<a href="#" class="page-link">
+										<i class="ai-arrow-right fs-xl"></i>
+									</a>
+								</li>
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</div>

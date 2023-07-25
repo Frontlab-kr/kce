@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="admin">
 	<head>
 		<meta charset="utf-8" />
-		<title>한국보육진흥원</title>
+		<title>Around | Portfolio Grid View v.1</title>
 		<!-- SEO Meta Tags-->
 		<meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
 		<meta
@@ -154,20 +154,18 @@
 			<header class="navbar navbar-expand-lg fixed-top">
 				<div class="container">
 					<a class="navbar-brand pe-sm-3" href="index.html">
-						<img src="/assets/images/logo.png" alt="" />
-						<p>어린이집 평가제 개편 시범사업</p>
+						<img src="/assets/images/logo-admin.png" alt="" />
+						<p>관리자 페이지</p>
 					</a>
 
 					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
 						<a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 							<div class="ps-2">
 								<div class="fs-xs lh-1 opacity-60">안녕하세요.</div>
-								<div class="fs-sm dropdown-toggle">새싹어린이집 님</div>
+								<div class="fs-sm dropdown-toggle">관리자 님</div>
 							</div></a
 						>
 						<div class="dropdown-menu dropdown-menu-end my-1">
-							<a class="dropdown-item" href="kindergarden.html"><i class="ai-home fs-lg opacity-70 me-2"></i>어린이집 정보</a>
-							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href=""><i class="ai-logout fs-lg opacity-70 me-2"></i>로그아웃</a>
 						</div>
 					</div>
@@ -177,30 +175,24 @@
 					<nav class="collapse navbar-collapse" id="navbarNav">
 						<ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">사업안내</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">게시판 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="">사업안내</a></li>
-									<li><a class="dropdown-item" href="notice-list.html">공지사항</a></li>
-									<li><a class="dropdown-item" href="faq.html">자주하는 질문</a></li>
+									<li><a class="dropdown-item" href="notice-write.html">공지사항 등록</a></li>
+									<li><a class="dropdown-item" href="faq-write.html">자주하는 질문 등록</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 현황</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="kindergarden.html">어린이집 정보</a></li>
+									<li><a class="dropdown-item" href="kindergarden-list.html">어린이집 현황</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">자체평가 보고서</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">평가 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="report.html">자체평가 보고서</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="edu-date.html">현장평가일 조회</a></li>
-									<li><a class="dropdown-item" href="edu-report.html">평가결과서 조회</a></li>
+									<li><a class="dropdown-item" href="">현장평가자 조회</a></li>
+									<li><a class="dropdown-item" href="">현장평가자 조구성 입력</a></li>
+									<li><a class="dropdown-item" href="">현장평가자 배치 입력</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -222,8 +214,8 @@
 				<nav aria-label="breadcrumb">
 					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item"><a href="index.html">어린이집 현황</a></li>
-						<li class="breadcrumb-item active" aria-current="page">어린이집 정보</li>
+						<li class="breadcrumb-item"><a href="index.html">어린이집 관리</a></li>
+						<li class="breadcrumb-item active" aria-current="page">어린이집 현황</li>
 					</ol>
 				</nav>
 
@@ -306,10 +298,7 @@
 									</div>
 									<div class="col-sm-12">
 										<label class="form-label">주소</label>
-										<div class="d-flex">
-											<input class="form-control" type="text" placeholder="주소를 입력해주세요." value="서울특별시 용산구 서계동 209" disabled />
-											<button class="btn btn-secondary ms-2" type="button">검색</button>
-										</div>
+										<input class="form-control" type="text" placeholder="주소를 입력해주세요." value="서울특별시 용산구 서계동 209" disabled />
 									</div>
 									<div class="col-sm-6">
 										<label class="form-label">정원</label>
