@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="admin">
 	<head>
 		<meta charset="utf-8" />
 		<title>한국보육진흥원</title>
@@ -154,14 +154,15 @@
 			<header class="navbar navbar-expand-lg fixed-top">
 				<div class="container">
 					<a class="navbar-brand pe-sm-3" href="index.html">
-						<img src="/assets/images/logo.png" alt="" />
+						<img src="/assets/images/logo-admin.png" alt="" />
+						<p>현장평가자</p>
 					</a>
 
 					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
 						<a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 							<div class="ps-2">
 								<div class="fs-xs lh-1 opacity-60">안녕하세요.</div>
-								<div class="fs-sm dropdown-toggle">새싹 어린이집 님</div>
+								<div class="fs-sm dropdown-toggle">송숙자 현장평가자님</div>
 							</div></a
 						>
 						<div class="dropdown-menu dropdown-menu-end my-1">
@@ -176,31 +177,15 @@
 					<nav class="collapse navbar-collapse" id="navbarNav">
 						<ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">사업안내</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="">사업안내</a></li>
-									<li><a class="dropdown-item" href="notice-list.html">공지사항</a></li>
-									<li><a class="dropdown-item" href="faq.html">자주하는 질문</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 정보</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="kindergarden.html">어린이집 정보</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">자체평가보고서</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="report01.html">자체평가보고서 작성</a></li>
-									<li><a class="dropdown-item" href="report.html">자체평가보고서 확인</a></li>
+									<li><a class="dropdown-item" href="kindergarden-list.html">어린이집 현황</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가</a>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item" href="rater-date.html">현장평가일 조회</a></li>
-									<li><a class="dropdown-item" href="rater-report.html">평가결과서 조회</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -213,8 +198,8 @@
 				<nav aria-label="breadcrumb">
 					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item">자체평가보고서</li>
-						<li class="breadcrumb-item active" aria-current="page">자체평가보고서 작성</li>
+						<li class="breadcrumb-item">어린이집 정보</li>
+						<li class="breadcrumb-item active" aria-current="page">평가결과서 작성</li>
 					</ol>
 				</nav>
 
@@ -234,16 +219,18 @@
 											<span class="nav-link px-0 py-2 active"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>보육과정</strong></span>
 											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01.html" data-scroll="data-scroll">1. 영유아 중심 일과 운영</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="rater-report01.html" data-scroll="data-scroll">1. 영유아 중심 일과 운영</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report02.html" data-scroll="data-scroll">2. 영유아가 주도하는 배움 지원</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="rater-report02.html" data-scroll="data-scroll">2. 영유아가 주도하는 배움 지원</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0 active" href="report03.html" data-scroll="data-scroll">3. 영유아 존중 상호작용 지원</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0 active" href="rater-report03.html" data-scroll="data-scroll"
+														>3. 영유아 존중 상호작용 지원</a
+													>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report04.html" data-scroll="data-scroll">4. 보육과정 실행 계획 및 평가</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="rater-report04.html" data-scroll="data-scroll">4. 보육과정 실행 계획 및 평가</a>
 												</li>
 											</ul>
 										</li>
@@ -251,12 +238,12 @@
 											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>운영관리</strong></span>
 											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report05.html" data-scroll="data-scroll"
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="rater-report05.html" data-scroll="data-scroll"
 														>5. 원장의 리더십과 보육교직원 역량강화</a
 													>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report06.html" data-scroll="data-scroll">6. 건강 및 안정</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="rater-report06.html" data-scroll="data-scroll">6. 건강 및 안정</a>
 												</li>
 											</ul>
 										</li>
@@ -421,8 +408,8 @@
 
 						<div class="d-flex justify-content-between">
 							<p>
-								<a class="btn btn-outline-secondary" href="report02.html">이전</a>
-								<a class="btn btn-outline-secondary ms-2" href="report04.html">다음</a>
+								<a class="btn btn-outline-secondary" href="rater-report02.html">이전</a>
+								<a class="btn btn-outline-secondary ms-2" href="rater-report04.html">다음</a>
 							</p>
 							<p>
 								<button type="button" class="btn btn-outline-primary" href="#alert01" data-bs-toggle="modal">저장</button>

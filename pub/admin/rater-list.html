@@ -204,55 +204,153 @@
 				<nav aria-label="breadcrumb">
 					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item">게시판 관리</li>
-						<li class="breadcrumb-item active" aria-current="page">공지사항 등록</li>
+						<li class="breadcrumb-item">현장평가자 관리</li>
+						<li class="breadcrumb-item active" aria-current="page">현장평가자 현황</li>
 					</ol>
 				</nav>
-				<!-- Page title + filters-->
-				<div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
-					<div class="col-lg-5">
-						<h1 class="mb-lg-0">공지사항 등록</h1>
-					</div>
-				</div>
-				<!-- Post-->
-				<div class="row">
-					<div class="col col-lg-8" style="margin: 0 auto">
+
+				<div class="row pt-sm-2 pt-lg-0">
+					<!-- Page content-->
+					<div class="col pt-4 pb-2 pb-sm-4">
+						<!-- 현장평가자 현황 -->
 						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
 							<div class="card-body">
-								<div class="mb-4">
-									<label class="form-label mb-2">제목</label>
-									<input class="form-control" type="text" value="제목을 입력해주세요." />
-								</div>
+								<div class="d-flex align-items-center justify-content-between mt-sm-n1 pb-2 mb-3 mb-xl-4">
+									<div class="d-flex align-items-center">
+										<i class="ai-search text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-0">현장평가자 현황</h2>
+									</div>
 
-								<div class="mb-4">
-									<label class="form-label mb-2">내용</label>
-									<textarea class="form-control" rows="15">에디터 자리</textarea>
-								</div>
-
-								<div class="mb-4">
-									<label class="form-label mb-2">첨부파일</label>
-									<input class="form-control mb-2" type="file" id="file-input" />
-									<input class="form-control mb-2" type="file" id="file-input" />
-									<input class="form-control mb-2" type="file" id="file-input" />
-									<input class="form-control" type="file" id="file-input" />
-								</div>
-
-								<div>
-									<label class="form-label mb-2">상단 고정</label>
-									<div class="form-check form-switch">
-										<input type="checkbox" class="form-check-input" id="customSwitch1" />
-										<label class="form-check-label" for="customSwitch1"></label>
+									<div class="position-relative">
+										<i class="ai-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+										<input class="form-control ps-5" type="search" placeholder="검색어를 입력해주세요." />
 									</div>
 								</div>
-
-								<div class="mt-4 text-end">
-									<button class="btn btn-lg btn-primary" type="submit">저장</button>
+								<div class="board-list g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="table-responsive">
+										<table class="table table-bordered table-striped table-sm">
+											<thead>
+												<tr>
+													<th class="text-center">번호</th>
+													<th class="text-center">이름</th>
+													<th class="text-center">ID</th>
+													<th class="text-center">연락처</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row" class="text-center">10</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">9</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">8</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">7</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">6</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">5</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">4</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">3</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">2</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">1</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</section>
+
+						<!-- Pagination-->
+						<div class="row gy-3 align-items-center pt-3">
+							<div class="col">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										<li class="page-item">
+											<a href="#" class="page-link">
+												<i class="ai-arrow-left fs-xl"></i>
+											</a>
+										</li>
+										<li class="page-item d-sm-none">
+											<span class="page-link pe-none">2 / 5</span>
+										</li>
+										<li class="page-item d-none d-sm-block">
+											<a href="#" class="page-link">1</a>
+										</li>
+										<li class="page-item active d-none d-sm-block" aria-current="page">
+											<span class="page-link">
+												2
+												<span class="visually-hidden">(current)</span>
+											</span>
+										</li>
+										<li class="page-item d-none d-sm-block">
+											<a href="#" class="page-link">3</a>
+										</li>
+										<li class="page-item d-none d-sm-block">
+											<a href="#" class="page-link">4</a>
+										</li>
+										<li class="page-item d-none d-sm-block">
+											<a href="#" class="page-link">5</a>
+										</li>
+										<li class="page-item">
+											<a href="#" class="page-link">
+												<i class="ai-arrow-right fs-xl"></i>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<!-- Divider for dark mode only-->
+			<hr class="d-none d-dark-mode-block" />
+			<!-- Sidebar toggle button-->
 		</main>
 		<!-- Footer-->
 		<footer class="footer bg-dark position-relative py-4 py-md-5">
@@ -270,8 +368,7 @@
 		<!-- Vendor scripts: js libraries and plugins-->
 		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-		<script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-		<script src="/assets/vendor/shufflejs/dist/shuffle.min.js"></script>
+		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
 		<!-- Main theme script-->
 		<script src="/assets/js/theme.min.js"></script>
 	</body>

@@ -2,7 +2,7 @@
 <html lang="ko" class="admin">
 	<head>
 		<meta charset="utf-8" />
-		<title>Around | Portfolio Grid View v.1</title>
+		<title>한국보육진흥원</title>
 		<!-- SEO Meta Tags-->
 		<meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
 		<meta
@@ -135,6 +135,8 @@
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font" />
 
 		<!-- Vendor styles-->
+		<link rel="stylesheet" media="screen" href="/assets/vendor/flatpickr/dist/flatpickr.min.css" />
+
 		<!-- Main Theme Styles + Bootstrap-->
 		<link rel="stylesheet" media="screen" href="/assets/css/theme.css" />
 		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
@@ -155,7 +157,7 @@
 				<div class="container">
 					<a class="navbar-brand pe-sm-3" href="index.html">
 						<img src="/assets/images/logo-admin.png" alt="" />
-						<p>관리자 페이지</p>
+						<p>관리자</p>
 					</a>
 
 					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
@@ -188,23 +190,13 @@
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">평가 관리</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가자 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="">현장평가자 조회</a></li>
-									<li><a class="dropdown-item" href="">현장평가자 조구성 입력</a></li>
-									<li><a class="dropdown-item" href="">현장평가자 배치 입력</a></li>
+									<li><a class="dropdown-item" href="rater-list.html">현장평가자 현황</a></li>
+									<li><a class="dropdown-item" href="rater-date.html">현장평가일 조회</a></li>
 								</ul>
 							</li>
 						</ul>
-						<div class="d-sm-none p-3 mt-n3">
-							<a
-								class="btn btn-primary w-100 mb-1"
-								href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/"
-								target="_blank"
-								rel="noopener"
-								><i class="ai-cart fs-xl me-2 ms-n1"></i>Buy now</a
-							>
-						</div>
 					</nav>
 				</div>
 			</header>
@@ -214,7 +206,7 @@
 				<nav aria-label="breadcrumb">
 					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item"><a href="index.html">어린이집 관리</a></li>
+						<li class="breadcrumb-item">어린이집 관리</li>
 						<li class="breadcrumb-item active" aria-current="page">어린이집 현황</li>
 					</ol>
 				</nav>
@@ -233,12 +225,17 @@
 								></button>
 								<div class="offcanvas-body">
 									<div class="pb-2 pb-lg-0 mb-4 mb-lg-5">
-										<h3 class="h5 mb-1">새싹어린이집</h3>
+										<h3 class="h5 mb-1">새싹 어린이집</h3>
 										<p class="fs-sm text-muted mb-0">saessagkindergarden</p>
 									</div>
 									<nav class="nav flex-column pb-2 pb-lg-4 mb-3">
 										<a class="nav-link fw-semibold py-2 px-0" href="#section01"><i class="ai-home fs-5 opacity-60 me-2"></i>어린이집 정보</a>
 										<a class="nav-link fw-semibold py-2 px-0" href="#section02"><i class="ai-user-group fs-5 opacity-60 me-2"></i>자체평가 위원회</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section03"><i class="ai-file fs-5 opacity-60 me-2"></i>자체평가보고서</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section04"><i class="ai-user-check fs-5 opacity-60 me-2"></i>현장평가자 조구성</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section05"><i class="ai-file-text fs-5 opacity-60 me-2"></i>상호확인서</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section06"><i class="ai-file-text fs-5 opacity-60 me-2"></i>평가보고서</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section07"><i class="ai-file-text fs-5 opacity-60 me-2"></i>평가결과서</a>
 									</nav>
 
 									<script>
@@ -267,11 +264,40 @@
 						<!-- 어린이집 정보 -->
 						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
 							<div class="card-body">
-								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+								<div class="d-flex align-items-center just mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
 									<i class="ai-home text-primary lead pe-1 me-2"></i>
 									<h2 class="h4 mb-0">어린이집 정보</h2>
 								</div>
 								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">승인</label>
+										<div class="mt-2">
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-4" name="radio2" />
+												<label class="form-check-label" for="ex-radio-4">미승인</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-5" name="radio2" checked />
+												<label class="form-check-label" for="ex-radio-5">승인</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-6" name="radio2" />
+												<label class="form-check-label" for="ex-radio-6">정지</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">평가일</label>
+										<div class="position-relative">
+											<input
+												class="form-control date-picker pe-5"
+												type="text"
+												placeholder="날짜를 선택해주세요."
+												data-datepicker-options='{"altInput": true, "altFormat": "Y, F J", "dateFormat": "Y-m-d", "locale": "ko"}'
+											/>
+											<i class="ai-calendar position-absolute top-50 end-0 translate-middle-y me-3"></i>
+										</div>
+									</div>
 									<div class="col-sm-6">
 										<label class="form-label">아이디</label>
 										<input class="form-control" type="text" value="saessagkindergarden" disabled />
@@ -355,6 +381,184 @@
 								</div>
 							</div>
 						</section>
+
+						<!-- 자체평가보고서 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section03">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between just mt-sm-n1 pb-2 mb-3">
+									<div class="d-flex align-items-center">
+										<i class="ai-file text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-0">자체평가보고서</h2>
+									</div>
+								</div>
+								<a href="report.html" target="_blank" class="btn btn-primary w-100 w-sm-auto ms-sm-2">
+									자체평가보고서 확인 <i class="ai-external-link lead pe-1 ms-2"></i>
+								</a>
+							</div>
+						</section>
+
+						<!-- 현장평가자 조구성 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section04">
+							<div class="card-body">
+								<div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
+									<i class="ai-user-check text-primary lead pe-1 me-2"></i>
+									<h2 class="h4 mb-0">현장평가자 조구성</h2>
+								</div>
+								<div class="row row-cols-1 row-cols-md-2 g-4">
+									<!-- Address (primary)-->
+									<div class="col">
+										<div class="card h-100 rounded-3 p-3 p-sm-4">
+											<div class="d-flex align-items-center pb-2 mb-1">
+												<h3 class="h6 text-nowrap text-truncate mb-0">고가영</h3>
+												<span class="badge bg-faded-primary text-primary fs-xs ms-3">팀장</span>
+												<div class="d-flex ms-auto">
+													<button class="nav-link fs-xl fw-normal py-1 pe-0 ps-1 ms-2" type="button" data-bs-toggle="tooltip" title="수정">
+														<i class="ai-edit-alt"></i>
+													</button>
+													<button class="nav-link text-danger fs-xl fw-normal py-1 pe-0 ps-1 ms-2" type="button" data-bs-toggle="tooltip" title="삭제">
+														<i class="ai-trash"></i>
+													</button>
+												</div>
+											</div>
+											<p class="mb-0">010-1234-5478</p>
+										</div>
+									</div>
+									<!-- Address-->
+									<div class="col">
+										<div class="card h-100 rounded-3 p-3 p-sm-4">
+											<div class="d-flex align-items-center pb-2 mb-1">
+												<h3 class="h6 text-nowrap text-truncate mb-0">오경님</h3>
+												<div class="d-flex ms-auto">
+													<button class="nav-link fs-xl fw-normal py-1 pe-0 ps-1 ms-2" type="button" data-bs-toggle="tooltip" title="수정">
+														<i class="ai-edit-alt"></i>
+													</button>
+													<button class="nav-link text-danger fs-xl fw-normal py-1 pe-0 ps-1 ms-2" type="button" data-bs-toggle="tooltip" title="삭제">
+														<i class="ai-trash"></i>
+													</button>
+												</div>
+											</div>
+											<p class="mb-0">010-1234-5478</p>
+										</div>
+									</div>
+									<!-- Add address-->
+									<div class="col">
+										<div class="card h-100 justify-content-center align-items-center border-dashed rounded-3 py-5 px-3 px-sm-4">
+											<a class="stretched-link d-flex align-items-center fw-semibold text-decoration-none my-sm-3" href="#modal-team" data-bs-toggle="modal"
+												><i class="ai-circle-plus fs-xl me-2"></i>추가</a
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 상호확인서 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section05">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between just mt-sm-n1 pb-2 mb-3">
+									<div class="d-flex align-items-center">
+										<i class="ai-file-text text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-0">상호확인서</h2>
+									</div>
+								</div>
+								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">문서 확인</label>
+										<div class="mt-2">
+											<a href="rater-report-01.html" target="_blank" class="btn btn-primary w-100 w-sm-auto">
+												상호확인서 확인 <i class="ai-external-link lead pe-1 ms-2"></i>
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">승인</label>
+										<div class="mt-3">
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-4" name="radio2" />
+												<label class="form-check-label" for="ex-radio-4">미승인</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-5" name="radio2" checked />
+												<label class="form-check-label" for="ex-radio-5">승인</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 평가보고서 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section06">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between just mt-sm-n1 pb-2 mb-3">
+									<div class="d-flex align-items-center">
+										<i class="ai-file-text text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-0">평가보고서</h2>
+									</div>
+								</div>
+								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">문서 확인</label>
+										<div class="mt-2">
+											<a href="rater-report-01.html" target="_blank" class="btn btn-primary w-100 w-sm-auto">
+												평가보고서 확인 <i class="ai-external-link lead pe-1 ms-2"></i>
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">승인</label>
+										<div class="mt-3">
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-4" name="radio3" />
+												<label class="form-check-label" for="ex-radio-4">미승인</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-5" name="radio3" checked />
+												<label class="form-check-label" for="ex-radio-5">승인</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 평가결과서 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section07">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between just mt-sm-n1 pb-2 mb-3">
+									<div class="d-flex align-items-center">
+										<i class="ai-file-text text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-0">평가결과서</h2>
+									</div>
+								</div>
+								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">문서 확인</label>
+										<div class="mt-2">
+											<a href="rater-report-01.html" target="_blank" class="btn btn-primary w-100 w-sm-auto">
+												평가결과서 확인 <i class="ai-external-link lead pe-1 ms-2"></i>
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">승인</label>
+										<div class="mt-3">
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-4" name="radio4" />
+												<label class="form-check-label" for="ex-radio-4">미승인</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-5" name="radio4" checked />
+												<label class="form-check-label" for="ex-radio-5">승인</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<div class="d-flex justify-content-end pt-4">
+							<a href="kindergarden-list.html" class="btn btn-primary w-100 w-sm-auto ms-sm-2"> 목록 </a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -362,41 +566,65 @@
 			<hr class="d-none d-dark-mode-block" />
 			<!-- Sidebar toggle button-->
 
-			<div class="modal fade" id="Committee" data-bs-backdrop="static" tabindex="-1" role="dialog">
+			<div class="modal fade modal-team" id="modal-team" data-bs-backdrop="static" tabindex="-1" role="dialog">
 				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header border-0">
-							<h4 class="modal-title">자체평가 위원회 추가</h4>
+							<h4 class="modal-title">현장평가자 조원 추가</h4>
 							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<form class="modal-body needs-validation pt-0" novalidate>
 							<div class="row row-cols-1 row-cols-lg-2 g-4 pb-2 pb-sm-3">
 								<div class="col">
-									<label class="form-label">구분</label>
+									<label class="form-label">평가관리자명</label>
+									<div class="d-flex">
+										<input class="form-control" type="text" placeholder="평가관리자명을 입력하세요." />
+										<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">검색</button>
+									</div>
+								</div>
+								<div class="col">
+									<label class="form-label">권한</label>
 									<select class="form-select" required>
 										<option value="" disabled selected>선택</option>
-										<option value="">원장</option>
-										<option value="">교사</option>
-										<option value="">부모</option>
+										<option value="">팀장</option>
+										<option value="">팀원</option>
 									</select>
 								</div>
-								<div class="col">
-									<label class="form-label">성명</label>
-									<input class="form-control" type="text" placeholder="성명을 입력하세요." />
-								</div>
-								<!-- <div class="col">
-									<label class="form-label">직위</label>
-									<input class="form-control" type="text" placeholder="직위를 입력하세요." />
-								</div>
-								<div class="col">
-									<label class="form-label">연락처</label>
-									<input class="form-control" type="text" placeholder="연락처를 입력하세요." />
-								</div> -->
 							</div>
+							<div class="list-group list-group-flush">
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">송숙자</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action active">고가영</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">정나영</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">강영신</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">표은채</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">윤지해</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">문나영</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">오경님</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">안미래</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">문경완</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">임영애</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">박장미</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">허남순</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">조미란</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">손혜림</a>
+							</div>
+							<script>
+								const modalTeamItems = document.querySelectorAll('.modal-team .list-group-item');
+
+								modalTeamItems.forEach((item) => {
+									item.addEventListener('click', function () {
+										modalTeamItems.forEach((item) => {
+											item.classList.remove('active');
+										});
+										this.classList.add('active');
+									});
+								});
+							</script>
 						</form>
+
 						<div class="modal-footer flex-column flex-sm-row">
 							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-3" data-bs-dismiss="modal">추가</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
 						</div>
 					</div>
 				</div>
@@ -419,6 +647,8 @@
 		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
 		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
+		<script src="/assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+		<script src="/assets/vendor/flatpickr/dist/l10n/ko.js"></script>
 		<!-- Main theme script-->
 		<script src="/assets/js/theme.min.js"></script>
 	</body>

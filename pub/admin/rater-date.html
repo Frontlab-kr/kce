@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="admin">
 	<head>
 		<meta charset="utf-8" />
 		<title>한국보육진흥원</title>
@@ -134,7 +134,6 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font" />
 
-		<!-- Vendor styles-->
 		<!-- Main Theme Styles + Bootstrap-->
 		<link rel="stylesheet" media="screen" href="/assets/css/theme.css" />
 		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
@@ -154,15 +153,20 @@
 			<header class="navbar navbar-expand-lg fixed-top">
 				<div class="container">
 					<a class="navbar-brand pe-sm-3" href="index.html">
-						<img src="/assets/images/logo.png" alt="" />
+						<img src="/assets/images/logo-admin.png" alt="" />
+						<p>관리자</p>
 					</a>
 
 					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
 						<a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 							<div class="ps-2">
-								<div class="fs-sm">로그인</div>
+								<div class="fs-xs lh-1 opacity-60">안녕하세요.</div>
+								<div class="fs-sm dropdown-toggle">관리자 님</div>
 							</div></a
 						>
+						<div class="dropdown-menu dropdown-menu-end my-1">
+							<a class="dropdown-item" href=""><i class="ai-logout fs-lg opacity-70 me-2"></i>로그아웃</a>
+						</div>
 					</div>
 					<button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 						<span class="navbar-toggler-icon"></span>
@@ -170,31 +174,23 @@
 					<nav class="collapse navbar-collapse" id="navbarNav">
 						<ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">사업안내</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">게시판 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="">사업안내</a></li>
-									<li><a class="dropdown-item" href="notice-list.html">공지사항</a></li>
-									<li><a class="dropdown-item" href="faq.html">자주하는 질문</a></li>
+									<li><a class="dropdown-item" href="notice-write.html">공지사항 등록</a></li>
+									<li><a class="dropdown-item" href="faq-write.html">자주하는 질문 등록</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 정보</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="kindergarden.html">어린이집 정보</a></li>
+									<li><a class="dropdown-item" href="kindergarden-list.html">어린이집 현황</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">자체평가보고서</a>
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가자 관리</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="report01.html">자체평가보고서 작성</a></li>
-									<li><a class="dropdown-item" href="report.html">자체평가보고서 확인</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가</a>
-								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="rater-list.html">현장평가자 현황</a></li>
 									<li><a class="dropdown-item" href="rater-date.html">현장평가일 조회</a></li>
-									<li><a class="dropdown-item" href="rater-report.html">평가결과서 조회</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -202,22 +198,88 @@
 				</div>
 			</header>
 			<!-- Page content-->
-			<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
+			<div class="container overflow-hidden py-5 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
 				<!-- Breadcrumb-->
 				<nav aria-label="breadcrumb">
 					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
 						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item">사업안내</li>
-						<li class="breadcrumb-item active" aria-current="page">사업안내</li>
+						<li class="breadcrumb-item">현장평가자 관리</li>
+						<li class="breadcrumb-item active" aria-current="page">현장평가일 조회</li>
 					</ol>
 				</nav>
-				<!-- Page title + filters-->
-				<div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
-					<div class="col-lg-5">
-						<h1 class="mb-lg-0">사업안내</h1>
-					</div>
-				</div>
-				<!-- Post-->
+
+				<link rel="stylesheet" media="screen" href="/assets/vendor/fullcalendar/main.min.css" />
+				<link rel="stylesheet" media="screen" href="/assets/vendor/simplebar/dist/simplebar.min.css" />
+				<link rel="stylesheet" media="screen" href="/assets/vendor/prismjs/themes/prism.css" />
+				<link rel="stylesheet" media="screen" href="/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.css" />
+				<link rel="stylesheet" media="screen" href="/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css" />
+				<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+				<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+				<script src="/assets/vendor/fullcalendar/main.min.js"></script>
+				<script src="/assets/vendor/simplebar/dist/simplebar.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-core.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-markup.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-clike.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-javascript.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-pug.min.js"></script>
+				<script src="/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+				<script src="/assets/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+				<script src="/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+				<div
+					class="calendar"
+					data-calendar-options='{
+  "initialDate": "2022-08-01",
+	"contentHeight": "auto",
+	"initialView": "dayGridMonth",
+	"locale": "ko",
+  "headerToolbar": {
+    "left": "today",
+    "center": "title",
+    "right": "prev,next"
+  },
+	"buttonText": {
+		"today": "오늘"
+	},
+  "eventTimeFormat": {
+    "hour": "2-digit",
+    "minute": "2-digit",
+    "hour12": false
+  },
+  "events": [
+    {
+      "title": "새싹 어린이집 평가일",
+      "start": "2022-08-01T16:30",
+      "end": "2022-08-01T18:00",
+      "classNames": ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-2", "ps-3", "border-start", "border-5", "border-purple"]
+    },
+		{
+      "title": "용산 어린이집 평가일",
+      "start": "2022-08-02T16:30",
+      "end": "2022-08-01T18:00",
+      "classNames": ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-2", "ps-3", "border-start", "border-5", "border-warning"]
+    },
+		{
+      "title": "마포 어린이집 평가일",
+      "start": "2022-08-11T16:30",
+      "end": "2022-08-01T18:00",
+      "classNames": ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-2", "ps-3", "border-start", "border-5", "border-info"]
+    },
+		{
+      "title": "공덕 어린이집 평가일",
+      "start": "2022-08-24T16:30",
+      "end": "2022-08-01T18:00",
+      "classNames": ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-2", "ps-3", "border-start", "border-5", "border-danger"]
+    },
+		{
+      "title": "여의도 어린이집 평가일",
+      "start": "2022-08-26T16:30",
+      "end": "2022-08-01T18:00",
+      "classNames": ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-2", "ps-3", "border-start", "border-5", "border-success"]
+    }
+  ]
+}'
+				></div>
 			</div>
 		</main>
 		<!-- Footer-->
@@ -228,6 +290,7 @@
 				</p>
 			</div>
 		</footer>
+
 		<!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
 			<svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg

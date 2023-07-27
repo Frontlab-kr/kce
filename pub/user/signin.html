@@ -155,6 +155,7 @@
 			<div class="d-lg-flex position-relative h-100">
 				<!-- Home button--><a
 					class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4"
+					style="z-index: 20"
 					href="index.html"
 					data-bs-toggle="tooltip"
 					data-bs-placement="left"
@@ -206,10 +207,9 @@
 					</p>
 				</div>
 				<!-- Cover image-->
-				<div
-					class="w-50 bg-size-cover bg-repeat-0 bg-position-center"
-					style="background-image: url(https://www.kcpi.or.kr/resources/images/main/main_visual0731_04.jpg)"
-				></div>
+				<div class="w-50 bg-size-cover bg-repeat-0 bg-position-center" style="position: relative; z-index: 10; background-image: url(/assets/images/login.jpg)">
+					<img src="/assets/images/logo.png" alt="" style="position: absolute; top: 30px; left: 30px; height: 50px" />
+				</div>
 			</div>
 		</main>
 		<!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>

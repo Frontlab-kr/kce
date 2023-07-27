@@ -58,13 +58,38 @@ header.navbar {
 	color: #fff;
 	border-color: rgba(255, 255, 255, 0.6);
 }
-.admin header.navbar .nav-link {
-	color: #fff;
+@media (min-width: 991.98px) {
+	.admin header.navbar .nav-link {
+		color: #fff;
+	}
+	.admin .navbar .nav-item:hover > .nav-link:not(.disabled),
+	.admin .navbar .nav-item .nav-link.show:not(.disabled) {
+		color: #fff;
+	}
+	.admin .navbar .dropdown:hover > .nav-link {
+		color: #fff;
+	}
 }
-.admin .navbar .nav-item:hover > .nav-link:not(.disabled),
-.admin .navbar .nav-item .nav-link.show:not(.disabled) {
-	color: #fff;
+.admin .navbar-toggler-icon,
+.admin .navbar-toggler-icon:before,
+.admin .navbar-toggler-icon:after {
+	background-color: #fff;
 }
-.admin .navbar .dropdown:hover > .nav-link {
-	color: #fff;
+.modal-kindergarden .list-group,
+.modal-team .list-group {
+	height: 212px;
+	overflow: auto;
+	border: 1px solid #e3e9ef;
+}
+.modal-kindergarden .list-group .list-group-item,
+.modal-team .list-group .list-group-item {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.fc-event-time {
+	display: none !important;
+}
+
+.breadcrumb {
 }
