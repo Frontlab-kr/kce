@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<title>한국보육진흥원</title>
+		<!-- SEO Meta Tags-->
+		<meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
+		<meta
+			name="keywords"
+			content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative"
+		/>
+		<meta name="author" content="Createx Studio" />
+		<!-- Viewport-->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Favicon and Touch Icons-->
+		<link rel="shortcut icon" href="/assets/favicon/favicon.ico" type="image/x-icon" />
+		<link rel="manifest" href="/assets/favicon/site.webmanifest" />
+		<link rel="mask-icon" color="#6366f1" href="/assets/favicon/safari-pinned-tab.svg" />
+		<meta name="msapplication-TileColor" content="#080032" />
+		<meta name="msapplication-config" content="assets/favicon/browserconfig.xml" />
+		<meta name="theme-color" content="white" />
+		<!-- Theme mode-->
+		<script>
+			let mode = window.localStorage.getItem('mode'),
+				root = document.getElementsByTagName('html')[0];
+			if (mode !== undefined && mode === 'dark') {
+				root.classList.add('dark-mode');
+			} else {
+				root.classList.remove('dark-mode');
+			}
+		</script>
+		<!-- Page loading styles-->
+		<style>
+			.page-loading {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				-webkit-transition: all 0.4s 0.2s ease-in-out;
+				transition: all 0.4s 0.2s ease-in-out;
+				background-color: #fff;
+				opacity: 0;
+				visibility: hidden;
+				z-index: 9999;
+			}
+			.dark-mode .page-loading {
+				background-color: #121519;
+			}
+			.page-loading.active {
+				opacity: 1;
+				visibility: visible;
+			}
+			.page-loading-inner {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				text-align: center;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				-webkit-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				opacity: 0;
+			}
+			.page-loading.active > .page-loading-inner {
+				opacity: 1;
+			}
+			.page-loading-inner > span {
+				display: block;
+				font-family: 'Inter', sans-serif;
+				font-size: 1rem;
+				font-weight: normal;
+				color: #6f788b;
+			}
+			.dark-mode .page-loading-inner > span {
+				color: #fff;
+				opacity: 0.6;
+			}
+			.page-spinner {
+				display: inline-block;
+				width: 2.75rem;
+				height: 2.75rem;
+				margin-bottom: 0.75rem;
+				vertical-align: text-bottom;
+				background-color: #d7dde2;
+				border-radius: 50%;
+				opacity: 0;
+				-webkit-animation: spinner 0.75s linear infinite;
+				animation: spinner 0.75s linear infinite;
+			}
+			.dark-mode .page-spinner {
+				background-color: rgba(255, 255, 255, 0.25);
+			}
+			@-webkit-keyframes spinner {
+				0% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				50% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@keyframes spinner {
+				0% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				50% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+		</style>
+		<!-- Page loading scripts-->
+		<script>
+			(function () {
+				window.onload = function () {
+					const preloader = document.querySelector('.page-loading');
+					preloader.classList.remove('active');
+					setTimeout(function () {
+						preloader.remove();
+					}, 1500);
+				};
+			})();
+		</script>
+		<!-- Import Google Font-->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font" />
+
+		<!-- Vendor styles-->
+		<!-- Main Theme Styles + Bootstrap-->
+		<link rel="stylesheet" media="screen" href="/assets/css/theme.css" />
+		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
+	</head>
+	<!-- Body-->
+	<body class="bg-secondary">
+		<!-- Page loading spinner-->
+		<div class="page-loading active">
+			<div class="page-loading-inner">
+				<div class="page-spinner"></div>
+				<span>Loading...</span>
+			</div>
+		</div>
+		<!-- Page wrapper-->
+		<main class="page-wrapper">
+			<!-- Page content-->
+			<div class="container">
+				<div class="row pt-sm-2 pt-lg-0">
+					<!-- Sidebar (offcanvas on sreens < 992px)-->
+					<aside class="col-lg-3 pe-lg-4 pe-xl-5">
+						<div class="position-lg-sticky top-0">
+							<div class="d-none d-lg-block" style="padding-top: 100px"></div>
+							<div id="sidebarAccount">
+								<div class="mt-4 mb-5">
+									<img src="/assets/images/logo.png" style="height: 40px" alt="" />
+								</div>
+								<div class="offcanvas-body">
+									<div class="pb-2 pb-lg-0 mb-4 mb-lg-5">
+										<h3 class="h5 mb-1">새싹 어린이집</h3>
+										<p class="fs-sm text-muted mb-0">saessagkindergarden</p>
+									</div>
+									<ul class="nav flex-column pb-2 pb-lg-4 mb-3">
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>어린이집 정보</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report02-write02.html" data-scroll="data-scroll">어린이집 정보</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>보육과정</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report02-write03.html" data-scroll="data-scroll">1. 영유아 중심 일과 운영</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report02-write04.html" data-scroll="data-scroll"
+														>2. 영유아가 주도하는 배움 지원</a
+													>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report02-write05.html" data-scroll="data-scroll">3. 영유아 존중 상호작용 지원</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report02-write06.html" data-scroll="data-scroll">4. 보육과정 실행 계획 및 평가</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2 active"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>운영관리</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0 active" href="report02-write07.html" data-scroll="data-scroll"
+														>5. 원장의 리더십과 보육교직원 역량강화</a
+													>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report02-write08.html" data-scroll="data-scroll">6. 건강 및 안정</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>현장평가 상호확인</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report02-write09.html" data-scroll="data-scroll">현장평가 상호확인</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</aside>
+					<!-- Page content-->
+					<div class="col-lg-9 mt-5 pt-lg-5">
+						<h1 class="mb-5">새싹 어린이집 상호확인서 작성</h1>
+						<h2 class="mb-4">운영관리</h2>
+						<!-- 5. 원장의 리더십과 보육교직원 역량 강화 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden" id="section01">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">5. 원장의 리더십과 보육교직원 역량 강화</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 20%" />
+											<col style="width: 80%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center align-middle">항목</th>
+												<th class="text-center align-middle">내용</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" class="align-middle">5-1.<br />보육의 질 향상을 위한 리더쉽</th>
+												<td>
+													<textarea class="form-control" rows="10"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" class="align-middle">5-2.<br />상호 존중하는 소통과 협력</th>
+												<td>
+													<textarea class="form-control" rows="10"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" class="align-middle">5-3.<br />교직원 역량 강화</th>
+												<td>
+													<textarea class="form-control" rows="10"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" class="align-middle">지표 5.<br />바람직한 수준</th>
+												<td>
+													<textarea class="form-control" rows="10"></textarea>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+						<div class="d-flex justify-content-between">
+							<p>
+								<a class="btn btn-outline-secondary" href="report02-write06.html">이전</a>
+								<a class="btn btn-outline-secondary ms-2" href="report02-write08.html">다음</a>
+							</p>
+							<p>
+								<button type="button" class="btn btn-outline-primary" href="#alert01" data-bs-toggle="modal">저장</button>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Divider for dark mode only-->
+			<hr class="d-none d-dark-mode-block" />
+			<!-- Sidebar toggle button-->
+
+			<div class="modal fade" id="alert01" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title"></h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body pt-0">
+							<p>임시저장 하시겠습니까?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="alert02" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title"></h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body pt-0">
+							<p>최종 제출 하시겠습니까?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- Footer-->
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+	</body>
+</html>

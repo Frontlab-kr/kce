@@ -23,7 +23,7 @@
 </json>
 </metadata>
 <defs>
-<font id="lg" horiz-adv-x="1024">
+<font  horiz-adv-x="1024">
 <font-face units-per-em="1024" ascent="960" descent="-64" />
 <missing-glyph horiz-adv-x="1024" />
 <glyph unicode="&#x20;" horiz-adv-x="512" d="" />

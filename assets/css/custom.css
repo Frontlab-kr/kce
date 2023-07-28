@@ -16,7 +16,9 @@ body {
 	font-weight: 700;
 	/* font-size: 0; */
 }
-
+.card {
+	overflow: hidden;
+}
 .find {
 	min-width: 560px;
 }
@@ -27,6 +29,9 @@ body {
 }
 header.navbar {
 	border-bottom: 1px solid #e3e3e3;
+}
+header.navbar .dropdown-item i {
+	font-size: 12px;
 }
 .notice-list-item__text {
 	display: -webkit-box;
@@ -41,6 +46,9 @@ header.navbar {
 	line-height: 1;
 }
 
+.table thead th {
+	background-color: #f6f9fc;
+}
 .board-list table {
 	white-space: nowrap;
 }
@@ -92,4 +100,23 @@ header.navbar {
 }
 
 .breadcrumb {
+}
+
+.table-question {
+	display: flex;
+	margin: -0.75rem;
+}
+.table-question span {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 15px 0;
+	font-size: 12px;
+	text-align: center;
+	border-left: 1px solid #e3e9ef;
+}
+
+.table-question span:first-child {
+	border-left: none;
 }
