@@ -1,3 +1,16 @@
+<?php
+	session_start();
+
+	require_once $_SERVER['DOCUMENT_ROOT']."/lib/setting.php";
+
+	require_once $lib_root."util.php";
+    require_once $lib_root."mysql.class.php";
+    $db = new dbHandle();
+
+	require_once $lib_root."member.class.php";
+	$mb = new Member;
+	$login_check = $mb->login_check(); //로그인 한 사람인 경우 패스 ?>
+
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
@@ -13,10 +26,9 @@
 		<!-- Viewport-->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!-- Favicon and Touch Icons-->
-		<link rel="shortcut icon" href="/assets/favicon/favicon.ico" type="image/x-icon" />
-
-		<link rel="manifest" href="/assets/favicon/site.webmanifest" />
-		<link rel="mask-icon" color="#6366f1" href="/assets/favicon/safari-pinned-tab.svg" />
+		<link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon" />
+		<link rel="manifest" href="assets/favicon/site.webmanifest" />
+		<link rel="mask-icon" color="#6366f1" href="assets/favicon/safari-pinned-tab.svg" />
 		<meta name="msapplication-TileColor" content="#080032" />
 		<meta name="msapplication-config" content="assets/favicon/browserconfig.xml" />
 		<meta name="theme-color" content="white" />
@@ -137,8 +149,8 @@
 
 		<!-- Vendor styles-->
 		<!-- Main Theme Styles + Bootstrap-->
-		<link rel="stylesheet" media="screen" href="/assets/css/theme.css" />
-		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
+		<link rel="stylesheet" media="screen" href="assets/css/theme.css" />
+		<link rel="stylesheet" media="screen" href="assets/css/custom.css" />
 	</head>
 	<!-- Body-->
 	<body>
@@ -162,43 +174,80 @@
 					title="Back to home"
 					><i class="ai-home"></i
 				></a>
-				<!-- Sign in form-->
+				<!-- Sign up form-->
 				<div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
 					<div class="w-100 mt-auto" style="max-width: 526px">
-						<h1>로그인</h1>
-						<p class="pb-3 mb-3 mb-lg-4">아직 계정이 없으신가요?&nbsp;&nbsp;<a href="signup.html">회원가입</a></p>
-						<form class="needs-validation" novalidate>
-							<div class="pb-3 mb-3">
-								<div class="position-relative">
-									<i class="ai-user fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-									<input class="form-control form-control-lg ps-5" type="text" placeholder="아이디를 입력하세요." required />
+						<h1 class="pb-4">회원가입</h1>
+						<form class="needs-validation pt-4" novalidate name="member" action="" method="POST">
+							<input type="hidden" name="type" value="" />
+							<div class="row">
+								<div class="col mb-4">
+									<label for="input-md" class="form-label">아이디</label>
+									<input class="form-control" type="text" name="userid" placeholder="아이디를 입력하세요." required />
 								</div>
 							</div>
-							<div class="mb-4">
-								<div class="position-relative">
-									<i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+
+							<div class="row">
+								<div class="col mb-4">
+									<label for="input-md" class="form-label">이메일 주소</label>
+									<input class="form-control" type="text" name="email" placeholder="이메일 주소를 입력하세요." required />
+								</div>
+							</div>
+
+							<div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2">
+								<div class="col mb-4">
+									<label for="input-md" class="form-label">비밀번호</label>
 									<div class="password-toggle">
-										<input class="form-control form-control-lg ps-5" type="password" placeholder="비밀번호를 입력하세요." required />
+										<input class="form-control" type="password" name="pwd" placeholder="비밀번호를 입력해주세요." />
+										<label class="password-toggle-btn" aria-label="Show/hide password">
+											<input class="password-toggle-check" type="checkbox" /><span class="password-toggle-indicator"></span>
+										</label>
+									</div>
+								</div>
+								<div class="col mb-4">
+									<label for="input-md" class="form-label">비밀번호 재입력</label>
+									<div class="password-toggle">
+										<input class="form-control" type="password" name="pwd_check" placeholder="비밀번호를 재입력해주세요." />
 										<label class="password-toggle-btn" aria-label="Show/hide password">
 											<input class="password-toggle-check" type="checkbox" /><span class="password-toggle-indicator"></span>
 										</label>
 									</div>
 								</div>
 							</div>
-							<div class="d-flex flex-wrap align-items-center justify-content-between pb-4">
-								<form-check class="my-1">
-									<input class="form-check-input" type="checkbox" id="keep-signedin" />
-									<label class="form-check-label ms-1" for="keep-signedin">로그인 유지</label>
-								</form-check>
-								<span>
-									<a class="fs-sm fw-semibold text-decoration-none my-1" href="find-id.html">아이디 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
-										class="fs-sm fw-semibold text-decoration-none my-1"
-										href="find-password.html"
-										>비밀번호 찾기</a
-									>
-								</span>
+
+							<div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2">
+								<div class="col mb-4">
+									<label for="input-md" class="form-label">어린이집명</label>
+									<input class="form-control" type="text" name="cname" placeholder="어린이집명을 입력하세요." required />
+								</div>
+								<div class="col mb-4">
+									<label for="input-md" class="form-label">원장명</label>
+									<input class="form-control" type="text" name="oname" placeholder="원장명을 입력하세요." required />
+								</div>
 							</div>
-							<button class="btn btn-lg btn-primary w-100 mb-4" type="submit">로그인</button>
+
+							<div class="row">
+								<div class="col mb-4">
+									<label for="input-md" class="form-label">연락처</label>
+									<input type="tel" class="form-control js-phone" id="phoneFormat" name="phone" placeholder="연락처를 입력해주세요." required />
+								</div>
+							</div>
+
+							<div class="pb-4">
+								<div class="form-check my-2">
+									<input class="form-check-input" type="checkbox" id="terms1" name="terms1" value="true" />
+									<label class="form-check-label ms-1" for="terms1"
+										><a href="#" data-bs-toggle="modal" data-bs-target="#modalAgree01">개인정보 수집 동의</a></label
+									>
+								</div>
+								<div class="form-check my-2">
+									<input class="form-check-input" type="checkbox" id="terms2" name="terms2" value="true" />
+									<label class="form-check-label ms-1" for="terms2"
+										><a href="#" data-bs-toggle="modal" data-bs-target="#modalAgree02">시범사업 평가 결과 무효</a></label
+									>
+								</div>
+							</div>
+							<button type="button" class="btn btn-lg btn-primary w-100 mb-4" id="memberFrmBtn" onclick="javascript:joinSubmit();">회원가입</button>
 						</form>
 					</div>
 					<!-- Copyright-->
@@ -212,15 +261,55 @@
 				</div>
 			</div>
 		</main>
+
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalAgree01">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">개인정보 수집 동의</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Modal body text goes here.</p>
+					</div>
+					<div class="modal-footer flex-column flex-sm-row">
+						<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-3" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalAgree02">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">시범사업 평가 결과 무효</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Modal body text goes here.</p>
+					</div>
+					<div class="modal-footer flex-column flex-sm-row">
+						<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-3" data-bs-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
 			<svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg
 			><i class="ai-arrow-up"></i
 		></a>
+
 		<!-- Vendor scripts: js libraries and plugins-->
-		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="assets/vendor/jquery/jquery-3.1.1.min.js"></script>
 		<!-- Main theme script-->
-		<script src="/assets/js/theme.min.js"></script>
+		<script src="assets/js/theme.min.js"></script>
+		<script src="assets/js/member.js"></script>
 	</body>
 </html>

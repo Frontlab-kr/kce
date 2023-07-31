@@ -1,5 +1,18 @@
+<?php
+	session_start();
+
+	require_once $_SERVER['DOCUMENT_ROOT']."/lib/setting.php";
+
+	require_once $lib_root."util.php";
+    require_once $lib_root."mysql.class.php";
+    $db = new dbHandle();
+
+	require_once $lib_root."member.class.php";
+	$mb = new Member;
+	$login_check = $mb->login_check(); //로그인 한 사람인 경우 패스 ?>
+
 <!DOCTYPE html>
-<html lang="ko" class="admin">
+<html lang="ko">
 	<head>
 		<meta charset="utf-8" />
 		<title>한국보육진흥원</title>
@@ -14,6 +27,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!-- Favicon and Touch Icons-->
 		<link rel="shortcut icon" href="/assets/favicon/favicon.ico" type="image/x-icon" />
+
 		<link rel="manifest" href="/assets/favicon/site.webmanifest" />
 		<link rel="mask-icon" color="#6366f1" href="/assets/favicon/safari-pinned-tab.svg" />
 		<meta name="msapplication-TileColor" content="#080032" />
@@ -140,7 +154,7 @@
 		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
 	</head>
 	<!-- Body-->
-	<body class="bg-secondary">
+	<body>
 		<!-- Page loading spinner-->
 		<div class="page-loading active">
 			<div class="page-loading-inner">
@@ -150,109 +164,68 @@
 		</div>
 		<!-- Page wrapper-->
 		<main class="page-wrapper">
-			<!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
-			<header class="navbar navbar-expand-lg fixed-top">
-				<div class="container">
-					<a class="navbar-brand pe-sm-3" href="index.html">
-						<img src="/assets/images/logo-admin.png" alt="" />
-						<p>관리자</p>
-					</a>
-
-					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
-						<a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-							<div class="ps-2">
-								<div class="fs-xs lh-1 opacity-60">안녕하세요.</div>
-								<div class="fs-sm dropdown-toggle">관리자 님</div>
-							</div></a
-						>
-						<div class="dropdown-menu dropdown-menu-end my-1">
-							<a class="dropdown-item" href=""><i class="ai-logout fs-lg opacity-70 me-2"></i>로그아웃</a>
-						</div>
-					</div>
-					<button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<nav class="collapse navbar-collapse" id="navbarNav">
-						<ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">게시판 관리</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="notice-write.html">공지사항 등록</a></li>
-									<li><a class="dropdown-item" href="faq-write.html">자주하는 질문 등록</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 관리</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="kindergarden-list.html">어린이집 현황</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가자 관리</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="rater-list.html">현장평가자 현황</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</header>
 			<!-- Page content-->
-			<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
-				<!-- Breadcrumb-->
-				<nav aria-label="breadcrumb">
-					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
-						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb-item">게시판 관리</li>
-						<li class="breadcrumb-item active" aria-current="page">자주하는 질문 등록</li>
-					</ol>
-				</nav>
-				<!-- Page title + filters-->
-				<div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
-					<div class="col-lg-5">
-						<h1 class="mb-lg-0">자주하는 질문 등록</h1>
-					</div>
-				</div>
-				<!-- Post-->
-				<div class="row">
-					<div class="col col-lg-8" style="margin: 0 auto">
-						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
-							<div class="card-body">
-								<div class="mb-4">
-									<label class="form-label mb-2">제목</label>
-									<input class="form-control" type="text" value="제목을 입력해주세요." />
-								</div>
-
-								<div class="mb-4">
-									<label class="form-label mb-2">내용</label>
-									<textarea class="form-control" rows="15">에디터 자리</textarea>
-								</div>
-
-								<div class="mb-4">
-									<label class="form-label mb-2">첨부파일</label>
-									<input class="form-control mb-2" type="file" id="file-input" />
-									<input class="form-control mb-2" type="file" id="file-input" />
-									<input class="form-control mb-2" type="file" id="file-input" />
-									<input class="form-control" type="file" id="file-input" />
-								</div>
-
-								<div class="mt-4 text-end">
-									<button class="btn btn-lg btn-primary" type="submit">저장</button>
+			<div class="d-lg-flex position-relative h-100">
+				<!-- Home button--><a
+				class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4"
+				style="z-index: 20"
+				href="index.html"
+				data-bs-toggle="tooltip"
+				data-bs-placement="left"
+				title="Back to home"
+				><i class="ai-home"></i
+			></a>
+				<!-- Sign in form-->
+				<div class="d-flex flex-column align-items-center w-lg-50 h-100 px-3 px-lg-5 pt-5">
+					<div class="w-100 mt-auto" style="max-width: 526px">
+						<h1>로그인</h1>
+						<p class="pb-3 mb-3 mb-lg-4">아직 계정이 없으신가요?&nbsp;&nbsp;<a href="signup.html">회원가입</a></p>
+						<form class="needs-validation" novalidate name="memberlogin" action="" method="POST">
+							<input type="hidden" name="type" value="" />
+							<div class="pb-3 mb-3">
+								<div class="position-relative">
+									<i class="ai-user fs-lg position-absolute start-0 ms-3" style="top:19px"></i>
+									<input class="form-control form-control-lg ps-5" name="id" type="text" placeholder="아이디를 입력하세요." required />
 								</div>
 							</div>
-						</section>
+							<div class="mb-4">
+								<div class="position-relative">
+									<i class="ai-lock-closed fs-lg position-absolute start-0 ms-3"  style="top:19px"></i>
+									<div class="password-toggle">
+										<input class="form-control form-control-lg ps-5" name="pw" type="password" placeholder="비밀번호를 입력하세요." required />
+										<label class="password-toggle-btn" aria-label="Show/hide password" style="top:8px">
+											<input class="password-toggle-check" type="checkbox" /><span class="password-toggle-indicator"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex flex-wrap align-items-center justify-content-between pb-4">
+								<form-check class="my-1">
+									<input class="form-check-input" type="checkbox" id="keep-signedin" />
+									<label class="form-check-label ms-1" for="keep-signedin">로그인 유지</label>
+								</form-check>
+								<span>
+									<a class="fs-sm fw-semibold text-decoration-none my-1" href="find-id.html">아이디 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+										class="fs-sm fw-semibold text-decoration-none my-1"
+										href="find-password.html"
+										>비밀번호 찾기</a
+									>
+								</span>
+							</div>
+							<button class="btn btn-lg btn-primary w-100 mb-4" type="button" onclick="javascript:userLoginSubmit();">로그인</button>
+						</form>
 					</div>
+					<!-- Copyright-->
+					<p class="w-100 fs-sm pt-5 mt-auto mb-5" style="max-width: 526px">
+						<span class="text-muted">&copy; The office for Korea Childcare Promotion Institute, All Right Reserved</span>
+					</p>
+				</div>
+				<!-- Cover image-->
+				<div class="d-none d-lg-block w-50 bg-size-cover bg-repeat-0 bg-position-center" style="position: relative; z-index: 10; background-image: url(/assets/images/login.jpg)">
+					<img src="/assets/images/logo.png" alt="" style="position: absolute; top: 30px; left: 30px; height: 50px" />
 				</div>
 			</div>
 		</main>
-		<!-- Footer-->
-		<footer class="footer bg-dark position-relative py-4 py-md-5">
-			<div class="dark-mode container position-relative zindex-2">
-				<p class="fs-sm pb-2 pb-lg-0 mb-0">
-					<span class="opacity-70">&copy; The office for Korea Childcare Promotion Institute, All Right Reserved </span>
-				</p>
-			</div>
-		</footer>
 		<!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
 			<svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg
@@ -261,9 +234,9 @@
 		<!-- Vendor scripts: js libraries and plugins-->
 		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-		<script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-		<script src="/assets/vendor/shufflejs/dist/shuffle.min.js"></script>
+		<script src="assets/vendor/jquery/jquery-3.1.1.min.js"></script>
 		<!-- Main theme script-->
 		<script src="/assets/js/theme.min.js"></script>
+		<script src="assets/js/member.js"></script>
 	</body>
 </html>

@@ -3,6 +3,11 @@
 body {
 	font-family: 'NanumSquare';
 }
+
+.password-toggle-btn {
+	top: 4px;
+	transform: translateY(0%);
+}
 .navbar-brand img {
 	height: 40px;
 }
