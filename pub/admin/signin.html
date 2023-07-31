@@ -161,16 +161,16 @@
 						<form class="needs-validation" novalidate>
 							<div class="pb-3 mb-3">
 								<div class="position-relative">
-									<i class="ai-user fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+									<i class="ai-user fs-lg position-absolute start-0 ms-3" style="top: 19px"></i>
 									<input class="form-control form-control-lg ps-5" type="text" placeholder="아이디를 입력하세요." required />
 								</div>
 							</div>
 							<div class="mb-4">
 								<div class="position-relative">
-									<i class="ai-lock-closed fs-lg position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+									<i class="ai-lock-closed fs-lg position-absolute start-0 ms-3" style="top: 19px"></i>
 									<div class="password-toggle">
 										<input class="form-control form-control-lg ps-5" type="password" placeholder="비밀번호를 입력하세요." required />
-										<label class="password-toggle-btn" aria-label="Show/hide password">
+										<label class="password-toggle-btn" aria-label="Show/hide password" style="top: 8px">
 											<input class="password-toggle-check" type="checkbox" /><span class="password-toggle-indicator"></span>
 										</label>
 									</div>
@@ -181,7 +181,13 @@
 									<input class="form-check-input" type="checkbox" id="keep-signedin" />
 									<label class="form-check-label ms-1" for="keep-signedin">로그인 유지</label>
 								</form-check>
-								<span class="fs-sm"> 아이디, 비밀번호 찾기 문의 : <strong class="fw-semibold">02-1234-5678</strong></span>
+								<span>
+									<a class="fs-sm fw-semibold text-decoration-none my-1" href="find-id.html">아이디 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+										class="fs-sm fw-semibold text-decoration-none my-1"
+										href="find-password.html"
+										>비밀번호 찾기</a
+									>
+								</span>
 							</div>
 							<button class="btn btn-lg btn-primary w-100 mb-4" type="submit">로그인</button>
 						</form>
