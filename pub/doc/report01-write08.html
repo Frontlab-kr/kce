@@ -171,16 +171,18 @@
 											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>보육과정</strong></span>
 											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section01" data-scroll="data-scroll">1. 영유아 중심 일과 운영</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write02.html" data-scroll="data-scroll">1. 영유아 중심 일과 운영</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section02" data-scroll="data-scroll">2. 영유아가 주도하는 배움 지원</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write03.html" data-scroll="data-scroll"
+														>2. 영유아가 주도하는 배움 지원</a
+													>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section03" data-scroll="data-scroll">3. 영유아 존중 상호작용 지원</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write04.html" data-scroll="data-scroll">3. 영유아 존중 상호작용 지원</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section04" data-scroll="data-scroll">4. 보육과정 실행 계획 및 평가</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write05.html" data-scroll="data-scroll">4. 보육과정 실행 계획 및 평가</a>
 												</li>
 											</ul>
 										</li>
@@ -188,171 +190,40 @@
 											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>운영관리</strong></span>
 											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section05" data-scroll="data-scroll">5. 원장의 리더십과 보육교직원 역량강화</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write06.html" data-scroll="data-scroll"
+														>5. 원장의 리더십과 보육교직원 역량강화</a
+													>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section06" data-scroll="data-scroll">6. 건강 및 안정</a>
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write07.html" data-scroll="data-scroll">6. 건강 및 안정</a>
 												</li>
 											</ul>
 										</li>
 									</ul>
-									<script>
-										document.querySelectorAll('.nav .nav-link').forEach(function (link) {
-											link.addEventListener('click', function (event) {
-												event.preventDefault();
-												var target = this.getAttribute('href');
-												var targetElement = document.querySelector(target);
-												var offset = targetElement.getBoundingClientRect().top;
-												var margin = 0;
-												window.scrollBy({
-													top: offset - margin,
-													left: 0,
-													behavior: 'smooth',
-												});
-											});
-										});
-									</script>
 								</div>
 							</div>
 						</div>
 					</aside>
 					<!-- Page content-->
-					<div class="col-lg-9 mt-5 pt-lg-5">
-						<h1 class="mb-5">새싹 어린이집 평가결과서</h1>
-						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden">
-							<div class="card-body">
-								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
-									<h2 class="h4 mb-lg-0">현장평가 정보</h2>
-								</div>
-								<!-- Basic table -->
-								<div class="table-responsive">
-									<table class="table table-bordered" style="min-width: 800px">
-										<colgroup>
-											<col style="width: 15%" />
-											<col style="width: 35%" />
-											<col style="width: 15%" />
-											<col style="width: 35%" />
-										</colgroup>
-										<tbody>
-											<tr>
-												<th scope="row" class="bg-secondary text-center align-middle">어린이집명</th>
-												<td class="text-end">
-													<div class="d-flex align-items-center justify-content-end">
-														<input type="text" class="form-control form-control-sm text-end me-1 ms-2" style="width: 100px" value="새싹" /> 어린이집
-													</div>
-												</td>
-												<th scope="row" class="bg-secondary text-center align-middle">지역</th>
-												<td class="text-end">
-													<div class="d-flex align-items-center justify-content-end">
-														<input type="text" class="form-control form-control-sm text-end me-1 ms-2" style="width: 100px" value="서울" />시
-														<input type="text" class="form-control form-control-sm text-end me-1 ms-2" style="width: 100px" value="강남" />구
-													</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</section>
+					<div class="col-lg-9 mt-5 pt-5 pb-2">
+						<h1 class="mb-5">새싹 어린이집 자체평가보고서 작성</h1>
+						<h2 class="mb-4">학부모위원 종합의견</h2>
 
-						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden">
+						<!-- 6. 건강 및 안전 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden" id="section05">
 							<div class="card-body">
-								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
-									<h2 class="h4 mb-lg-0">보육과정</h2>
-								</div>
-								<div class="mb-4">
-									<textarea class="form-control" rows="5">작성내용</textarea>
-								</div>
-								<!-- Basic table -->
-								<div class="table-responsive">
-									<table class="table table-bordered" style="min-width: 800px">
-										<colgroup>
-											<col style="width: 20%" />
-											<col style="width: 80%" />
-										</colgroup>
-										<thead>
-											<tr>
-												<th class="text-center align-middle">지표</th>
-												<th class="text-center align-middle">평가 내용</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr id="section01">
-												<th scope="row" class="align-middle">1.<br />영유아 중심 일과운영</th>
-												<td>
-													<textarea class="form-control" rows="10">작성내용</textarea>
-												</td>
-											</tr>
-											<tr id="section02">
-												<th scope="row" class="align-middle">2.<br />영유아가 주도하는 배움지원</th>
-												<td>
-													<textarea class="form-control" rows="10">작성내용</textarea>
-												</td>
-											</tr>
-											<tr id="section03">
-												<th scope="row" class="align-middle">3.<br />영유아 존중 상호작용 지원</th>
-												<td>
-													<textarea class="form-control" rows="10">작성내용</textarea>
-												</td>
-											</tr>
-											<tr id="section04">
-												<th scope="row" class="align-middle">4.<br />보육과정 실행과 평가</th>
-												<td>
-													<textarea class="form-control" rows="10">작성내용</textarea>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</section>
-
-						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden">
-							<div class="card-body">
-								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
-									<h2 class="h4 mb-lg-0">운영관리</h2>
-								</div>
-								<div class="mb-4">
-									<textarea class="form-control" rows="5">작성내용</textarea>
-								</div>
-								<!-- Basic table -->
-								<div class="table-responsive">
-									<table class="table table-bordered" style="min-width: 800px">
-										<colgroup>
-											<col style="width: 20%" />
-											<col style="width: 80%" />
-										</colgroup>
-										<thead>
-											<tr>
-												<th class="text-center align-middle">지표</th>
-												<th class="text-center align-middle">평가 내용</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr id="section05">
-												<th scope="row" class="align-middle">5.<br />리더쉽과 역량강화</th>
-												<td>
-													<textarea class="form-control" rows="10">작성내용</textarea>
-												</td>
-											</tr>
-											<tr id="section06">
-												<th scope="row" class="align-middle">6.<br />건강및 안전</th>
-												<td>
-													<textarea class="form-control" rows="10">작성내용</textarea>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+								<textarea class="form-control" rows="10"></textarea>
 							</div>
 						</section>
 
 						<div class="d-flex justify-content-between py-4">
-							<p class="d-flex"></p>
 							<p class="d-flex">
-								<button type="button" class="btn btn-outline-primary w-100 w-sm-auto ms-sm-2">수정</button>
-								<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2">최종 제출</button>
-								<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2">승인</button>
+								<a class="btn btn-outline-secondary" href="report01-write07.html">이전</a>
+								<button type="button" class="btn btn-outline-secondary ms-2" href="" disabled>다음</button>
+							</p>
+							<p class="d-flex">
+								<button type="button" class="btn btn-outline-primary" href="#alert01" data-bs-toggle="modal">저장</button>
+								<button type="button" class="btn btn-primary ms-2" href="#alert02" data-bs-toggle="modal">최종 제출</button>
 							</p>
 						</div>
 					</div>
@@ -397,7 +268,6 @@
 				</div>
 			</div>
 		</main>
-		<!-- Footer-->
 		<!-- Vendor scripts: js libraries and plugins-->
 		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
