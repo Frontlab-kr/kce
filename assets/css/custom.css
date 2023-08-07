@@ -125,3 +125,7 @@ header.navbar .dropdown-item i {
 .table-question span:first-child {
 	border-left: none;
 }
+
+.steps ul li {
+	word-break: keep-all;
+}
