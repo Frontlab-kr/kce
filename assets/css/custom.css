@@ -129,3 +129,60 @@ header.navbar .dropdown-item i {
 .steps ul li {
 	word-break: keep-all;
 }
+.kce-main .kce-main__title {
+	word-break: keep-all;
+}
+.kce-main .kce-main__title strong {
+	position: relative;
+}
+.kce-main .kce-main__title strong:before {
+	content: '';
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+	background: #fff8b9;
+	z-index: 10;
+}
+.kce-main .kce-main__title strong span {
+	position: relative;
+	z-index: 20;
+}
+.kce-main .kce-main__subtitle {
+	position: sticky;
+	top: 150px;
+}
+.kce-main-hero {
+	position: relative;
+	min-height: calc(100vh);
+}
+.kce-main-hero__bg {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 20;
+}
+.kce-main-hero .list-unstyled {
+	word-break: keep-all;
+}
+.kce-main__list .card {
+	width: 50%;
+	border: 1px solid #b9cce0;
+}
+@media (min-width: 992px) {
+	.kce-main {
+	}
+}
+@media (max-width: 992px) {
+	.kce-main__list .card {
+		width: 100%;
+	}
+	.kce-main-hero__bg {
+		position: relative;
+		bottom: 0;
+		right: 0;
+		z-index: 20;
+	}
+}
