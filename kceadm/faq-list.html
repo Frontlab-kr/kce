@@ -1,0 +1,230 @@
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/kceadm/inc/header.html";
+
+	if($_SESSION['BKEY'] != ""){
+		unset($_SESSION['BKEY']);
+	}
+
+	$page_url = getBoardUrl("page");
+	$view_url = getBoardUrl("view");
+	$write_url = getBoardUrl("write");
+	$search_url = getBoardUrl("search");
+
+	$tValue = Html_Change($_GET['tValue']);
+?>
+			<!-- Page content-->
+			<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
+				<!-- Breadcrumb-->
+				<nav aria-label="breadcrumb">
+					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item"><a href="index.html">사업안내</a></li>
+						<li class="breadcrumb-item active" aria-current="page">자주하는 질문</li>
+					</ol>
+				</nav>
+				<!-- Page title + filters-->
+				<div class="row align-items-center gy-2 mt-5 mb-4 pb-1 pb-sm-2 pb-lg-3">
+					<div class="col-lg-5">
+						<h1 class="mb-lg-0">자주하는 질문</h1>
+					</div>
+					<div class="col-xl-2 offset-xl-1 col-lg-3 col-sm-5"></div>
+					<div class="col-lg-4 col-sm-7">
+						<div class="position-relative">
+							<i class="ai-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+							<input class="form-control ps-5 search-input" type="search" placeholder="검색어를 입력해주세요." value="<?=$tValue?>"  />
+						</div>
+					</div>
+				</div>
+				<!-- Post-->
+				<!-- Default accordion -->
+				<div class="accordion" id="accordionDefault">
+
+				</div>
+
+				<!-- Pagination-->
+				<div class="row gy-3 align-items-center mt-lg-5 pt-2 pt-md-3 pt-lg-0 mb-md-2 mb-xl-4">
+					<div class="col">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-center">
+
+							</ul>
+						</nav>
+					</div>
+				</div>
+
+				<div class="d-flex justify-content-end">
+					<a href="faq-write.html" class="btn btn-lg btn-primary w-100 w-sm-auto ms-sm-2">등록</a>
+				</div>
+			</div>
+		</main>
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/kceadm/inc/footer.html";
+?>
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+		<script src="/assets/vendor/shufflejs/dist/shuffle.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+<script>
+	var page = parseInt('<?=$_GET['page']?>');
+
+	if(page == "" || !page){
+		page = 1;
+	}
+
+	function getList(page){
+		var tSearch = $('.search-input').val();
+		$.ajax({
+			type : 'post'
+			, async  :  true
+			, url  :  '/api/faq.api.php'
+			, data : {
+				type : 'getList'
+				, page : page
+				, tsearch : tSearch
+			}
+			, success : function(response) {
+				if(response.RESULT == 1){
+					var aHtml = Array();
+
+					if(response.TOPCNT > 0){
+						$.each(response.TOPDATA, function(k, v) {
+							aHtml.push('<div class="accordion-item">');
+							aHtml.push('	<h3 class="accordion-header" id="headingOne'+v.idx+'">');
+							aHtml.push('		<button');
+							aHtml.push('			class="accordion-button"');
+							aHtml.push('			type="button"');
+							aHtml.push('			data-bs-toggle="collapse"');
+							aHtml.push('			data-bs-target="#collapseOne'+v.idx+'"');
+							aHtml.push('			aria-expanded="false"');
+							aHtml.push('			aria-controls="collapseOne'+v.idx+'"');
+							aHtml.push('		>'+v.title);
+							aHtml.push('		</button>');
+							aHtml.push('	</h3>');
+							aHtml.push('	<div class="accordion-collapse collapse" id="collapseOne'+v.idx+'" aria-labelledby="headingOne'+v.idx+'" data-bs-parent="#accordionDefault">');
+							aHtml.push('		<div class="accordion-body fs-sm">'+v.contents+'</div>');
+							aHtml.push('		<div class="pe-4 pb-4 text-end"><button class="btn btn-sm btn-primary" type="button" onclick="javascript:contentView(\'' + v.b_key + '\')">수정</button></div>');
+							aHtml.push('	</div>');
+							aHtml.push('</div>');
+						});
+					}
+					if(response.CNT > 0){
+						$.each(response.DATA, function(k, v) {
+                            aHtml.push('<div class="accordion-item">');
+							aHtml.push('	<h3 class="accordion-header" id="headingOne'+v.idx+'">');
+							aHtml.push('		<button');
+							aHtml.push('			class="accordion-button collapsed"');
+							aHtml.push('			type="button"');
+							aHtml.push('			data-bs-toggle="collapse"');
+							aHtml.push('			data-bs-target="#collapseOne'+v.idx+'"');
+							aHtml.push('			aria-expanded="false"');
+							aHtml.push('			aria-controls="collapseOne'+v.idx+'"');
+							aHtml.push('		>'+v.title);
+							aHtml.push('		</button>');
+							aHtml.push('	</h3>');
+							aHtml.push('	<div class="accordion-collapse collapse" id="collapseOne'+v.idx+'" aria-labelledby="headingOne'+v.idx+'" data-bs-parent="#accordionDefault">');
+							aHtml.push('		<div class="accordion-body fs-sm">'+v.contents+'</div>');
+							aHtml.push('		<div class="pe-4 pb-4 text-end"><button class="btn btn-sm btn-primary" type="button" onclick="javascript:contentView(\'' + v.b_key + '\')">수정</button></div>');
+							aHtml.push('	</div>');
+							aHtml.push('</div>');
+						});
+					}else{
+						
+					}
+					//$('.search_input').val(response.tSearch);
+					$('#accordionDefault').html(aHtml.join(''));
+
+                    var page_s = response.PAGE_S;
+					page_s++;
+					var page_e = response.PAGE_E;
+					setPagenation(page, page_s, page_e, response.TOTAL_CNT, 5);
+				}else{
+					alert(response.MSG);
+				}
+			}
+			, error : function(request, status, error) {
+				//console.log(error);
+				return;
+			}
+			, cache : false
+			, dataType : 'json'
+		});
+	}
+
+	function setPagenation(page, page_s, page_e, total, limit){
+		var aHtml = Array();
+
+		var nLastPage = Math.ceil(total/limit);
+
+		if(nLastPage == 0) return;
+
+		if(page > nLastPage){
+			alert('페이지표시가 올바르지 않습니다.');
+			changeLocation(1);
+			return;
+		}
+
+		aHtml.push('<li class="page-item">');
+		aHtml.push('	<a href="javascript:void(0)" onclick="javascript:'+(page == 1 ? "alert('첫 페이지 입니다.');" : 'changeLocation(' + (page-1) + ')')+'" class="page-link">');
+		aHtml.push('		<i class="ai-arrow-left fs-xl"></i>');
+		aHtml.push('	</a>');
+		aHtml.push('</li>');
+
+
+		aHtml.push('<li class="page-item d-sm-none">');
+		aHtml.push('	<span class="page-link pe-none">'+page+' / '+nLastPage+'</span>');
+		aHtml.push('</li>');
+
+
+		for(var i = page_s; i <= page_e; i++){
+			aHtml.push('<li class="page-item d-none d-sm-block">');
+			aHtml.push((page == i ? '<span class="page-link text-dark font-weight-bold">' : '<a href="javascript:void(0)" onclick="javascript:changeLocation(' + i + ')" class="page-link">'));
+			aHtml.push(i+(page == i ? '<span class="visually-hidden">(current)</span>' : ''));
+			aHtml.push((page == i ? '</span>' : '</a>'));
+			aHtml.push('</li>');
+		}
+
+
+		aHtml.push('<li class="page-item">');
+		aHtml.push('	<a href="javascript:void(0)" onclick="javascript:'+(page == nLastPage ? "alert('마지막 페이지 입니다.');" : 'changeLocation(' + (page+1) + ')')+'" class="page-link">');
+		aHtml.push('		<i class="ai-arrow-right fs-xl"></i>');
+		aHtml.push('	</a>');
+		aHtml.push('</li>');
+
+		$('.pagination').html(aHtml.join(''));
+	}
+
+	function changeLocation(page){
+		var URI = '<?=$page_url?>'+'&page='+page;
+
+		location.href=URI;
+	}
+
+	function contentView(bkey){
+		var URI = '/kceadm/faq-write.html'+'<?=$write_url?>';
+
+		location.href=URI+"&bkey="+bkey;
+	} 
+
+	function Search(){
+		var tV = $(".search-input").val();
+		var URI = '<?=$search_url?>';
+
+		location.href=URI+'&tValue='+tV;
+	}
+
+	$(document).ready(function(){
+		$(".search-input").keypress(function(e){
+			if(e.keyCode == 13){
+				Search();
+			}
+		});
+
+		getList(page);
+	});
+</script>
+	</body>
+</html>

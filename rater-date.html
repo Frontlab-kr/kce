@@ -1,0 +1,130 @@
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/inc/header.html";
+
+?>
+			<!-- Page content-->
+			<div class="container overflow-hidden py-5 mt-5 mb-2 mb-md-3 mb-lg-4 mb-xxl-5">
+				<!-- Breadcrumb-->
+				<nav aria-label="breadcrumb">
+					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item">현장평가</li>
+						<li class="breadcrumb-item active" aria-current="page">현장평가일 조회</li>
+					</ol>
+				</nav>
+
+				<link rel="stylesheet" media="screen" href="/assets/vendor/fullcalendar/main.min.css" />
+				<link rel="stylesheet" media="screen" href="/assets/vendor/simplebar/dist/simplebar.min.css" />
+				<link rel="stylesheet" media="screen" href="/assets/vendor/prismjs/themes/prism.css" />
+				<link rel="stylesheet" media="screen" href="/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.css" />
+				<link rel="stylesheet" media="screen" href="/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.css" />
+				<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+				<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+				<script src="/assets/vendor/fullcalendar/main.min.js"></script>
+				<script src="/assets/vendor/simplebar/dist/simplebar.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-core.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-markup.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-clike.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-javascript.min.js"></script>
+				<script src="/assets/vendor/prismjs/components/prism-pug.min.js"></script>
+				<script src="/assets/vendor/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+				<script src="/assets/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+				<script src="/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+				<div id="calendar" class="calendar"></div>
+			</div>
+		</main>
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/inc/footer.html";
+?>
+
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+		<script src="/assets/vendor/shufflejs/dist/shuffle.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+		<script src="/assets/js/member.js"></script>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var calendarEl = document.getElementById('calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					contentHeight: 'auto',
+					initialView: 'dayGridMonth',
+					locale: 'ko',
+					headerToolbar: {
+						left: 'today',
+						center: 'title',
+						right: 'prev,next',
+					},
+					buttonText: {
+						today: '오늘',
+						class: 'd',
+					},
+					eventTimeFormat: {
+						hour: '2-digit',
+						minute: '2-digit',
+						hour12: false,
+					},
+					events:function(info, successCallback, failureCallback){
+						$.ajax({
+							type : 'post'
+							, async : false
+							, cache : false
+							, dataType : 'json'
+							, url  :  '/api/member.eval.api.php'
+							, data : {
+								type : 'getEvalDate'
+							}
+							, success : function(response) {
+								var events = [];
+								var data = response.DATA;
+								
+								if(data.eval_date != ""){
+									events.push({
+										title : data.cname+' 평가일'
+										,start : data.eval_date
+										,end : data.eval_date
+										,classNames: [
+											'event-custom-style',
+											'bg-light',
+											'text-nav',
+											'border-0',
+											'rounded-1',
+											'p-2',
+											'ps-3',
+											'border-start',
+											'border-5',
+											'border-purple'
+										]
+									});
+								}
+								successCallback(events);
+							}
+						});
+					}
+				});
+				calendar.render();
+			});
+		</script>
+
+	<style>
+		.fc-header-toolbar .fc-button-primary:disabled,
+		.fc-header-toolbar .fc-button-primary:focus,
+		.fc-header-toolbar .fc-button-primary:hover,
+		.fc-header-toolbar .fc-button-primary:active {
+			background-color: #3b77b6 !important;
+			border-color: #3b77b6 !important;
+			color: #fff !important;
+		}
+		.fc-header-toolbar .fc-button-primary {
+			background: none;
+			color: #3b77b6;
+			border-color: #3b77b6;
+		}
+	</style>
+	</body>
+</html>

@@ -1,0 +1,208 @@
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/inc/report1_header.html";
+?>
+					<!-- Page content-->
+					<div class="col-lg-9 mt-5 pt-lg-5">
+						<h1 class="mb-5"><mark class="cname"><?=$_SESSION['USER_CNAME']?></mark> 자체평가보고서 작성</h1>
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden" id="section01">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">자체평가 위원회</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered eval-list" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 50%" />
+											<col style="width: 50%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center">성명</th>
+												<th class="text-center">소속 및 직위(급)</th>
+											</tr>
+										</thead>
+										<tbody>
+
+										</tbody>
+									</table>
+
+									<form class="ckeditor_form" name="frm" id="frm" method="POST" action="javascript:;">
+										<input type="hidden" name="type" value="insert1" />
+										<div class="mt-5 mb-5">
+											<div style="word-break: keep-all">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" name="agree" id="ex-check-1" />
+													<label class="form-check-label" for="ex-check-1">
+														본 어린이집은 원장, 보육교사, 원아 부모 각 1인 이상을 포함한 자체평가(점검)위원회를 구성하여 평가지표를 기준으로 운영 전반에 대해
+														자체평가(점검)을 실시하고 자체평가(점 검)보고서를 작성하였습니다.<br />
+														보고서에 포함된 모든 내용은 사실임을 확인합니다.<br />
+														<div class="mt-2"><small>* 자체점검위원회는 3~7인 이내, 어린이집 운영위원회에서 수행 가능</small></div>
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="text-end">
+											2023년 7월 12일
+											<h4 class="mt-3">원장 <?=$_SESSION['USER_ONAME']?></h4>
+										</div>
+									</form>
+								</div>
+							</div>
+						</section>
+						<div class="d-flex justify-content-between py-4">
+							<p class="d-flex">
+								<button type="button" class="btn btn-outline-secondary" href="" disabled>이전</button>
+								<a class="btn btn-outline-secondary ms-2" href="report01-write02.html">다음</a>
+							</p>
+							<p class="d-flex">
+								<button type="button" class="btn btn-primary" href="#alert01" data-bs-toggle="modal">저장</button>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Divider for dark mode only-->
+			<hr class="d-none d-dark-mode-block" />
+			<!-- Sidebar toggle button-->
+
+			<div class="modal fade" id="alert01" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title"></h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body pt-0">
+							<p>임시저장 하시겠습니까?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmSubmit1()">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="alert02" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title"></h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body pt-0">
+							<p>최종 제출 하시겠습니까?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- Footer-->
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery.form.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+<script>
+	function getEvalList2(){
+		$.ajax({
+			type : 'post'
+			, async  :  true
+			, url  :  '/api/member.eval.api.php'
+			, data : {
+				type : 'getList'
+			}
+			, success : function(response) {
+				if(response.RESULT == 1){
+					if(response.CNT > 0){
+						var aHtml = Array();
+
+						$.each(response.DATA, function(k, v) {
+							aHtml.push('<tr>');
+							aHtml.push('	<th scope="row" class="text-center">'+v.name+'</th>');
+							aHtml.push('	<td class="text-center">'+v.kind+'</td>');
+							aHtml.push('</tr>');
+						});
+
+						$(".eval-list tbody").html(aHtml.join(''));
+					}else{
+					
+					}
+				}else{
+					
+				}
+			}
+			, error : function(request, status, error) {
+				//console.log(error);
+				return;
+			}
+			, cache : false
+			, dataType : 'json'
+		});
+	}
+
+	function getReport(){
+		$.ajax({
+			type : 'post'
+			, async  :  true
+			, url  :  '/api/report1.api.php'
+			, data : {
+				type : 'getReport'
+			}
+			, success : function(response) {
+				if(response.RESULT == 1){
+					var data = response.DATA;
+					
+					if(data.agree == "1"){
+						$("input[name='agree']").prop("checked", true);
+					}
+				}else{
+					
+				}
+			}
+			, error : function(request, status, error) {
+				//console.log(error);
+				return;
+			}
+			, cache : false
+			, dataType : 'json'
+		});
+	}
+
+	function frmSubmit1(){
+		$agree = $("input[name='agree']");
+		if(!$agree.is(':checked')){
+			alert('사실 확인을 해주세요.');
+			return false;
+		}
+		
+		document.frm.action = "/api/report1.api.php";
+
+		$('#frm').ajaxSubmit({
+			dataType:  'json'
+			,success : function(response) {
+				if(response.RESULT == 1){
+					alert(response.MSG + " 다음페이지로 이동합니다.");
+					location.href='/report01-write02.html';
+				}else{
+					alert(response.MSG);
+					location.reload();
+				}
+			}
+		});
+	}
+
+	$(document).ready(function(){
+		getReport();
+		getEvalList2();
+	});
+</script>
+	</body>
+</html>

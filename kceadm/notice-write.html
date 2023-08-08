@@ -1,0 +1,301 @@
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/kceadm/inc/header.html";
+
+	$randValue = $mb->randString(10);
+    $time = time();
+
+    if(!$_GET['bkey'] || $_GET['bkey'] == ""){
+
+    }else{
+        require_once $lib_root."mysql.class.php";
+        $db = new dbHandle();
+
+        $szQuery = sprintf("SELECT idx FROM tbl_notice WHERE b_key = '%s'", $_GET['bkey']);
+        $db->dbQuery($szQuery);
+
+        $aRow = $db->dbFetch();
+        $no = $aRow['idx'];
+
+        $_SESSION[$randValue.'-'.$no] = $_GET['bkey'];
+    }
+
+	$list_url = "/kceadm/notice-list.html".getBoardUrl("list");
+?>
+			<!-- Page content-->
+			<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
+				<!-- Breadcrumb-->
+				<nav aria-label="breadcrumb">
+					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item">게시판 관리</li>
+						<li class="breadcrumb-item active" aria-current="page">공지사항 등록</li>
+					</ol>
+				</nav>
+				<!-- Page title + filters-->
+				<div class="row align-items-center gy-2 mb-4 pb-1 pb-sm-2 pb-lg-3">
+					<div class="col-lg-5">
+						<h1 class="mb-lg-0">공지사항 등록</h1>
+					</div>
+				</div>
+				<!-- Post-->
+				<div class="row">
+					<div class="col col-lg-8" style="margin: 0 auto">
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
+							<div class="card-body">
+								<form class="ckeditor_form" name="frm" id="frm" method="POST" action="javascript:;" enctype='multipart/form-data'>
+									<div class="mb-4">
+										<label class="form-label mb-2">제목</label>
+										<input class="form-control" name="title" type="text" placeholder="제목을 입력해주세요." />
+									</div>
+
+									<div class="mb-4">
+										<label class="form-label mb-2">리스트 - 내용</label>
+										<textarea class="form-control" name="min-contents" rows="5"></textarea>
+									</div>
+
+									<div class="mb-4">
+										<label class="form-label mb-2">내용</label>
+										<textarea class="form-control" name="contents" id="editor" rows="15"></textarea>
+									</div>
+
+									<div class="mb-4">
+										<label class="form-label mb-2">첨부파일</label>
+										<input class="form-control mb-3" type="file" id="file-input" name="file1" />
+										<input class="form-control mb-3" type="file" id="file-input" name="file2" />
+										<input class="form-control mb-3" type="file" id="file-input" name="file3" />
+										<input class="form-control" type="file" id="file-input" name="file4" />
+									</div>
+
+									<div>
+										<label class="form-label mb-2">상단 고정</label>
+										<div class="form-check form-switch">
+											<input type="checkbox" class="form-check-input" id="customSwitch1" name="top" value="1" />
+											<label class="form-check-label" for="customSwitch1"></label>
+										</div>
+									</div>
+
+									<div class="mt-4 text-end">
+										<button class="btn btn-lg btn-primary ms-3" type="button" onclick="frmSubmit()">저장</button>
+									</div>
+									<input type="hidden" value="insert" name="type" />
+									<input type="hidden" id="add_url" value="" ckeditor-data="" />
+									<input type="hidden" id="add_file" value="" ckeditor-data="" />
+									<input type="hidden" id="editor_img" name="editor_no" value="" />
+								</form>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</main>
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/kceadm/inc/footer.html";
+?>
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+		<script src="/assets/vendor/shufflejs/dist/shuffle.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery.form.js"></script>
+		<script src="/ckeditor/ckeditor.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+		<script src="/assets/js/initeditor.js"></script>
+
+
+<script>
+	initEditor();
+	CKEDITOR.config.allowedContent = true;
+	CKEDITOR.dtd.$removeEmpty['i'] = false;
+
+	var bkey = "<?=$_GET['bkey']?>";
+	var rnd = "<?=$randValue?>";
+	var list_url = '<?=$list_url?>';
+
+	if(!bkey || bkey == ""){
+	
+	}else{
+		$("input[name='type']").val('update');
+
+		var oHtml = Array();
+		oHtml.push('<input type="hidden" value="'+bkey+'" name="upno" /><input type="hidden" value="'+rnd+'" name="rnd" />');
+		$("input[name='type']").after(oHtml.join(''));
+
+		getContent(bkey);
+	}
+	function CKupdate(){
+		for ( instance in CKEDITOR.instances )
+			CKEDITOR.instances[instance].updateElement();
+	}
+
+	function getContent(bkey){
+		$.ajax({
+			type : 'post'
+			, async  :  true
+			, url  :  '/api/notice.api.php'
+			, data : {
+				type : 'getContent'
+				, bkey : bkey
+			}
+			, success : function(response) {
+				if(response.RESULT == 1){
+					var oData = response.DATA;
+					$("input[name=title]").val(oData['title']);
+                    $("textarea[name=min-contents]").html(oData['min_contents']);
+                    setTimeout(function(){CKEDITOR.instances.editor.setData(oData['contents'])}, 500);
+					if(oData['top'] == "1"){
+						$("input[name='top']").prop("checked", true)
+					}
+
+					$(".btn-primary").before('<button class="btn btn-lg btn-secondary" type="button" onclick="delContent()">삭제</button>');
+
+                    if(oData['file'].length > 0){
+						var add_html = Array();
+						add_html.push("<p class='d-flex justify-content-between mb-2' style='font-size:14px;'>");
+						add_html.push("<input type='hidden' name='file11' id='file11' value='"+oData['file']+"' />");
+						add_html.push("등록된 파일 : "+oData['orifile']+"<span><input type='checkbox' name='del1' value='1' style='width:20px; vertical-align:middle;' /> 선택삭제</span>");
+						add_html.push("</p>");
+						$("input:file[name='file1']").before(add_html.join(''));
+					}
+
+                    if(oData['file2'].length > 0){
+						var add_html = Array();
+						add_html.push("<p class='d-flex justify-content-between mb-2' style='font-size:14px;'>");
+						add_html.push("<input type='hidden' name='file22' id='file22' value='"+oData['file2']+"' />");
+						add_html.push("등록된 파일 : "+oData['orifile2']+"<span><input type='checkbox' name='del2' value='1' style='width:20px; vertical-align:middle;' /> 선택삭제</span>");
+						add_html.push("</p>");
+						$("input:file[name='file2']").before(add_html.join(''));
+					}
+
+					if(oData['file3'].length > 0){
+						var add_html = Array();
+						add_html.push("<p class='d-flex justify-content-between mb-2' style='font-size:14px;'>");
+						add_html.push("<input type='hidden' name='file33' id='file33' value='"+oData['file3']+"' />");
+						add_html.push("등록된 파일 : "+oData['orifile3']+"<span><input type='checkbox' name='del3' value='1' style='width:20px; vertical-align:middle;' /> 선택삭제</span>");
+						add_html.push("</p>");
+						$("input:file[name='file3']").before(add_html.join(''));
+					}
+
+					if(oData['file4'].length > 0){
+						var add_html = Array();
+						add_html.push("<p class='d-flex justify-content-between mb-2' style='font-size:14px;'>");
+						add_html.push("<input type='hidden' name='file44' id='file44' value='"+oData['file4']+"' />");
+						add_html.push("등록된 파일 : "+oData['orifile4']+"<span><input type='checkbox' name='del4' value='1' style='width:20px; vertical-align:middle;' /> 선택삭제</span>");
+						add_html.push("</p>");
+						$("input:file[name='file4']").before(add_html.join(''));
+					}
+				}else{
+					alert(response.MSG);
+					history.back();
+				}
+			}
+			, error : function(request, status, error) {
+				//console.log(error);
+				return;
+			}
+			, cache : false
+			, dataType : 'json'
+		});
+	}
+
+	function delContent(){
+		msg = confirm('정말로 삭제하시겠습니까?');
+		if(msg == false){
+
+		}else{
+			$.ajax({
+				type : 'post'
+				, async  :  true
+				, url  :  '/api/notice.api.php'
+				, data : {
+					type : 'delete'
+					, bkey : bkey
+				}
+				, success : function(response) {
+					if(response.RESULT == 1){
+						alert("삭제되었습니다.");
+						location.href='<?=$list_url?>';
+					}else{
+						alert(response.MSG);
+					}
+				}
+				, error : function(request, status, error) {
+					//console.log(error);
+					return;
+				}
+				, cache : false
+				, dataType : 'json'
+			});
+		}
+	}
+
+	function frmSubmit(){
+		CKupdate();
+
+		var txt = $("#txt_ch_btn").text();
+		msg = confirm('저장 하시겠습니까?');
+		if(msg == false){
+			
+		}else{
+			$title = $("input[name='title']");
+			if($title.val() == "" || !$title.val()){
+				alert('제목을 입력해주세요.');
+				$title.focus();
+				return false;
+			}
+            
+			document.frm.action = "/api/notice.api.php";
+/*
+			$.ajax({
+				type : 'post'
+				, async  :  true
+				, url  :  '/api/notice.api.php'
+				, data : $('#frm').serialize()
+				, success : function(response) {
+					if(response.RESULT == 1){
+						alert(response.MSG);
+						location.href = list_url;
+					}else{
+						alert(response.MSG);
+						location.reload();
+					}
+				}
+				, error : function(request, status, error) {
+					//console.log(error);
+					return;
+				}
+				, cache : false
+				, dataType : 'json'
+			});
+*/
+			$('#frm').ajaxSubmit({
+				dataType:  'json'
+				,success : function(response) {
+					if(response.RESULT == 1){
+						alert(response.MSG);
+						location.href = list_url;
+					}else{
+						alert(response.MSG);
+						location.reload();
+					}
+				}
+			});
+		}
+	}
+
+	function editor_img(no){
+        var nos = $("#editor_img").val();
+        
+        if(nos == "" || !nos){
+            $("#editor_img").val(no);
+        }else{
+            $("#editor_img").val(nos+"_"+no);
+        }
+    }
+</script>
+
+
+
+	</body>
+</html>

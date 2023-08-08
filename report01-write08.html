@@ -1,0 +1,137 @@
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/inc/report1_header.html";
+?>
+					<!-- Page content-->
+					<div class="col-lg-9 mt-5 pt-5 pb-2">
+						<h1 class="mb-5"><mark class="cname"><?=$_SESSION['USER_CNAME']?></mark> 자체평가보고서 작성</h1>
+						<h2 class="mb-4">학부모위원 종합의견</h2>
+
+						<!-- 6. 건강 및 안전 -->
+						<form class="ckeditor_form" name="frm" id="frm" method="POST" action="javascript:;">
+						<input type="hidden" name="type" value="insert8" />
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden" id="section05">
+							<div class="card-body">
+								<textarea class="form-control" name="data7-1" rows="10"></textarea>
+							</div>
+						</section>
+						</form>
+						
+						<div class="d-flex justify-content-between py-4">
+							<p class="d-flex">
+								<a class="btn btn-outline-secondary" href="report01-write07.html">이전</a>
+								<button type="button" class="btn btn-outline-secondary ms-2" href="" disabled>다음</button>
+							</p>
+							<p class="d-flex">
+								<button type="button" class="btn btn-primary" href="#alert01" data-bs-toggle="modal">저장</button>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Divider for dark mode only-->
+			<hr class="d-none d-dark-mode-block" />
+			<!-- Sidebar toggle button-->
+
+			<div class="modal fade" id="alert01" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title"></h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body pt-0">
+							<p>임시저장 하시겠습니까?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmSubmit8()">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="alert02" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title"></h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body pt-0">
+							<p>최종 제출 하시겠습니까?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery.form.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+<script>
+	var idx = '<?=$_SESSION["USER_IDX"]?>';
+	function getReport(){
+		$.ajax({
+			type : 'post'
+			, async  :  true
+			, url  :  '/api/report1.api.php'
+			, data : {
+				type : 'getReport'
+			}
+			, success : function(response) {
+				if(response.RESULT == 1){
+					var data = response.DATA;
+
+					if(data.data7_1 != ""){
+						$("textarea[name='data7-1']").text(data.data7_1);
+					}
+
+				}else{
+					
+				}
+			}
+			, error : function(request, status, error) {
+				//console.log(error);
+				return;
+			}
+			, cache : false
+			, dataType : 'json'
+		});
+	}
+	function frmSubmit8(){
+		$data7_1 = $("textarea[name='data7-1']");
+		if($data7_1.val() == "" || !$data7_1.val()){
+			alert('총평을 작성해주세요.');
+			return false;
+		}
+		
+		
+		document.frm.action = "/api/report1.api.php";
+
+		$('#frm').ajaxSubmit({
+			dataType:  'json'
+			,success : function(response) {
+				if(response.RESULT == 1){
+					alert(response.MSG + " 다음페이지로 이동합니다.");
+					location.href='/report01-view.html?idx='+idx;
+				}else{
+					alert(response.MSG);
+					location.reload();
+				}
+			}
+		});
+	}
+
+	$(document).ready(function(){
+		getReport();
+	});
+</script>
+	</body>
+</html>

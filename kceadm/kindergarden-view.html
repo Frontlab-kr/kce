@@ -1,0 +1,588 @@
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/kceadm/inc/header.html";
+
+	$randValue = $mb->randString(10);
+    $time = time();
+
+    if(!$_GET['bkey'] || $_GET['bkey'] == ""){
+
+    }else{
+        require_once $lib_root."mysql.class.php";
+        $db = new dbHandle();
+
+        $szQuery = sprintf("SELECT idx FROM tbl_member WHERE b_key = '%s'", $_GET['idx']);
+        $db->dbQuery($szQuery);
+
+        $aRow = $db->dbFetch();
+        $no = $aRow['idx'];
+
+        $_SESSION[$randValue.'-'.$no] = $_GET['idx'];
+    }
+
+	$list_url = "/kceadm/kindergarden-list.html".getBoardUrl("list");
+?>
+			<!-- Page content-->
+			<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
+				<!-- Breadcrumb-->
+				<nav aria-label="breadcrumb">
+					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item">어린이집 관리</li>
+						<li class="breadcrumb-item active" aria-current="page">어린이집 현황</li>
+					</ol>
+				</nav>
+
+				<div class="row pt-sm-2 pt-lg-0">
+					<!-- Sidebar (offcanvas on sreens < 992px)-->
+					<aside class="col-lg-3 pe-lg-4 pe-xl-5 mt-n3">
+						<div class="position-lg-sticky top-0">
+							<div class="d-none d-lg-block" style="padding-top: 105px"></div>
+							<div class="offcanvas-lg offcanvas-start" id="sidebarAccount">
+								<button
+									class="btn-close position-absolute top-0 end-0 mt-3 me-3 d-lg-none"
+									type="button"
+									data-bs-dismiss="offcanvas"
+									data-bs-target="#sidebarAccount"
+								></button>
+								<div class="offcanvas-body">
+									<div class="pb-2 pb-lg-0 mb-4 mb-lg-5">
+										<h3 class="h5 mb-1 cname"></h3>
+										<p class="fs-sm text-muted mb-0 userid"></p>
+									</div>
+									<nav class="nav flex-column pb-2 pb-lg-4 mb-3">
+										<a class="nav-link fw-semibold py-2 px-0" href="#section01"><i class="ai-home fs-5 opacity-60 me-2"></i>어린이집 정보</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section02"><i class="ai-user-group fs-5 opacity-60 me-2"></i>자체평가 위원회</a>
+										<!-- <a class="nav-link fw-semibold py-2 px-0" href="#section03"><i class="ai-user-check fs-5 opacity-60 me-2"></i>현장평가자 조구성</a> -->
+										<h4 class="h6 mt-5 mb-1">평가 문서</h4>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section04"><i class="ai-file-text fs-5 opacity-60 me-2"></i>자체평가보고서</a>
+										<!-- <a class="nav-link fw-semibold py-2 px-0" href="#section05"><i class="ai-file-text fs-5 opacity-60 me-2"></i>상호확인서</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section06"><i class="ai-file-text fs-5 opacity-60 me-2"></i>평가보고서</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section07"><i class="ai-file-text fs-5 opacity-60 me-2"></i>평가결과서</a> -->
+									</nav>
+
+									<script>
+										document.querySelectorAll('.nav .nav-link').forEach(function (link) {
+											link.addEventListener('click', function (event) {
+												event.preventDefault();
+												var target = this.getAttribute('href');
+												var targetElement = document.querySelector(target);
+												var offset = targetElement.getBoundingClientRect().top;
+												var headerHeight = document.querySelector('header').offsetHeight;
+												var margin = 24;
+												window.scrollBy({
+													top: offset - headerHeight - margin,
+													left: 0,
+													behavior: 'smooth',
+												});
+											});
+										});
+									</script>
+								</div>
+							</div>
+						</div>
+					</aside>
+					<!-- Page content-->
+					<div class="col-lg-9 pt-4 pb-2 pb-sm-4">
+						<!-- 어린이집 정보 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
+							<div class="card-body">
+								<div class="d-flex align-items-center just mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<i class="ai-home text-primary lead pe-1 me-2"></i>
+									<h2 class="h4 mb-lg-0">어린이집 정보</h2>
+								</div>
+								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">승인</label>
+										<div class="mt-2">
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-4" name="radio2" value="0" />
+												<label class="form-check-label" for="ex-radio-4">미승인</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-5" name="radio2" value="1" />
+												<label class="form-check-label" for="ex-radio-5">승인</label>
+											</div>
+											<div class="form-check form-check-inline">
+												<input class="form-check-input" type="radio" id="ex-radio-6" name="radio2" value="2" />
+												<label class="form-check-label" for="ex-radio-6">정지</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">평가일</label>
+										<div class="position-relative">
+											<input
+												class="form-control date-picker pe-5"
+												type="text"
+												id="flatdate"
+												name="eval_date"
+												placeholder="날짜를 선택해주세요."
+												data-datepicker-options='{"altInput": true, "altFormat": "Y, F J", "dateFormat": "Y-m-d", "locale": "ko"}'
+											/>
+											<i class="ai-calendar position-absolute top-50 end-0 translate-middle-y me-3"></i>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">아이디</label>
+										<input class="form-control" type="text" name="userid" value="saessagkindergarden" disabled />
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">이메일 주소</label>
+										<input class="form-control" type="text" name="email" value="saessagkindergarden@new-kce.com" disabled />
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">어린이집명</label>
+										<input class="form-control" type="text" name="cname" placeholder="어린이집명을 입력하세요." value="새싹 어린이집" disabled />
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">원장명</label>
+										<input class="form-control" type="text" name="oname" placeholder="원장명을 입력하세요." value="임영애" disabled />
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">대표자명</label>
+										<input class="form-control" type="text" name="oname2" placeholder="대표자명을 입력하세요." value="임영애" disabled />
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">연락처</label>
+										<input class="form-control" type="text" name="phone" placeholder="연락처를 입력해주세요." value="010-1234-5478" disabled />
+									</div>
+									<div class="col-sm-12">
+										<label class="form-label">주소</label>
+										<input class="form-control" type="text" name="address" placeholder="주소를 입력해주세요." value="서울특별시 용산구 서계동 209" disabled />
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">정원</label>
+										<input class="form-control" type="text" name="maxto" placeholder="정원을 입력해주세요." value="100" disabled />
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">현원</label>
+										<input class="form-control" type="text" name="nowto" placeholder="현원을 입력해주세요." value="99" disabled />
+									</div>
+
+									<div class="col-sm-6">
+										<label class="form-label">어린이집 유형</label>
+										<select class="form-select" name="kind" disabled>
+											<option selected disabled>선택</option>
+											<option value="국공립어린이집">국공립어린이집</option>
+											<option value="사회복지법인어린이집">사회복지법인어린이집</option>
+											<option value="법인·단체등어린이집">법인·단체등어린이집</option>
+											<option value="직장어린이집">직장어린이집</option>
+											<option value="가정어린이집">가정어린이집</option>
+											<option value="협동어린이집">협동어린이집</option>
+											<option value="민간어린이집">민간어린이집</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 자체평가 위원회 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section02">
+							<div class="card-body">
+								<div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
+									<i class="ai-user-group text-primary lead pe-1 me-2"></i>
+									<h2 class="h4 mb-lg-0">자체평가 위원회</h2>
+								</div>
+								<div class="row row-cols-1 row-cols-md-2 g-4 eval-list">
+									
+								</div>
+							</div>
+						</section>
+
+						<!-- 현장평가자 조구성 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section03" style="display: none;">
+							<div class="card-body">
+								<div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
+									<i class="ai-user-check text-primary lead pe-1 me-2"></i>
+									<h2 class="h4 mb-lg-0">현장평가자 조구성</h2>
+								</div>
+								<div class="row row-cols-1 row-cols-md-2 g-4">
+									<!-- Address (primary)-->
+									<div class="col">
+										<div class="card h-100 rounded-3 p-3 p-sm-4">
+											<div class="d-flex align-items-center pb-2 mb-1">
+												<h3 class="h6 text-nowrap text-truncate mb-0"><a href="rater-view.html">고가영</a></h3>
+												<span class="badge bg-faded-primary text-primary fs-xs ms-3">팀장</span>
+												<div class="d-flex ms-auto">
+													<button class="nav-link fs-xl fw-normal py-1 pe-0 ps-1 ms-2" type="button" data-bs-toggle="tooltip" title="수정">
+														<i class="ai-edit-alt"></i>
+													</button>
+													<button class="nav-link text-danger fs-xl fw-normal py-1 pe-0 ps-1 ms-2" type="button" data-bs-toggle="tooltip" title="삭제">
+														<i class="ai-trash"></i>
+													</button>
+												</div>
+											</div>
+											<p class="mb-0">010-1234-5478</p>
+										</div>
+									</div>
+									<!-- Address-->
+									<div class="col">
+										<div class="card h-100 rounded-3 p-3 p-sm-4">
+											<div class="d-flex align-items-center pb-2 mb-1">
+												<h3 class="h6 text-nowrap text-truncate mb-0"><a href="rater-view.html">오경님</a></h3>
+												<div class="d-flex ms-auto">
+													<button class="nav-link fs-xl fw-normal py-1 pe-0 ps-1 ms-2" type="button" data-bs-toggle="tooltip" title="수정">
+														<i class="ai-edit-alt"></i>
+													</button>
+													<button class="nav-link text-danger fs-xl fw-normal py-1 pe-0 ps-1 ms-2" type="button" data-bs-toggle="tooltip" title="삭제">
+														<i class="ai-trash"></i>
+													</button>
+												</div>
+											</div>
+											<p class="mb-0">010-1234-5478</p>
+										</div>
+									</div>
+									<!-- Add address-->
+									<div class="col">
+										<div class="card h-100 justify-content-center align-items-center border-dashed rounded-3 py-5 px-3 px-sm-4">
+											<a class="stretched-link d-flex align-items-center fw-semibold text-decoration-none my-sm-3" href="#modal-team" data-bs-toggle="modal"
+												><i class="ai-circle-plus fs-xl me-2"></i>추가</a
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 자체평가보고서 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section04">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between just mt-sm-n1 pb-2 mb-3">
+									<div class="d-flex align-items-center">
+										<i class="ai-file-text text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-lg-0">자체평가보고서</h2>
+									</div>
+								</div>
+								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">문서 확인</label>
+										<div class="mt-2">
+											<a href="/report01-view.html?idx=<?=$_GET['idx']?>" target="_blank" class="btn btn-primary w-100 w-sm-auto">
+												자체평가보고서 확인 <i class="ai-external-link lead pe-1 ms-2"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 상호확인서 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section05" style="display: none;">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between just mt-sm-n1 pb-2 mb-3">
+									<div class="d-flex align-items-center">
+										<i class="ai-file-text text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-lg-0">상호확인서</h2>
+									</div>
+								</div>
+								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">문서 확인</label>
+										<div class="mt-2">
+											<a href="../doc/report02-view.html" target="_blank" class="btn btn-primary w-100 w-sm-auto">
+												상호확인서 확인 <i class="ai-external-link lead pe-1 ms-2"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 평가보고서 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section06" style="display: none;">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between just mt-sm-n1 pb-2 mb-3">
+									<div class="d-flex align-items-center">
+										<i class="ai-file-text text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-lg-0">평가보고서</h2>
+									</div>
+								</div>
+								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">문서 확인</label>
+										<div class="mt-2">
+											<a href="../doc/report03-view.html" target="_blank" class="btn btn-primary w-100 w-sm-auto">
+												평가보고서 확인 <i class="ai-external-link lead pe-1 ms-2"></i>
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">승인</label>
+										<div class="mt-3">미승인</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 평가결과서 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section07" style="display: none;">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between just mt-sm-n1 pb-2 mb-3">
+									<div class="d-flex align-items-center">
+										<i class="ai-file-text text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-lg-0">평가결과서</h2>
+									</div>
+								</div>
+								<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="col-sm-6">
+										<label class="form-label">문서 확인</label>
+										<div class="mt-2">
+											<a href="../doc/report04-view.html" target="_blank" class="btn btn-primary w-100 w-sm-auto">
+												평가결과서 확인 <i class="ai-external-link lead pe-1 ms-2"></i>
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<label class="form-label">승인</label>
+										<div class="mt-3">승인</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<div class="d-flex justify-content-end pt-4">
+							<a href="kindergarden-list.html" class="btn btn-outline-primary w-100 w-sm-auto ms-sm-2"> 목록 </a>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" onclick="userUpdateSubmit();">저장</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Divider for dark mode only-->
+			<hr class="d-none d-dark-mode-block" />
+			<!-- Sidebar toggle button-->
+
+			<div class="modal fade modal-team" id="modal-team" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title">현장평가자 조원 추가</h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<form class="modal-body needs-validation pt-0" novalidate>
+							<div class="row row-cols-1 row-cols-lg-2 g-4 pb-2 pb-sm-3">
+								<div class="col">
+									<label class="form-label">평가관리자명</label>
+									<div class="d-flex">
+										<input class="form-control" type="text" placeholder="평가관리자명을 입력하세요." />
+										<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">검색</button>
+									</div>
+								</div>
+								<div class="col">
+									<label class="form-label">권한</label>
+									<select class="form-select" required>
+										<option value="" disabled selected>선택</option>
+										<option value="">팀장</option>
+										<option value="">팀원</option>
+									</select>
+								</div>
+							</div>
+							<div class="list-group list-group-flush">
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">송숙자</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action active">고가영</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">정나영</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">강영신</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">표은채</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">윤지해</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">문나영</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">오경님</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">안미래</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">문경완</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">임영애</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">박장미</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">허남순</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">조미란</a>
+								<a href="javascript:void(0)" class="list-group-item list-group-item-action">손혜림</a>
+							</div>
+							<script>
+								const modalTeamItems = document.querySelectorAll('.modal-team .list-group-item');
+
+								modalTeamItems.forEach((item) => {
+									item.addEventListener('click', function () {
+										modalTeamItems.forEach((item) => {
+											item.classList.remove('active');
+										});
+										this.classList.add('active');
+									});
+								});
+							</script>
+						</form>
+
+						<div class="modal-footer flex-column flex-sm-row">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- Footer-->
+		<footer class="footer bg-dark position-relative py-4 py-md-5">
+			<div class="dark-mode container position-relative zindex-2">
+				<p class="fs-sm pb-2 pb-lg-0 mb-0">
+					<span class="opacity-70">&copy; The office for Korea Childcare Promotion Institute, All Right Reserved </span>
+				</p>
+			</div>
+		</footer>
+		<!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+			<svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg
+			><i class="ai-arrow-up"></i
+		></a>
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
+		<script src="/assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+		<script src="/assets/vendor/flatpickr/dist/l10n/ko.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+		<script>
+			var idx = "<?=$_GET['idx']?>";
+			function getMemberInfo(idx){
+				$.ajax({
+					type : 'post'
+					, async  :  true
+					, url  :  '/api/member.api.php'
+					, data : {
+						type : 'getMemberInfo'
+						, idx : idx
+					}
+					, success : function(response) {
+						if(response.RESULT == 1){
+							var oData = response.DATA;
+
+							$("input[name='userid']").val(oData['userid']);
+							$("input[name='email']").val(oData['email']);
+							$("input[name='cname']").val(oData['cname']);
+							$("input[name='oname']").val(oData['oname']);
+							$("input[name='phone']").val(oData['phone']);
+							$("input[name='oname2']").val(oData['oname2']);
+							$("input[name='address']").val(oData['address']);
+							$("input[name='maxto']").val(oData['maxto']);
+							$("input[name='nowto']").val(oData['nowto']);
+
+							$(".cname").text(oData['cname']);
+							$(".userid").text(oData['userid']);
+
+							if(oData['eval_date'] != ""){
+								$("input[name='eval_date']").val(oData['eval_date']);
+
+								var a_date = oData['eval_date'].split("-");
+								var y = a_date[0];
+								var m = a_date[1];
+
+								var d = a_date[2];
+							}
+
+							flatpickr("#flatdate", { 
+								"altInput": true
+								, "locale": "ko"
+								, "altFormat": "Y, F J"
+								, "dateFormat": "Y-m-d"
+								, "allowInput":true
+							});
+
+							$("select[name='kind'] option[value='"+oData['kind']+"']").prop("selected", true);
+
+							$("input[name='radio2'][value='"+oData['state']+"']").prop("checked", true);
+
+						}else{
+							alert(response.MSG);
+							history.back();
+						}
+					}
+					, error : function(request, status, error) {
+						//console.log(error);
+						return;
+					}
+					, cache : false
+					, dataType : 'json'
+				});
+			}
+
+			function getEvalList(idx){
+				$.ajax({
+					type : 'post'
+					, async  :  true
+					, url  :  '/api/member.eval.api.php'
+					, data : {
+						type : 'getListAdm'
+						, idx : idx
+					}
+					, success : function(response) {
+						if(response.RESULT == 1){
+							if(response.CNT > 0){
+								var aHtml = Array();
+
+								$.each(response.DATA, function(k, v) {
+									aHtml.push('<div class="col">');
+									aHtml.push('	<div class="card h-100 rounded-3 p-3 p-sm-4">');
+									aHtml.push('		<div class="d-flex align-items-center pb-2 mb-1">');
+									aHtml.push('			<h3 class="h6 text-nowrap text-truncate mb-0">'+v.name+'</h3>');
+									aHtml.push('		</div>');
+									aHtml.push('		<p class="mb-0">'+v.kind+'</p>');
+									aHtml.push('	</div>');
+									aHtml.push('</div>');
+									console.log(v.kind);
+								});
+
+								$(".eval-list").html(aHtml.join(''));
+							}else{
+							
+							}
+						}else{
+							
+						}
+					}
+					, error : function(request, status, error) {
+						//console.log(error);
+						return;
+					}
+					, cache : false
+					, dataType : 'json'
+				});
+			}
+
+			function userUpdateSubmit(){
+				$.ajax({
+					type : 'post'
+					, async  :  true
+					, url  :  '/api/member.api.php'
+					, data : {
+						type : 'updateMember'
+						, idx : idx
+						, date : $("#flatdate").val()
+						, state : $("input[name='radio2']:checked").val()
+					}
+					, success : function(response) {
+						if(response.RESULT == 1){
+							alert(response.MSG);
+							location.reload();
+						}else{
+							alert(response.MSG);
+							location.reload();
+						}
+					}
+					, error : function(request, status, error) {
+						//console.log(error);
+						return;
+					}
+					, cache : false
+					, dataType : 'json'
+				});
+			}
+
+			$(document).ready(function(){
+				getMemberInfo(idx);
+				getEvalList(idx);
+			});
+		</script>
+
+		<style>
+			body {
+				background: #f6f9fc;
+			}
+		</style>
+	</body>
+</html>

@@ -1,0 +1,1848 @@
+<?php
+	session_start();
+
+	require_once $_SERVER['DOCUMENT_ROOT']."/lib/setting.php";
+
+	require_once $lib_root."util.php";
+    require_once $lib_root."mysql.class.php";
+    $db = new dbHandle();
+
+	require_once $lib_root."member.class.php";
+	$mb = new Member;
+	$login_check = $mb->login_check();
+
+	if($login_check == "no"){
+		Error('LOGIN_ERROR');
+	}
+
+	if(!$_GET['idx'] || $_GET['idx'] == ""){
+		Error('REFERER_ERROR');
+    }else{
+
+	}
+
+?>
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<title>한국보육진흥원 | KCE Korea Childcare Evaluation</title>
+		<!-- SEO Meta Tags-->
+		<meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
+		<meta
+			name="keywords"
+			content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative"
+		/>
+		<meta name="author" content="Createx Studio" />
+		<!-- Viewport-->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Favicon and Touch Icons-->
+		<link rel="shortcut icon" href="/assets/favicon/favicon.ico" type="image/x-icon" />
+		<link rel="manifest" href="/assets/favicon/site.webmanifest" />
+		<link rel="mask-icon" color="#6366f1" href="/assets/favicon/safari-pinned-tab.svg" />
+		<meta name="msapplication-TileColor" content="#080032" />
+		<meta name="msapplication-config" content="assets/favicon/browserconfig.xml" />
+		<meta name="theme-color" content="white" />
+		<!-- Theme mode-->
+		<script>
+			let mode = window.localStorage.getItem('mode'),
+				root = document.getElementsByTagName('html')[0];
+			if (mode !== undefined && mode === 'dark') {
+				root.classList.add('dark-mode');
+			} else {
+				root.classList.remove('dark-mode');
+			}
+		</script>
+		<!-- Page loading styles-->
+		<style>
+			.page-loading {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				-webkit-transition: all 0.4s 0.2s ease-in-out;
+				transition: all 0.4s 0.2s ease-in-out;
+				background-color: #fff;
+				opacity: 0;
+				visibility: hidden;
+				z-index: 9999;
+			}
+			.dark-mode .page-loading {
+				background-color: #121519;
+			}
+			.page-loading.active {
+				opacity: 1;
+				visibility: visible;
+			}
+			.page-loading-inner {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				text-align: center;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				-webkit-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				opacity: 0;
+			}
+			.page-loading.active > .page-loading-inner {
+				opacity: 1;
+			}
+			.page-loading-inner > span {
+				display: block;
+				font-family: 'Inter', sans-serif;
+				font-size: 1rem;
+				font-weight: normal;
+				color: #6f788b;
+			}
+			.dark-mode .page-loading-inner > span {
+				color: #fff;
+				opacity: 0.6;
+			}
+			.page-spinner {
+				display: inline-block;
+				width: 2.75rem;
+				height: 2.75rem;
+				margin-bottom: 0.75rem;
+				vertical-align: text-bottom;
+				background-color: #d7dde2;
+				border-radius: 50%;
+				opacity: 0;
+				-webkit-animation: spinner 0.75s linear infinite;
+				animation: spinner 0.75s linear infinite;
+			}
+			.dark-mode .page-spinner {
+				background-color: rgba(255, 255, 255, 0.25);
+			}
+			@-webkit-keyframes spinner {
+				0% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				50% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@keyframes spinner {
+				0% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				50% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+		</style>
+		<!-- Page loading scripts-->
+		<script>
+			(function () {
+				window.onload = function () {
+					const preloader = document.querySelector('.page-loading');
+					preloader.classList.remove('active');
+					setTimeout(function () {
+						preloader.remove();
+					}, 1500);
+				};
+			})();
+		</script>
+		<!-- Import Google Font-->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font" />
+
+		<!-- Vendor styles-->
+		<!-- Main Theme Styles + Bootstrap-->
+		<link rel="stylesheet" media="screen" href="/assets/css/theme.css" />
+		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
+	</head>
+	<!-- Body-->
+	<body class="bg-secondary">
+		<!-- Page loading spinner-->
+		<div class="page-loading active">
+			<div class="page-loading-inner">
+				<div class="page-spinner"></div>
+				<span>Loading...</span>
+			</div>
+		</div>
+		<!-- Page wrapper-->
+		<main class="page-wrapper">
+			<!-- Page content-->
+			<div class="container">
+				<div class="row pt-sm-2 pt-lg-0">
+					<!-- Sidebar (offcanvas on sreens < 992px)-->
+					<aside class="col-lg-3 pe-lg-4 pe-xl-5">
+						<div class="position-lg-sticky top-0">
+							<div class="d-none d-lg-block" style="padding-top: 100px"></div>
+							<div id="sidebarAccount">
+								<div class="mt-4 mb-5">
+									<img src="/assets/images/logo.png" style="height: 40px" alt="" />
+								</div>
+								<div class="offcanvas-body">
+									<div class="pb-2 pb-lg-0 mb-4 mb-lg-5">
+										<h3 class="h5 mb-1 cname"></h3>
+										<p class="fs-sm text-muted mb-0 userid"></p>
+									</div>
+									<ul class="nav flex-column pb-2 pb-lg-4 mb-3">
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>보육과정</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section01" data-scroll="data-scroll">1. 영유아 중심 일과 운영</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section02" data-scroll="data-scroll">2. 영유아가 주도하는 배움 지원</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section03" data-scroll="data-scroll">3. 영유아 존중 상호작용 지원</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section04" data-scroll="data-scroll">4. 보육과정 실행 계획 및 평가</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>운영관리</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section05" data-scroll="data-scroll">5. 원장의 리더십과 보육교직원 역량강화</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section06" data-scroll="data-scroll">6. 건강 및 안정</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>학부모위원 종합의견</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="#section07" data-scroll="data-scroll">학부모위원 종합의견</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+									<script>
+										document.querySelectorAll('.nav .nav-link').forEach(function (link) {
+											link.addEventListener('click', function (event) {
+												event.preventDefault();
+												var target = this.getAttribute('href');
+												var targetElement = document.querySelector(target);
+												var offset = targetElement.getBoundingClientRect().top;
+												var margin = 24;
+												window.scrollBy({
+													top: offset - margin,
+													left: 0,
+													behavior: 'smooth',
+												});
+											});
+										});
+									</script>
+								</div>
+							</div>
+						</div>
+					</aside>
+					<!-- Page content-->
+					
+					<div class="col-lg-9 mt-5 pt-lg-5">
+						<h1 class="mb-5"><mark class="cname"></mark> 자체평가보고서</h1>
+
+						<form class="ckeditor_form" name="frm" id="frm" method="POST" action="javascript:;">
+						<input type="hidden" name="type" value="insertAll" />
+						<input type="hidden" name="idx" value="<?=$_GET['idx']?>" />
+
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">자체평가 위원회</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered eval-list" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 50%" />
+											<col style="width: 50%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center">성명</th>
+												<th class="text-center">소속 및 직위(급)</th>
+											</tr>
+										</thead>
+										<tbody>
+
+										</tbody>
+									</table>
+
+									<div class="mt-5 mb-5">
+										<div style="word-break: keep-all">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" name="agree" id="ex-check-1" checked />
+												<label class="form-check-label" for="ex-check-1">
+													본 어린이집은 원장, 보육교사, 원아 부모 각 1인 이상을 포함한 자체평가(점검)위원회를 구성하여 평가지표를 기준으로 운영 전반에 대해
+													자체평가(점검)을 실시하고 자체평가(점 검)보고서를 작성하였습니다.<br />
+													보고서에 포함된 모든 내용은 사실임을 확인합니다.<br />
+													<div class="mt-2"><small>* 자체점검위원회는 3~7인 이내, 어린이집 운영위원회에서 수행 가능</small></div>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="text-end">
+										2023년 7월 12일
+										<h4 class="mt-3 oname"></h4>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<h2 class="pt-5 mt-5 mb-4">보육과정</h2>
+
+						<!-- 1. 영유아 중심 일과 운영 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">1. 영유아 중심 일과 운영</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 10%" />
+											<col style="width: 60%" />
+											<col style="width: 30%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center align-middle" rowspan="2">항목</th>
+												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle">어린이집의 수준</th>
+											</tr>
+											<tr>
+												<th>
+													<div class="table-question">
+														<span> 전혀<br />그렇지<br />않다 </span>
+														<span> 그렇지<br />않다 </span>
+														<span> 보통이다 </span>
+														<span> 그렇다 </span>
+														<span> 매우<br />그렇다 </span>
+													</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">1-1</th>
+												<td>
+													<strong><mark>일과의 충실한 운영</mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer1-1-1" name="answer1-1" value="1" checked />
+															<label for="answer1-1-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer1-1-2" name="answer1-1" value="2" />
+															<label for="answer1-1-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer1-1-3" name="answer1-1" value="3" />
+															<label for="answer1-1-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer1-1-4" name="answer1-1" value="4" />
+															<label for="answer1-1-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer1-1-5" name="answer1-1" value="5" />
+															<label for="answer1-1-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													영유아가 충분히 놀이할 수 있도록 놀이 시간을 계획하고, 영유아의 관심사와 놀이 특성, 신체리듬, 날씨 등의 상황을 고려하여 일과를 융통성
+													있게 영유아의 비언어적‧언어적 의사 표현을 존중하여 하루 일과를 운영한다.
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">1-2</th>
+												<td>
+													<strong><mark>따뜻하고 편안한 일상생활 지원</mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer1-2-1" name="answer1-2" value="1" checked />
+															<label for="answer1-2-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer1-2-2" name="answer1-2" value="2" />
+															<label for="answer1-2-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer1-2-3" name="answer1-2" value="3" />
+															<label for="answer1-2-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer1-2-4" name="answer1-2" value="4" />
+															<label for="answer1-2-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer1-2-5" name="answer1-2" value="5" />
+															<label for="answer1-2-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													영유아의 신체리듬과 속도에 맞추어 일상생활을 지원한다. 등원 시 영유아를 반갑게 맞이하고, 식사와 간식시간에 영유아가 서두르지 않고
+													편안하고 즐겁게 먹을 수 있도록 한다. 또한 영유아의 배변 경험이 개별적으로 이루어지도록 돕는다. 영유아의 개별 특성에 맞추어 편안하게
+													자거나 휴식하고, 안전하게 생활할 수 있도록 지원하며 따뜻한 분위기에서 귀가하도록 한다.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<h5 class="pt-3">총평</h5>
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 50%" />
+											<col style="width: 50%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center">잘하고 있는 내용(강점)을 작성해주세요.</th>
+												<th class="text-center">개선하려고 노력한 부분을 작성해주세요.</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<textarea class="form-control" name="data1-1" rows="5"></textarea
+													>
+												</td>
+												<td>
+													<textarea class="form-control" name="data1-2" rows="5"></textarea
+													>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+
+						<!-- 2. 영유아가 주도하는 배움 지원 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section02">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">2. 영유아가 주도하는 배움 지원</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 10%" />
+											<col style="width: 60%" />
+											<col style="width: 30%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center align-middle" rowspan="2">항목</th>
+												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle">어린이집의 수준</th>
+											</tr>
+											<tr>
+												<th>
+													<div class="table-question">
+														<span> 전혀<br />그렇지<br />않다 </span>
+														<span> 그렇지<br />않다 </span>
+														<span> 보통이다 </span>
+														<span> 그렇다 </span>
+														<span> 매우<br />그렇다 </span>
+													</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">2-1</th>
+												<td>
+													<strong><mark>영유아의 놀이를 위한 공간 구성 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer2-1-1" name="answer2-1" value="1" checked />
+															<label for="answer2-1-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer2-1-2" name="answer2-1" value="2" />
+															<label for="answer2-1-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer2-1-3" name="answer2-1" value="3" />
+															<label for="answer2-1-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer2-1-4" name="answer2-1" value="4" />
+															<label for="answer2-1-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer2-1-5" name="answer2-1" value="5" />
+															<label for="answer2-1-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													영유아의 놀이 중심으로 공간을 구성하고, 놀이가 방해받지 않을 정도의 크기로 제공한다. 실내외에서 자연 및 계절의 변화를 경험할 수 있고,
+													편 안 하게 휴식할 수 있는 공간을 마련한다. 영유아의 놀이와 활동 기록을 활용하여 보육실이나 복도, 실외 공간 등을 구성한다.
+													(장애영유아를 담당하는 경우) 장애영유아의 장애유형과 특성에 적절한 공간 및 시설, 적합한 보조 기구 등이 마련되어 있고, 장애영유아가
+													일과 에 참여할 수 있도록 이동, 활동 참여, 의사소통 등을 다양한 형태로 지원해야 한다.<br />
+													※특수교사 및 장애영유아를 위한 보육교사가 배치되어 있는 경우에 한 하여 평정함.
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">2-2</th>
+												<td>
+													<strong><mark>배움을 위한 자료 제공</mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer2-2-1" name="answer2-2" value="1" checked />
+															<label for="answer2-2-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer2-2-2" name="answer2-2" value="2" />
+															<label for="answer2-2-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer2-2-3" name="answer2-2" value="3" />
+															<label for="answer2-2-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer2-2-4" name="answer2-2" value="4" />
+															<label for="answer2-2-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer2-2-5" name="answer2-2" value="5" />
+															<label for="answer2-2-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													영유아의 놀이를 통한 배움을 지원하는 풍부하고 매력적인 자료, 영유아 의성, 신체적 특성, 장애, 종교, 가족 및 문화적 배경의 차이를
+													인정하는 놀이 및 활동 자료를 제공하고, 놀이 및 활동 자료는 영유아가 수월하게 사 용할 수 있도록 지원한다.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<h5 class="pt-3">총평</h5>
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 50%" />
+											<col style="width: 50%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center">잘하고 있는 내용(강점)을 작성해주세요.</th>
+												<th class="text-center">개선하려고 노력한 부분을 작성해주세요.</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<textarea class="form-control" name="data2-1" rows="5"></textarea
+													>
+												</td>
+												<td>
+													<textarea class="form-control" name="data2-2" rows="5"></textarea
+													>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+
+						<!-- 3. 영유아 존중 상호작용 지원 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section03">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">3. 영유아 존중 상호작용 지원</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 10%" />
+											<col style="width: 60%" />
+											<col style="width: 30%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center align-middle" rowspan="2">항목</th>
+												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle">어린이집의 수준</th>
+											</tr>
+											<tr>
+												<th>
+													<div class="table-question">
+														<span> 전혀<br />그렇지<br />않다 </span>
+														<span> 그렇지<br />않다 </span>
+														<span> 보통이다 </span>
+														<span> 그렇다 </span>
+														<span> 매우<br />그렇다 </span>
+													</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">3-1</th>
+												<td>
+													<strong><mark>교사와 영유아의 능동적 상호작용</mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer3-1-1" name="answer3-1" value="1" checked />
+															<label for="answer3-1-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer3-1-2" name="answer3-1" value="2" />
+															<label for="answer3-1-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer3-1-3" name="answer3-1" value="3" />
+															<label for="answer3-1-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer3-1-4" name="answer3-1" value="4" />
+															<label for="answer3-1-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer3-1-5" name="answer3-1" value="5" />
+															<label for="answer3-1-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													영유아의 비언어적・언어적 표현을 경청하고, 있는 그대로 존중하여 반응하며 영유아와 소통되고 있는지를 확인한다. 영유아의 놀이를 기다리고
+													지켜보며 영유아와 함께 놀이하면서 경험이나 배움을 지원하는 상호작용 을 한다. 영유아의 성, 신체적 특성, 장애, 종교, 가족 및 문화적 배경
+													등에 대해 차별적인 말과 행동을 하지 않는다.
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">3-2</th>
+												<td>
+													<strong><mark>영유아 또래 간 상호작용 격려 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer3-2-1" name="answer3-2" value="1" checked />
+															<label for="answer3-2-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer3-2-2" name="answer3-2" value="2" />
+															<label for="answer3-2-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer3-2-3" name="answer3-2" value="3" />
+															<label for="answer3-2-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer3-2-4" name="answer3-2" value="4" />
+															<label for="answer3-2-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer3-2-5" name="answer3-2" value="5" />
+															<label for="answer3-2-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													영유아들이 서로의 관점을 있는 그대로 존중할 수 있도록 격려하고, 영유 아 또래 간에 경험과 배움을 공유할 수 있도록 지원하며, 다툼이나
+													문제 가 발생하면 영유아가 스스로 해결할 수 있도록 지원한다.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<h5 class="pt-3">총평</h5>
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 50%" />
+											<col style="width: 50%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center">잘하고 있는 내용(강점)을 작성해주세요.</th>
+												<th class="text-center">개선하려고 노력한 부분을 작성해주세요.</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<textarea class="form-control" name="data3-1" rows="5"></textarea
+													>
+												</td>
+												<td>
+													<textarea class="form-control" name="data3-2" rows="5"></textarea
+													>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+
+						<!-- 4. 보육과정 실행 계획 및 평가 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section04">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">4. 보육과정 실행 계획 및 평가</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 10%" />
+											<col style="width: 60%" />
+											<col style="width: 30%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center align-middle" rowspan="2">항목</th>
+												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle">어린이집의 수준</th>
+											</tr>
+											<tr>
+												<th>
+													<div class="table-question">
+														<span> 전혀<br />그렇지<br />않다 </span>
+														<span> 그렇지<br />않다 </span>
+														<span> 보통이다 </span>
+														<span> 그렇다 </span>
+														<span> 매우<br />그렇다 </span>
+													</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">4-1</th>
+												<td>
+													<strong><mark>관찰 및 실행 계획 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer4-1-1" name="answer4-1" value="1" checked />
+															<label for="answer4-1-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer4-1-2" name="answer4-1" value="2" />
+															<label for="answer4-1-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer4-1-3" name="answer4-1" value="3" />
+															<label for="answer4-1-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer4-1-4" name="answer4-1" value="4" />
+															<label for="answer4-1-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer4-1-5" name="answer4-1" value="5" />
+															<label for="answer4-1-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													영유아의 놀이 혹은 일상생활 혹은 활동을 관찰하고 배움으로 기록하며, 이를 지원하기 위해 계획을 수립하여 실행한다. 만 5세 유아의 경우,
+													초 등 학교와의 연계를 위한 놀이 혹은 활동을 계획하고 실행한다.<br />
+													(장애영유아를 담당하는 경우) 다양한 교육진단을 통해 발달에 적합한 개별화 교육계획을 수립하고 장애유형과 장애 특성, 발달 수준을 고려한
+													여 놀이, 일상생활, 활동의 참여를 촉진할 수 있도록 관찰하여 기록한다.<br />
+													취학 전 장애유아의 경우, 초등학교와의 연계를 위한 놀이 혹은 활동을 계획하고 실행한다.<br />
+													※특수교사 및 장애영유아를 위한 보육교사가 배치되어 있는 경우에 한 하여 평정함.
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">4-2</th>
+												<td>
+													<strong><mark>보육과정 평가 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer4-2-1" name="answer4-2" value="1" checked />
+															<label for="answer4-2-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer4-2-2" name="answer4-2" value="2" />
+															<label for="answer4-2-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer4-2-3" name="answer4-2" value="3" />
+															<label for="answer4-2-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer4-2-4" name="answer4-2" value="4" />
+															<label for="answer4-2-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer4-2-5" name="answer4-2" value="5" />
+															<label for="answer4-2-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													표준보육과정의 영유아 중심‧놀이 중심 보육과정으로 운영되고 있는지를 평가하고, 영유아의 특성과 변화 정도 평가는 연 2회 이상 관찰기록,
+													놀 의결과 물, 작품 등을 누적 수집하여 시행한다.<br />
+													보육과정 운영평가와 영 유아 평가 결과는 보육과정 운영 개선, 실행계획 수립, 영유아 이해, 부 모 면담 등에 활용한다.<br />
+													(장애영유아를 담당하는 경우) 장애영유아의 특성과 변화 정도에 대한 평 가는 다양한 교육진단과 일상적인 놀이 관찰기록 등을 수집하여
+													실시한 다. 평가 결과는 다음 단계 목표 수립, 지원방법, 부모 면담 등에 활용할 수 있다.<br />
+													※특수교사 및 장애영유아를 위한 보육교사가 배치되어 있는 경우에 한 하여 평정함.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<h5 class="pt-3">총평</h5>
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 50%" />
+											<col style="width: 50%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center">잘하고 있는 내용(강점)을 작성해주세요.</th>
+												<th class="text-center">개선하려고 노력한 부분을 작성해주세요.</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<textarea class="form-control" name="data4-1" rows="5"></textarea
+													>
+												</td>
+												<td>
+													<textarea class="form-control" name="data4-2" rows="5"></textarea
+													>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+
+						<h2 class="mb-4 pt-5">운영관리</h2>
+
+						<!-- 5. 원장의 리더십과 보육교직원 역량강화 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section05">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">5. 원장의 리더십과 보육교직원 역량강화</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 10%" />
+											<col style="width: 60%" />
+											<col style="width: 30%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center align-middle" rowspan="2">항목</th>
+												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle">어린이집의 수준</th>
+											</tr>
+											<tr>
+												<th>
+													<div class="table-question">
+														<span> 전혀<br />그렇지<br />않다 </span>
+														<span> 그렇지<br />않다 </span>
+														<span> 보통이다 </span>
+														<span> 그렇다 </span>
+														<span> 매우<br />그렇다 </span>
+													</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">5-1</th>
+												<td>
+													<strong><mark>보육의 질 향상을 위한 리더십 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-1-1" name="answer5-1" value="1" checked />
+															<label for="answer5-1-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-1-2" name="answer5-1" value="2" />
+															<label for="answer5-1-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-1-3" name="answer5-1" value="3" />
+															<label for="answer5-1-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-1-4" name="answer5-1" value="4" />
+															<label for="answer5-1-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer5-1-5" name="answer5-1" value="5" />
+															<label for="answer5-1-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													원장은 어린이집 운영의 주체로서 보육의 질 향상을 위해 노력한다.<br />
+													원장은 표준보육과정과 운영 철학, 학부모 만족도 등을 반영하여 운영계획을 작성한다.<br />
+													원장은 교직원의 안정적인 근무환경 조성을 위해 노력한다.
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">5-2</th>
+												<td>
+													<strong><mark>상호 존중하는 소통과 협력 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-2-1" name="answer5-2" value="1" checked />
+															<label for="answer5-2-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-2-2" name="answer5-2" value="2" />
+															<label for="answer5-2-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-2-3" name="answer5-2" value="3" />
+															<label for="answer5-2-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-2-4" name="answer5-2" value="4" />
+															<label for="answer5-2-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer5-2-5" name="answer5-2" value="5" />
+															<label for="answer5-2-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													보육교직원은 상호 존중한다.<br />
+													보육교직원의 의사결정 과정은 민주적이고 합리적으로 이루어진다.<br />
+													어린이집은 가정과 일상적인 소통을 위해 노력한다
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">5-3</th>
+												<td>
+													<strong><mark>교직원 역량 강화 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-3-1" name="answer5-3" value="1" checked />
+															<label for="answer5-3-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-3-2" name="answer5-3" value="2" />
+															<label for="answer5-3-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-3-3" name="answer5-3" value="3" />
+															<label for="answer5-3-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer5-3-4" name="answer5-3" value="4" />
+															<label for="answer5-3-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer5-3-5" name="answer5-3" value="5" />
+															<label for="answer5-3-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													원장은 보육교직원의 역량 증진을 위해 다양한 유형의 교육 기회를 제공한다.<br />
+													원장은 교사의 상호작용 등에 대해 관찰하고 지원한다.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<h5 class="pt-3">총평</h5>
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 50%" />
+											<col style="width: 50%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center">잘하고 있는 내용(강점)을 작성해주세요.</th>
+												<th class="text-center">개선하려고 노력한 부분을 작성해주세요.</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<textarea class="form-control" name="data5-1" rows="5"></textarea
+													>
+												</td>
+												<td>
+													<textarea class="form-control" name="data5-2" rows="5"></textarea
+													>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+
+						<!-- 6. 건강 및 안전 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section06">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<h2 class="h4 mb-lg-0">6. 건강 및 안전</h2>
+								</div>
+								<!-- Basic table -->
+								<div class="table-responsive">
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 10%" />
+											<col style="width: 60%" />
+											<col style="width: 30%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center align-middle" rowspan="2">항목</th>
+												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle">어린이집의 수준</th>
+											</tr>
+											<tr>
+												<th>
+													<div class="table-question">
+														<span> 전혀<br />그렇지<br />않다 </span>
+														<span> 그렇지<br />않다 </span>
+														<span> 보통이다 </span>
+														<span> 그렇다 </span>
+														<span> 매우<br />그렇다 </span>
+													</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">6-1</th>
+												<td>
+													<strong><mark>실내외 공간의 청결·쾌적성 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-1-1" name="answer6-1" value="1" checked />
+															<label for="answer6-1-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-1-2" name="answer6-1" value="2" />
+															<label for="answer6-1-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-1-3" name="answer6-1" value="3" />
+															<label for="answer6-1-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-1-4" name="answer6-1" value="4" />
+															<label for="answer6-1-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer6-1-5" name="answer6-1" value="5" />
+															<label for="answer6-1-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													보육실 공간, 설비·비품, 놀잇감을 청결하고 쾌적하게 관리한다.<br />
+													화장실 공간과 세면대 주변을 청결하고 쾌적하게 관리한다.<br />
+													기타실내공간, 설비·비품, 놀잇감을 청결하고 쾌적하게 관리한다.<br />
+													실외공간, 설비·비품, 놀잇감을 청결하고 쾌적하게 관리한다.
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">6-2</th>
+												<td>
+													<strong><mark>급·간식 운영의 적합성 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-2-1" name="answer6-2" value="1" checked />
+															<label for="answer6-2-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-2-2" name="answer6-2" value="2" />
+															<label for="answer6-2-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-2-3" name="answer6-2" value="3" />
+															<label for="answer6-2-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-2-4" name="answer6-2" value="4" />
+															<label for="answer6-2-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer6-2-5" name="answer6-2" value="5" />
+															<label for="answer6-2-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													신선한 식자재 구입, 보관이 이루어지도록 관리한다.<br />
+													조리실의 공간과 비품을 청결하고 위생적으로 관리한다.<br />
+													조리과정을 청결하고 위생적으로 관리한다.<br />
+													배식과정을 청결하고 위생적으로 관리한다.
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">6-3</th>
+												<td>
+													<strong><mark>실내외 공간, 시설설비의 안전한 관리 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-3-1" name="answer6-3" value="1" checked />
+															<label for="answer6-3-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-3-2" name="answer6-3" value="2" />
+															<label for="answer6-3-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-3-3" name="answer6-3" value="3" />
+															<label for="answer6-3-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-3-4" name="answer6-3" value="4" />
+															<label for="answer6-3-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer6-3-5" name="answer6-3" value="5" />
+															<label for="answer6-3-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													보육실과 실내외 공간 및 시설·설비를 안전하게 관리한다.<br />
+													놀잇감과 활동 자료, 위험한 물건을 안전하게 관리한다.<br />
+													비상사태용 시설·설비를 상시 사용할 수 있도록 관리한다.
+												</td>
+											</tr>
+											<tr>
+												<th scope="row" rowspan="2" class="text-center">6-4</th>
+												<td>
+													<strong><mark>영유아의 안전한 보호 </mark></strong>
+												</td>
+												<td rowspan="2" class="align-middle">
+													<div class="d-flex justify-content-center">
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-4-1" name="answer6-4" value="1" checked />
+															<label for="answer6-4-1" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">1</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-4-2" name="answer6-4" value="2" />
+															<label for="answer6-4-2" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">2</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-4-3" name="answer6-4" value="3" />
+															<label for="answer6-4-3" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">3</span>
+															</label>
+														</div>
+														<div class="me-3">
+															<input type="radio" class="btn-check" id="answer6-4-4" name="answer6-4" value="4" />
+															<label for="answer6-4-4" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">4</span>
+															</label>
+														</div>
+														<div>
+															<input type="radio" class="btn-check" id="answer6-4-5" name="answer6-4" value="5" />
+															<label for="answer6-4-5" class="btn btn-outline-secondary px-2">
+																<span class="mx-1">5</span>
+															</label>
+														</div>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td style="word-break: keep-all">
+													영유아의 안전한 일과 보장에 역점을 두고 관리한다.<br />
+													비상시 신속하게 대처할 수 있도록 관리한다.
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<h5 class="pt-3">총평</h5>
+									<table class="table table-bordered" style="min-width: 800px">
+										<colgroup>
+											<col style="width: 50%" />
+											<col style="width: 50%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="text-center">잘하고 있는 내용(강점)을 작성해주세요.</th>
+												<th class="text-center">개선하려고 노력한 부분을 작성해주세요.</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<textarea class="form-control" name="data6-1" rows="5"></textarea
+													>
+												</td>
+												<td>
+													<textarea class="form-control" name="data6-2" rows="5"></textarea
+													>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+
+						<!-- 학부모위원 종합의견 -->
+						<h2 class="mb-4 pt-5">학부모위원 종합의견</h2>
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section07">
+							<div class="card-body">
+								<textarea class="form-control" name="data7-1" rows="10"></textarea>
+							</div>
+						</section>
+						<div class="d-flex justify-content-between py-4">
+							<p class="d-flex"></p>
+							<p class="d-flex">
+								<button type="button" class="btn btn-outline-primary w-100 w-sm-auto ms-sm-2" href="#alert01" data-bs-toggle="modal">수정</button>
+								<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" href="#alert02" data-bs-toggle="modal">최종 제출</button>
+							</p>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- Divider for dark mode only-->
+			<hr class="d-none d-dark-mode-block" />
+			<!-- Sidebar toggle button-->
+
+			<div class="modal fade" id="alert01" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title"></h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body pt-0">
+							<p>임시저장 하시겠습니까?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmAllSubmit()">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="alert02" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title"></h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body pt-0">
+							<p>최종 제출 하시겠습니까?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmFinalSubmit()">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery.form.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+<script>
+	var idx = "<?=$_GET['idx']?>";
+	var chk1=0;
+	var chk2=0;
+	var chk3=0;
+	var chk4=0;
+	var chk5=0;
+	var chk6=0;
+	var chk7=0;
+
+	function getEvalList3(idx){
+		$.ajax({
+			type : 'post'
+			, async  :  true
+			, url  :  '/api/member.eval.api.php'
+			, data : {
+				type : 'getList2'
+				, idx : idx
+			}
+			, success : function(response) {
+				if(response.RESULT == 1){
+					if(response.CNT > 0){
+						var aHtml = Array();
+
+						$.each(response.DATA, function(k, v) {
+							aHtml.push('<tr>');
+							aHtml.push('	<th scope="row" class="text-center">'+v.name+'</th>');
+							aHtml.push('	<td class="text-center">'+v.kind+'</td>');
+							aHtml.push('</tr>');
+						});
+
+						$(".eval-list tbody").html(aHtml.join(''));
+					}else{
+					
+					}
+				}else{
+					
+				}
+			}
+			, error : function(request, status, error) {
+				//console.log(error);
+				return;
+			}
+			, cache : false
+			, dataType : 'json'
+		});
+	}
+
+	function getReport2(idx){
+		$.ajax({
+			type : 'post'
+			, async  :  true
+			, url  :  '/api/report1.api.php'
+			, data : {
+				type : 'getReport2'
+				, idx : idx
+			}
+			, success : function(response) {
+				if(response.RESULT == 1){
+					var data = response.DATA;
+
+					$(".cname").text(data.cname);
+					$(".oname").text("원장 "+data.oname);
+					$(".userid").text(data.userid);
+					
+					if(data.agree == "1"){
+						$("input[name='agree']").prop("checked", true);
+					}
+
+					if(data.sel1_1 != ""){
+						$("input[name='answer1-1'][value='"+data.sel1_1+"']").prop("checked", true);
+					}
+
+					if(data.data1_1 != ""){
+						$("textarea[name='data1-1']").text(data.data1_1);
+					}
+
+					if(data.sel1_2 != ""){
+						$("input[name='answer1-2'][value='"+data.sel1_2+"']").prop("checked", true);
+					}
+
+					if(data.data1_2 != ""){
+						$("textarea[name='data1-2']").text(data.data1_2);
+					}
+
+					if(data.sel2_1 != ""){
+						$("input[name='answer2-1'][value='"+data.sel2_1+"']").prop("checked", true);
+					}
+
+					if(data.data2_1 != ""){
+						$("textarea[name='data2-1']").text(data.data2_1);
+					}
+
+					if(data.sel2_2 != ""){
+						$("input[name='answer2-2'][value='"+data.sel2_2+"']").prop("checked", true);
+					}
+
+					if(data.data2_2 != ""){
+						$("textarea[name='data2-2']").text(data.data2_2);
+					}
+
+					if(data.sel3_1 != ""){
+						$("input[name='answer3-1'][value='"+data.sel3_1+"']").prop("checked", true);
+					}
+
+					if(data.data3_1 != ""){
+						$("textarea[name='data3-1']").text(data.data3_1);
+					}
+
+					if(data.sel3_2 != ""){
+						$("input[name='answer3-2'][value='"+data.sel3_2+"']").prop("checked", true);
+					}
+
+					if(data.data3_2 != ""){
+						$("textarea[name='data3-2']").text(data.data3_2);
+					}
+
+					if(data.sel4_1 != ""){
+						$("input[name='answer4-1'][value='"+data.sel4_1+"']").prop("checked", true);
+					}
+
+					if(data.data4_1 != ""){
+						$("textarea[name='data4-1']").text(data.data4_1);
+					}
+
+					if(data.sel4_2 != ""){
+						$("input[name='answer4-2'][value='"+data.sel4_2+"']").prop("checked", true);
+					}
+
+					if(data.data4_2 != ""){
+						$("textarea[name='data4-2']").text(data.data4_2);
+					}
+
+					if(data.sel5_1 != ""){
+						$("input[name='answer5-1'][value='"+data.sel5_1+"']").prop("checked", true);
+					}
+
+					if(data.data5_1 != ""){
+						$("textarea[name='data5-1']").text(data.data5_1);
+					}
+
+					if(data.sel5_2 != ""){
+						$("input[name='answer5-2'][value='"+data.sel5_2+"']").prop("checked", true);
+					}
+
+					if(data.data5_2 != ""){
+						$("textarea[name='data5-2']").text(data.data5_2);
+					}
+
+					if(data.sel5_3 != ""){
+						$("input[name='answer5-3'][value='"+data.sel5_3+"']").prop("checked", true);
+					}
+
+					if(data.sel6_1 != ""){
+						$("input[name='answer6-1'][value='"+data.sel6_1+"']").prop("checked", true);
+					}
+
+					if(data.data6_1 != ""){
+						$("textarea[name='data6-1']").text(data.data6_1);
+					}
+
+					if(data.sel6_2 != ""){
+						$("input[name='answer6-2'][value='"+data.sel6_2+"']").prop("checked", true);
+					}
+
+					if(data.data6_2 != ""){
+						$("textarea[name='data6-2']").text(data.data6_2);
+					}
+
+					if(data.sel6_3 != ""){
+						$("input[name='answer6-3'][value='"+data.sel6_3+"']").prop("checked", true);
+					}
+
+					if(data.sel6_4 != ""){
+						$("input[name='answer6-4'][value='"+data.sel6_4+"']").prop("checked", true);
+					}
+
+					if(data.data7_1 != ""){
+						$("textarea[name='data7-1']").text(data.data7_1);
+					}
+
+					chk1 = data.chk1;
+					chk2 = data.chk2;
+					chk3 = data.chk3;
+					chk4 = data.chk4;
+					chk5 = data.chk5;
+					chk6 = data.chk6;
+					chk7 = data.chk7;
+				}else{
+					alert(response.MSG);
+					history.go(-1);
+				}
+			}
+			, error : function(request, status, error) {
+				//console.log(error);
+				return;
+			}
+			, cache : false
+			, dataType : 'json'
+		});
+	}
+
+	function frmAllSubmit(){
+		$agree = $("input[name='agree']");
+		if(!$agree.is(':checked')){
+			alert('사실 확인을 해주세요.');
+			$agree.focus();
+			return false;
+		}
+
+		$data1_1 = $("textarea[name='data1-1']");
+		if($data1_1.val() == "" || !$data1_1.val()){
+			alert('총평을 작성해주세요.');
+			$data1_1.focus();
+			return false;
+		}
+		$data1_2 = $("textarea[name='data1-2']");
+		if($data1_2.val() == "" || !$data1_2.val()){
+			alert('총평을 작성해주세요.');
+			$data1_2.focus();
+			return false;
+		}
+
+		$data2_1 = $("textarea[name='data2-1']");
+		if($data2_1.val() == "" || !$data2_1.val()){
+			alert('총평을 작성해주세요.');
+			$data2_1.focus();
+			return false;
+		}
+		$data2_2 = $("textarea[name='data2-2']");
+		if($data2_2.val() == "" || !$data2_2.val()){
+			alert('총평을 작성해주세요.');
+			$data2_2.focus();
+			return false;
+		}
+
+		$data3_1 = $("textarea[name='data3-1']");
+		if($data3_1.val() == "" || !$data3_1.val()){
+			alert('총평을 작성해주세요.');
+			$data3_1.focus();
+			return false;
+		}
+		$data3_2 = $("textarea[name='data3-2']");
+		if($data3_2.val() == "" || !$data3_2.val()){
+			alert('총평을 작성해주세요.');
+			$data3_2.focus();
+			return false;
+		}
+
+		$data4_1 = $("textarea[name='data4-1']");
+		if($data4_1.val() == "" || !$data4_1.val()){
+			alert('총평을 작성해주세요.');
+			$data4_1.focus();
+			return false;
+		}
+		$data4_2 = $("textarea[name='data4-2']");
+		if($data4_2.val() == "" || !$data4_2.val()){
+			alert('총평을 작성해주세요.');
+			$data4_2.focus();
+			return false;
+		}
+
+		$data5_1 = $("textarea[name='data5-1']");
+		if($data5_1.val() == "" || !$data5_1.val()){
+			alert('총평을 작성해주세요.');
+			$data5_1.focus();
+			return false;
+		}
+		$data5_2 = $("textarea[name='data5-2']");
+		if($data5_2.val() == "" || !$data5_2.val()){
+			alert('총평을 작성해주세요.');
+			$data5_2.focus();
+			return false;
+		}
+
+		$data6_1 = $("textarea[name='data6-1']");
+		if($data6_1.val() == "" || !$data6_1.val()){
+			alert('총평을 작성해주세요.');
+			$data6_1.focus();
+			return false;
+		}
+		$data6_2 = $("textarea[name='data6-2']");
+		if($data6_2.val() == "" || !$data6_2.val()){
+			alert('총평을 작성해주세요.');
+			$data6_2.focus();
+			return false;
+		}
+
+		$data7_1 = $("textarea[name='data7-1']");
+		if($data7_1.val() == "" || !$data7_1.val()){
+			alert('총평을 작성해주세요.');
+			$data7_1.focus();
+			return false;
+		}
+		
+		document.frm.action = "/api/report1.api.php";
+
+		$('#frm').ajaxSubmit({
+			dataType:  'json'
+			,success : function(response) {
+				if(response.RESULT == 1){
+					alert(response.MSG);
+					location.reload();
+				}else{
+					alert(response.MSG);
+					location.reload();
+				}
+			}
+		});
+	}
+
+	function frmFinalSubmit(){
+		if(chk1 == 0 || chk1 == ""){
+			alert('영유아 중심 일과 운영 문항이 작성되지 않았습니다.');
+			return;
+		}
+		if(chk2 == 0 || chk2 == ""){
+			alert('영유아가 주도하는 배움 지원 문항이 작성되지 않았습니다.');
+			return;
+		}
+		if(chk3 == 0 || chk3 == ""){
+			alert('영유아 존중 상호작용 지원 문항이 작성되지 않았습니다.');
+			return;
+		}
+		if(chk4 == 0 || chk4 == ""){
+			alert('보육과정 실행 계획 및 평가 문항이 작성되지 않았습니다.');
+			return;
+		}
+		if(chk5 == 0 || chk5 == ""){
+			alert('원장의 리더십과 보육교직원 역량강화 문항이 작성되지 않았습니다.');
+			return;
+		}
+		if(chk6 == 0 || chk6 == ""){
+			alert('건강 및 안전 문항이 작성되지 않았습니다.');
+			return;
+		}
+		if(chk7 == 0 || chk7 == ""){
+			alert('학부모위원 종합의견 문항이 작성되지 않았습니다.');
+			return;
+		}
+
+	
+
+		$.ajax({
+			type : 'post'
+			, async  :  true
+			, url  :  '/api/report1.api.php'
+			, data : {
+				type : 'setFinal'
+				, idx : idx
+			}
+			, success : function(response) {
+				if(response.RESULT == 1){
+					alert(response.MSG);
+					location.reload();
+				}else{
+					alert(response.MSG);
+					location.reload();
+				}
+			}
+			, error : function(request, status, error) {
+				//console.log(error);
+				return;
+			}
+			, cache : false
+			, dataType : 'json'
+		});
+	}
+
+	$(document).ready(function(){
+		getReport2(idx);
+		getEvalList3(idx);
+	});
+</script>
+	</body>
+</html>

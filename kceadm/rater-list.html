@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko" class="admin">
+	<head>
+		<meta charset="utf-8" />
+		<title>한국보육진흥원</title>
+		<!-- SEO Meta Tags-->
+		<meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
+		<meta
+			name="keywords"
+			content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative"
+		/>
+		<meta name="author" content="Createx Studio" />
+		<!-- Viewport-->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Favicon and Touch Icons-->
+		<link rel="shortcut icon" href="/assets/favicon/favicon.ico" type="image/x-icon" />
+		<link rel="manifest" href="/assets/favicon/site.webmanifest" />
+		<link rel="mask-icon" color="#6366f1" href="/assets/favicon/safari-pinned-tab.svg" />
+		<meta name="msapplication-TileColor" content="#080032" />
+		<meta name="msapplication-config" content="assets/favicon/browserconfig.xml" />
+		<meta name="theme-color" content="white" />
+		<!-- Theme mode-->
+		<script>
+			let mode = window.localStorage.getItem('mode'),
+				root = document.getElementsByTagName('html')[0];
+			if (mode !== undefined && mode === 'dark') {
+				root.classList.add('dark-mode');
+			} else {
+				root.classList.remove('dark-mode');
+			}
+		</script>
+		<!-- Page loading styles-->
+		<style>
+			.page-loading {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				-webkit-transition: all 0.4s 0.2s ease-in-out;
+				transition: all 0.4s 0.2s ease-in-out;
+				background-color: #fff;
+				opacity: 0;
+				visibility: hidden;
+				z-index: 9999;
+			}
+			.dark-mode .page-loading {
+				background-color: #121519;
+			}
+			.page-loading.active {
+				opacity: 1;
+				visibility: visible;
+			}
+			.page-loading-inner {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				text-align: center;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				-webkit-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				opacity: 0;
+			}
+			.page-loading.active > .page-loading-inner {
+				opacity: 1;
+			}
+			.page-loading-inner > span {
+				display: block;
+				font-family: 'Inter', sans-serif;
+				font-size: 1rem;
+				font-weight: normal;
+				color: #6f788b;
+			}
+			.dark-mode .page-loading-inner > span {
+				color: #fff;
+				opacity: 0.6;
+			}
+			.page-spinner {
+				display: inline-block;
+				width: 2.75rem;
+				height: 2.75rem;
+				margin-bottom: 0.75rem;
+				vertical-align: text-bottom;
+				background-color: #d7dde2;
+				border-radius: 50%;
+				opacity: 0;
+				-webkit-animation: spinner 0.75s linear infinite;
+				animation: spinner 0.75s linear infinite;
+			}
+			.dark-mode .page-spinner {
+				background-color: rgba(255, 255, 255, 0.25);
+			}
+			@-webkit-keyframes spinner {
+				0% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				50% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@keyframes spinner {
+				0% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				50% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+		</style>
+		<!-- Page loading scripts-->
+		<script>
+			(function () {
+				window.onload = function () {
+					const preloader = document.querySelector('.page-loading');
+					preloader.classList.remove('active');
+					setTimeout(function () {
+						preloader.remove();
+					}, 1500);
+				};
+			})();
+		</script>
+		<!-- Import Google Font-->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font" />
+
+		<!-- Vendor styles-->
+		<!-- Main Theme Styles + Bootstrap-->
+		<link rel="stylesheet" media="screen" href="/assets/css/theme.css" />
+		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
+	</head>
+	<!-- Body-->
+	<body class="bg-secondary">
+		<!-- Page loading spinner-->
+		<div class="page-loading active">
+			<div class="page-loading-inner">
+				<div class="page-spinner"></div>
+				<span>Loading...</span>
+			</div>
+		</div>
+		<!-- Page wrapper-->
+		<main class="page-wrapper">
+			<!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+			<header class="navbar navbar-expand-lg fixed-top">
+				<div class="container">
+					<a class="navbar-brand pe-sm-3" href="index.html">
+						<img src="/assets/images/logo-admin.png" alt="" />
+						<p>관리자</p>
+					</a>
+
+					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
+						<a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+							<div class="ps-2">
+								<div class="fs-xs lh-1 opacity-60">안녕하세요.</div>
+								<div class="fs-sm dropdown-toggle">관리자 님</div>
+							</div></a
+						>
+						<div class="dropdown-menu dropdown-menu-end my-1">
+							<a class="dropdown-item" href=""><i class="ai-logout fs-lg opacity-70 me-2"></i>로그아웃</a>
+						</div>
+					</div>
+					<button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<nav class="collapse navbar-collapse" id="navbarNav">
+						<ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">게시판 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="notice-write.html">공지사항 등록</a></li>
+									<li><a class="dropdown-item" href="faq-write.html">자주하는 질문 등록</a></li>
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="kindergarden-list.html">어린이집 현황</a></li>
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가자 관리</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="rater-list.html">현장평가자 현황</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+			<!-- Page content-->
+			<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
+				<!-- Breadcrumb-->
+				<nav aria-label="breadcrumb">
+					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item">현장평가자 관리</li>
+						<li class="breadcrumb-item active" aria-current="page">현장평가자 현황</li>
+					</ol>
+				</nav>
+
+				<div class="row pt-sm-2 pt-lg-0">
+					<!-- Page content-->
+					<div class="col pt-4 pb-2 pb-sm-4">
+						<!-- 현장평가자 현황 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between mt-sm-n1 pb-2 mb-3 mb-xl-4">
+									<div class="d-flex align-items-center">
+										<i class="ai-search text-primary lead pe-1 me-2"></i>
+										<h2 class="h4 mb-lg-0">현장평가자 현황</h2>
+									</div>
+
+									<div class="position-relative">
+										<i class="ai-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+										<input class="form-control ps-5" type="search" placeholder="검색어를 입력해주세요." />
+									</div>
+								</div>
+								<div class="board-list g-3 g-sm-4 mt-0 mt-lg-2">
+									<div class="table-responsive">
+										<table class="table table-bordered table-striped table-sm">
+											<thead>
+												<tr>
+													<th class="text-center">번호</th>
+													<th class="text-center">이름</th>
+													<th class="text-center">ID</th>
+													<th class="text-center">연락처</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row" class="text-center">10</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">9</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">8</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">7</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">6</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">5</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">4</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">3</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">2</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+												<tr>
+													<th scope="row" class="text-center">1</th>
+													<td class="text-center"><a href="rater-view.html">송숙자</a></td>
+													<td class="text-center">songsukja</td>
+													<td class="text-center">010-1234-5678</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- Pagination-->
+						<div class="row gy-3 align-items-center pt-3">
+							<div class="col">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										<li class="page-item">
+											<a href="#" class="page-link">
+												<i class="ai-arrow-left fs-xl"></i>
+											</a>
+										</li>
+										<li class="page-item d-sm-none">
+											<span class="page-link pe-none">2 / 5</span>
+										</li>
+										<li class="page-item d-none d-sm-block">
+											<a href="#" class="page-link">1</a>
+										</li>
+										<li class="page-item active d-none d-sm-block" aria-current="page">
+											<span class="page-link">
+												2
+												<span class="visually-hidden">(current)</span>
+											</span>
+										</li>
+										<li class="page-item d-none d-sm-block">
+											<a href="#" class="page-link">3</a>
+										</li>
+										<li class="page-item d-none d-sm-block">
+											<a href="#" class="page-link">4</a>
+										</li>
+										<li class="page-item d-none d-sm-block">
+											<a href="#" class="page-link">5</a>
+										</li>
+										<li class="page-item">
+											<a href="#" class="page-link">
+												<i class="ai-arrow-right fs-xl"></i>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Divider for dark mode only-->
+			<hr class="d-none d-dark-mode-block" />
+			<!-- Sidebar toggle button-->
+		</main>
+		<!-- Footer-->
+		<footer class="footer bg-dark position-relative py-4 py-md-5">
+			<div class="dark-mode container position-relative zindex-2">
+				<p class="fs-sm pb-2 pb-lg-0 mb-0">
+					<span class="opacity-70">&copy; The office for Korea Childcare Promotion Institute, All Right Reserved </span>
+				</p>
+			</div>
+		</footer>
+		<!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+			<svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle></svg
+			><i class="ai-arrow-up"></i
+		></a>
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+	</body>
+</html>

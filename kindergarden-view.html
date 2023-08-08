@@ -1,0 +1,348 @@
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/inc/header.html";
+
+	if($login_check == "no"){
+		Error('LOGIN_ERROR');
+	}
+
+	$pwd_check = $_GET['v'];
+?>
+			<!-- Page content-->
+			<div class="container pt-5 pb-lg-5 pb-md-4 pb-2 my-5">
+				<!-- Breadcrumb-->
+				<nav aria-label="breadcrumb">
+					<ol class="pt-lg-3 pb-lg-4 pb-2 breadcrumb">
+						<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+						<li class="breadcrumb-item">어린이집 정보</li>
+						<li class="breadcrumb-item active" aria-current="page">어린이집 정보</li>
+					</ol>
+				</nav>
+
+				<div class="row pt-sm-2 pt-lg-0">
+					<!-- Sidebar (offcanvas on sreens < 992px)-->
+					<aside class="col-lg-3 pe-lg-4 pe-xl-5 mt-n3">
+						<div class="position-lg-sticky top-0">
+							<div class="d-none d-lg-block" style="padding-top: 105px"></div>
+							<div class="offcanvas-lg offcanvas-start" id="sidebarAccount">
+								<button
+									class="btn-close position-absolute top-0 end-0 mt-3 me-3 d-lg-none"
+									type="button"
+									data-bs-dismiss="offcanvas"
+									data-bs-target="#sidebarAccount"
+								></button>
+								<div class="offcanvas-body">
+									<div class="pb-2 pb-lg-0 mb-4 mb-lg-5">
+										<h3 class="h5 mb-1"><?=$_SESSION['USER_CNAME']?></h3>
+										<p class="fs-sm text-muted mb-0">saessagkindergarden</p>
+									</div>
+									<nav class="nav flex-column pb-2 pb-lg-4 mb-3">
+										<a class="nav-link fw-semibold py-2 px-0" href="#section01"><i class="ai-home fs-5 opacity-60 me-2"></i>어린이집 정보</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section02"><i class="ai-at fs-5 opacity-60 me-2"></i>이메일 변경</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section03"><i class="ai-lock-closed fs-5 opacity-60 me-2"></i>비밀번호 변경</a>
+										<a class="nav-link fw-semibold py-2 px-0" href="#section04"><i class="ai-trash fs-5 opacity-60 me-2"></i>회원 탈퇴</a>
+									</nav>
+
+									<script>
+										document.querySelectorAll('.nav .nav-link').forEach(function (link) {
+											link.addEventListener('click', function (event) {
+												event.preventDefault();
+												var target = this.getAttribute('href');
+												var targetElement = document.querySelector(target);
+												var offset = targetElement.getBoundingClientRect().top;
+												var headerHeight = document.querySelector('header').offsetHeight;
+												var margin = 24;
+												window.scrollBy({
+													top: offset - headerHeight - margin,
+													left: 0,
+													behavior: 'smooth',
+												});
+											});
+										});
+									</script>
+								</div>
+							</div>
+						</div>
+					</aside>
+					<!-- Page content-->
+					<div class="col-lg-9 pt-4 pb-2 pb-sm-4">
+						<!-- 어린이집 정보 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section01">
+							<div class="card-body">
+								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
+									<i class="ai-home text-primary lead pe-1 me-2"></i>
+									<h2 class="h4 mb-0">어린이집 정보</h2>
+								</div>
+								<form name="changeMember" action="" method="POST">
+									<input type="hidden" name="type" value="" />
+									<div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+										<div class="col-sm-6">
+											<label class="form-label">아이디</label>
+											<input class="form-control" name="userid" type="text" value="" disabled />
+										</div>
+										<div class="col-sm-6">
+										</div>
+										<div class="col-sm-6">
+											<label class="form-label">어린이집명</label>
+											<input class="form-control" name="cname" type="text" placeholder="어린이집명을 입력하세요." />
+										</div>
+										<div class="col-sm-6">
+											<label class="form-label">원장명</label>
+											<input class="form-control" name="oname" type="text" placeholder="원장명을 입력하세요." />
+										</div>
+										<div class="col-sm-6">
+											<label class="form-label">대표자명</label>
+											<input class="form-control" name="oname2" type="text" placeholder="대표자명을 입력하세요." />
+										</div>
+										<div class="col-sm-6">
+											<label class="form-label">연락처</label>
+											<input class="form-control" name="phone" type="text" placeholder="연락처를 입력해주세요." />
+										</div>
+										<div class="col-sm-12">
+											<label class="form-label">주소</label>
+											<div class="d-flex">
+												<input class="form-control" name="address" id="address" type="text" placeholder="주소를 입력해주세요." />
+												<button class="btn btn-secondary ms-2" type="button" onclick="execDaumPostcode()">검색</button>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<label class="form-label">정원</label>
+											<input class="form-control" name="maxto" type="text" placeholder="정원을 입력해주세요." />
+										</div>
+										<div class="col-sm-6">
+											<label class="form-label">현원</label>
+											<input class="form-control" name="nowto" type="text" placeholder="현원을 입력해주세요." />
+										</div>
+
+										<div class="col-sm-6">
+											<label class="form-label">어린이집 유형</label>
+											<select class="form-select" name="kind">
+												<option selected disabled>선택</option>
+												<option value="국공립어린이집">국공립어린이집</option>
+												<option value="사회복지법인어린이집">사회복지법인어린이집</option>
+												<option value="법인·단체등어린이집">법인·단체등어린이집</option>
+												<option value="직장어린이집">직장어린이집</option>
+												<option value="가정어린이집">가정어린이집</option>
+												<option value="협동어린이집">협동어린이집</option>
+												<option value="민간어린이집">민간어린이집</option>
+											</select>
+										</div>
+
+										<div class="col-12 d-flex justify-content-end pt-3">
+											<button class="btn btn-primary ms-3" id="memberFrmBtn" type="button" onclick="javascript:userUpdateSubmit();" >저장</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</section>
+
+						<!-- 이메일 변경 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section02">
+							<div class="card-body">
+								<div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
+									<i class="ai-lock-closed text-primary lead pe-1 me-2"></i>
+									<h2 class="h4 mb-lg-0">이메일 변경</h2>
+								</div>
+								<div class="row align-items-center g-3 g-sm-4 pb-3">
+									<div class="col-sm-6">
+										<label class="form-label" for="current-pass">새로운 이메일 주소</label>
+										<input class="form-control" name="email" type="text" value="" />
+									</div>
+								</div>
+								<div class="d-flex justify-content-end pt-3">
+									<button class="btn btn-primary ms-3" type="button">저장</button>
+								</div>
+							</div>
+						</section>
+						
+						<!-- 비밀번호 변경 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4" id="section03">
+							<div class="card-body">
+								<div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
+									<i class="ai-lock-closed text-primary lead pe-1 me-2"></i>
+									<h2 class="h4 mb-0">비밀번호 변경</h2>
+								</div>
+								<form name="pwdFrm" action="javascript:return;" method="POST">
+									<input type="hidden" name="type" value="passChange" />
+									<div class="row align-items-center g-3 g-sm-4 pb-3">
+										<div class="col-sm-6">
+											<label class="form-label" for="current-pass">현재 비밀번호</label>
+											<div class="password-toggle">
+												<input class="form-control" type="password" name="pw2" value="" id="current-pass" />
+												<label class="password-toggle-btn" aria-label="Show/hide password">
+													<input class="password-toggle-check" type="checkbox" /><span class="password-toggle-indicator"></span>
+												</label>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<a class="d-inline-block fs-sm fw-semibold text-decoration-none mt-sm-4" href="find-password.html">비밀번호를 잃어버리셨나요?</a>
+										</div>
+										<div class="col-sm-6">
+											<label class="form-label" for="new-pass">새 비밀번호</label>
+											<div class="password-toggle">
+												<input class="form-control" type="password" name="new_pw" placeholder="비밀번호를 입력해주세요." id="new-pass" />
+												<label class="password-toggle-btn" aria-label="Show/hide password">
+													<input class="password-toggle-check" type="checkbox" /><span class="password-toggle-indicator"></span>
+												</label>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<label class="form-label" for="confirm-pass">새 비밀번호 확인</label>
+											<div class="password-toggle">
+												<input class="form-control" type="password" name="new_pw_chk" placeholder="비밀번호를 재입력해주세요." id="confirm-pass" />
+												<label class="password-toggle-btn" aria-label="Show/hide password">
+													<input class="password-toggle-check" type="checkbox" /><span class="password-toggle-indicator"></span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="alert alert-info d-flex my-3 my-sm-4">
+										<i class="ai-circle-info fs-xl me-2"></i>
+										<p class="mb-0">비밀번호는 최소 8자 이상이어야 합니다.</p>
+									</div>
+									<div class="d-flex justify-content-end pt-3">
+										<button class="btn btn-primary ms-3" type="button" onclick="javascript:pwChange();">저장</button>
+									</div>
+								</form>
+							</div>
+						</section>
+
+						<!-- 회원 탈퇴 -->
+						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4" id="section04">
+							<div class="card-body">
+								<div class="d-flex align-items-center pb-4 mt-sm-n1 mb-0 mb-lg-1 mb-xl-3">
+									<i class="ai-trash text-primary lead pe-1 me-2"></i>
+									<h2 class="h4 mb-0">회원 탈퇴</h2>
+								</div>
+								<div class="alert alert-danger d-flex mb-4">
+									<i class="ai-triangle-alert fs-xl me-2"></i>
+									<p class="mb-0">회원 탈퇴 즉시 가입된 정보가 모두 폐기 됩니다. 탈퇴 하시겠습니까?</p>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="member-leave-confirm" />
+									<label class="form-check-label text-dark fw-medium" for="member-leave-confirm">네, 탈퇴하고 싶습니다.</label>
+								</div>
+								<div class="d-flex flex-column flex-sm-row justify-content-end pt-4 mt-sm-2 mt-md-3">
+									<button class="btn btn-danger" type="button" onclick="javascript:memberLeave();"><i class="ai-trash ms-n1 me-2"></i>회원 탈퇴</button>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+			<!-- Divider for dark mode only-->
+			<hr class="d-none d-dark-mode-block" />
+			<!-- Sidebar toggle button-->
+
+			<div class="modal fade" id="Committee" data-bs-backdrop="static" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header border-0">
+							<h4 class="modal-title">자체평가 위원회 추가</h4>
+							<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<form class="modal-body needs-validation pt-0" name="memberEvalFrm" action="" method="POST" novalidate>
+							<div class="row row-cols-1 row-cols-lg-2 g-4 pb-2 pb-sm-3">
+								<div class="col">
+									<label class="form-label">구분</label>
+									<select class="form-select" name="evalkind" required>
+										<option value="" disabled selected>선택</option>
+										<option value="원장">원장</option>
+										<option value="교사">교사</option>
+										<option value="부모">부모</option>
+									</select>
+								</div>
+								<div class="col">
+									<label class="form-label">성명</label>
+									<input class="form-control" name="evalname" type="text" placeholder="성명을 입력하세요." />
+								</div>
+								<!-- <div class="col">
+									<label class="form-label">직위</label>
+									<input class="form-control" type="text" placeholder="직위를 입력하세요." />
+								</div>
+								<div class="col">
+									<label class="form-label">연락처</label>
+									<input class="form-control" type="text" placeholder="연락처를 입력하세요." />
+								</div> -->
+							</div>
+						</form>
+						<div class="modal-footer flex-column flex-sm-row">
+							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" onclick="javascript:evalSubmit('insert');">추가</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<style>
+			body {
+				background: #f6f9fc;
+			}
+		</style>
+<?php
+	include_once $_SERVER['DOCUMENT_ROOT']."/inc/footer.html";
+?>
+
+
+		<!-- Vendor scripts: js libraries and plugins-->
+		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+		<script src="/assets/vendor/cleave.js/dist/cleave.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<!-- Main theme script-->
+		<script src="/assets/js/theme.min.js"></script>
+		<script src="/assets/js/member.js"></script>
+
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+		<script>
+			function execDaumPostcode() {
+				new daum.Postcode({
+					oncomplete: function(data) {
+						var addr = '';
+						var extraAddr = '';
+						var address = '';
+
+						if (data.userSelectedType === 'R') {
+							addr = data.roadAddress;
+						} else {
+							addr = data.jibunAddress;
+						}
+
+						if(data.userSelectedType === 'R'){
+							if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+								extraAddr += data.bname;
+							}
+							if(data.buildingName !== '' && data.apartment === 'Y'){
+								extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+							}
+							if(extraAddr !== ''){
+								extraAddr = ' (' + extraAddr + ')';
+							}
+							address += data.zonecode + ") ";
+							address += addr;
+							address += extraAddr;
+						
+						} else {
+							address += data.zonecode + ") ";
+							address += addr;
+						}
+
+						document.getElementById("address").value = address;
+
+					}
+				}).open();
+			}
+			$(document).ready(function(){
+				getMemberInfo(); // 정보 가져오기
+				getEvalList();
+
+				var pwd_check = "<?=$pwd_check?>";
+				if(pwd_check == "1"){
+					var offset = $('#section03').offset();
+					$('html').animate({scrollTop : offset.top - 100}, 500);
+				}
+			});
+		</script>
+	</body>
+</html>

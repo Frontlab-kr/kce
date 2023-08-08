@@ -9,8 +9,13 @@
 
 	require_once $lib_root."member.class.php";
 	$mb = new Member;
-	$login_check = $mb->login_check(); ?>
+	$login_check = $mb->login_check();
 
+	if($login_check == "no"){
+		Error('LOGIN_ERROR');
+	}
+
+?>
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
@@ -139,6 +144,16 @@
 					setTimeout(function () {
 						preloader.remove();
 					}, 1500);
+
+					var path = window.location.pathname.replace("/","");
+
+					var target_a = document.querySelector('ul.snb a[href="'+path+'"]');
+
+					if(target_a != null){
+						target_a.classList.add('active');
+						var target_parent = target_a.parentNode.parentNode.previousSibling.previousSibling;
+						target_parent.classList.add('active');
+					}
 				};
 			})();
 		</script>
@@ -149,12 +164,11 @@
 
 		<!-- Vendor styles-->
 		<!-- Main Theme Styles + Bootstrap-->
-		<link rel="stylesheet" media="screen" href="/assets/vendor/swiper/swiper-bundle.min.css" />
 		<link rel="stylesheet" media="screen" href="/assets/css/theme.css" />
 		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
 	</head>
 	<!-- Body-->
-	<body>
+	<body class="bg-secondary">
 		<!-- Page loading spinner-->
 		<div class="page-loading active">
 			<div class="page-loading-inner">
@@ -164,85 +178,65 @@
 		</div>
 		<!-- Page wrapper-->
 		<main class="page-wrapper">
-			<!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
-			<header class="navbar navbar-expand-lg fixed-top">
-				<div class="container">
-					<a class="navbar-brand pe-sm-3" href="index.html">
-						<img src="/assets/images/logo.png" alt="" />
-					</a>
-					<div class="dropdown nav d-none d-sm-block order-lg-3 ms-auto">
-						<?php if($login_check == "user"){ ?>
-						<a class="nav-link d-flex align-items-center p-0" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-							<div class="ps-2">
-								<div class="fs-xs lh-1 opacity-60">안녕하세요.</div>
-								<div class="fs-sm dropdown-toggle">
-									<?=$_SESSION['USER_CNAME']?>
-									님
+			<!-- Page content-->
+			<div class="container">
+				<div class="row pt-sm-2 pt-lg-0">
+					<!-- Sidebar (offcanvas on sreens < 992px)-->
+					<aside class="col-lg-3 pe-lg-4 pe-xl-5">
+						<div class="position-lg-sticky top-0">
+							<div class="d-none d-lg-block" style="padding-top: 100px"></div>
+							<div id="sidebarAccount">
+								<div class="mt-4 mb-5">
+									<img src="/assets/images/logo.png" style="height: 40px" alt="" />
 								</div>
-							</div></a
-						>
-						<div class="dropdown-menu dropdown-menu-end my-1">
-							<a class="dropdown-item" href="kindergarden-view.html"><i class="ai-home fs-lg opacity-70 me-2"></i>어린이집 정보</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="/proc/logout.php"><i class="ai-logout fs-lg opacity-70 me-2"></i>로그아웃</a>
+								<div class="offcanvas-body">
+									<div class="pb-2 pb-lg-0 mb-4 mb-lg-5">
+										<h3 class="h5 mb-1"><?=$_SESSION['USER_CNAME']?></h3>
+										<p class="fs-sm text-muted mb-0"><?=$_SESSION['USER_ID']?></p>
+									</div>
+									<ul class="nav flex-column pb-2 pb-lg-4 mb-3 snb">
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>보육과정</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write02.html" data-scroll="data-scroll">1. 영유아 중심 일과 운영</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write03.html" data-scroll="data-scroll"
+														>2. 영유아가 주도하는 배움 지원</a
+													>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write04.html" data-scroll="data-scroll">3. 영유아 존중 상호작용 지원</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write05.html" data-scroll="data-scroll">4. 보육과정 실행 계획 및 평가</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>운영관리</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write06.html" data-scroll="data-scroll"
+														>5. 원장의 리더십과 보육교직원 역량강화</a
+													>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write07.html" data-scroll="data-scroll">6. 건강 및 안정</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>학부모위원 종합의견</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write08.html" data-scroll="data-scroll">학부모위원 종합의견</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
-						<?} else{?>
-						<a class="nav-link d-flex align-items-center p-0" href="signin.html"> 로그인</a>
-						<?}?>
-					</div>
-					<button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<nav class="collapse navbar-collapse" id="navbarNav">
-						<ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px">
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">사업안내</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/">사업안내</a></li>
-									<li><a class="dropdown-item" href="notice-list.html">공지사항</a></li>
-									<li><a class="dropdown-item" href="faq.html">자주하는 질문</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">어린이집 현황</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="kindergarden-view.html">기본사항 입력</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">자체평가</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="kindergarden-self-view.html">자체평가위원회 구성</a></li>
-									<li>
-										<a class="dropdown-item" href="/report01-write01.html" target="_blank" title="새창이 열립니다."
-											>자체평가보고서 작성 <i class="ai-external-link"></i
-										></a>
-									</li>
-									<li>
-										<a class="dropdown-item" href="/report01-view.html?idx=<?=$_SESSION['USER_IDX']?>" target="_blank" title="새창이 열립니다."
-											>자체평가보고서 확인 <i class="ai-external-link"></i
-										></a>
-									</li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">현장평가</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="rater-date.html">현장평가일 조회</a></li>
-									<!-- <li>
-										<a class="dropdown-item" href="../doc/report02-view.html" target="_blank" title="새창이 열립니다."
-											>상호확인서 <i class="ai-external-link"></i
-										></a>
-									</li>
-									<li>
-										<a class="dropdown-item" href="../doc/report04-view.html" target="_blank" title="새창이 열립니다."
-											>평가결과서 <i class="ai-external-link"></i
-										></a>
-									</li> -->
-								</ul>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</header>
-
+					</aside>
