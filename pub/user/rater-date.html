@@ -253,36 +253,52 @@
 				<script src="/assets/vendor/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 				<script src="/assets/vendor/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
 
-				<div
-					class="calendar"
-					data-calendar-options='{
-  "initialDate": "2022-08-01",
-	"contentHeight": "auto",
-	"initialView": "dayGridMonth",
-	"locale": "ko",
-  "headerToolbar": {
-    "left": "today",
-    "center": "title",
-    "right": "prev,next"
-  },
-	"buttonText": {
-		"today": "오늘"
-	},
-  "eventTimeFormat": {
-    "hour": "2-digit",
-    "minute": "2-digit",
-    "hour12": false
-  },
-  "events": [
-    {
-      "title": "새싹 어린이집 평가일",
-      "start": "2022-08-01T16:30",
-      "end": "2022-08-01T18:00",
-      "classNames": ["event-custom-style", "bg-light", "text-nav", "border-0", "rounded-1", "p-2", "ps-3", "border-start", "border-5", "border-purple"]
-    }
-  ]
-}'
-				></div>
+				<div id="calendar" class="calendar"></div>
+				<script>
+					document.addEventListener('DOMContentLoaded', function () {
+						var calendarEl = document.getElementById('calendar');
+						var calendar = new FullCalendar.Calendar(calendarEl, {
+							initialDate: '2022-08-01',
+							contentHeight: 'auto',
+							initialView: 'dayGridMonth',
+							locale: 'ko',
+							headerToolbar: {
+								left: 'today',
+								center: 'title',
+								right: 'prev,next',
+							},
+							buttonText: {
+								today: '오늘',
+								class: 'd',
+							},
+							eventTimeFormat: {
+								hour: '2-digit',
+								minute: '2-digit',
+								hour12: false,
+							},
+							events: [
+								{
+									title: '새싹 어린이집 평가일',
+									start: '2022-08-03T16:30',
+									end: '2022-08-03T18:00',
+									classNames: [
+										'event-custom-style',
+										'bg-light',
+										'text-nav',
+										'border-0',
+										'rounded-1',
+										'p-2',
+										'ps-3',
+										'border-start',
+										'border-5',
+										'border-purple',
+									],
+								},
+							],
+						});
+						calendar.render();
+					});
+				</script>
 			</div>
 		</main>
 		<!-- Footer-->

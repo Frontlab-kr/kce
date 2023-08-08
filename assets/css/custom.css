@@ -162,14 +162,23 @@ header.navbar .dropdown-item i {
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	z-index: 20;
+	z-index: 1;
 }
 .kce-main-hero .list-unstyled {
 	word-break: keep-all;
 }
+.kce-main-hero .list-unstyled li {
+	background: rgba(255, 255, 255, 0.8);
+}
 .kce-main__list .card {
-	width: 50%;
+	width: 500px;
 	border: 1px solid #b9cce0;
+	background: rgba(255, 255, 255, 0.8);
+}
+@media (max-width: 1500px) {
+	.kce-main__list .card {
+		background: rgba(255, 255, 255, 0.9);
+	}
 }
 @media (min-width: 992px) {
 	.kce-main {
