@@ -181,13 +181,7 @@
 									<input class="form-check-input" type="checkbox" id="keep-signedin" />
 									<label class="form-check-label ms-1" for="keep-signedin">아이디 저장</label>
 								</form-check>
-								<span>
-									<a class="fs-sm fw-semibold text-decoration-none my-1" href="find-id.html">아이디 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
-										class="fs-sm fw-semibold text-decoration-none my-1"
-										href="find-password.html"
-										>비밀번호 찾기</a
-									>
-								</span>
+								<span style="font-size: 14px"> 아이디, 비밀번호 문의 : 010-6262-1852 </span>
 							</div>
 							<button class="btn btn-lg btn-primary w-100 mb-4" type="button" onclick="javascript:adminLoginValid();">로그인</button>
 						</form>
@@ -217,28 +211,28 @@
 		<script src="/assets/js/adm_login.js"></script>
 		<script src="/assets/js/cookie.js"></script>
 		<script>
-			$(document).ready(function(){
+			$(document).ready(function () {
 				// 로딩 후 쿠키 불러오기
-				var getCookieId = getCookie("admSaveId");
+				var getCookieId = getCookie('admSaveId');
 				$("input[name='id']").val(getCookieId);
-				if($("input[name='id']").val() != "") {
+				if ($("input[name='id']").val() != '') {
 					$("input[name='id']").addClass('on-focus');
-					$('#keep-signedin').prop("checked", true);
+					$('#keep-signedin').prop('checked', true);
 				}
 				// '아이디 기억' 클릭시 쿠키값 저장 (1주일)
-				$('#keep-signedin').change(function(){
-					if($('#keep-signedin').is(':checked') == true){
+				$('#keep-signedin').change(function () {
+					if ($('#keep-signedin').is(':checked') == true) {
 						var id_val = $("input[name='id']").val();
-						setCookie("admSaveId", id_val, 7);
+						setCookie('admSaveId', id_val, 7);
 					} else {
-						delCookie("admSaveId");
+						delCookie('admSaveId');
 					}
 				});
 				// '아이디 기억' 클릭 후 아이다값 변경될 경우.
-				$("input[name='id']").keyup(function(){
-					if($('#keep-signedin').is(':checked') == true){
+				$("input[name='id']").keyup(function () {
+					if ($('#keep-signedin').is(':checked') == true) {
 						var id_val = $("input[name='id']").val();
-						setCookie("admSaveId", id_val, 7);
+						setCookie('admSaveId', id_val, 7);
 					}
 				});
 			});

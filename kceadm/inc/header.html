@@ -9,7 +9,17 @@
 
 	require_once $lib_root."member.class.php";
 	$mb = new Member;
-	$login_check = $mb->login_check(); if($_SESSION['ADMIN_CHK'] != 1){ Error('ADMIN_ERROR'); } if($login_check == "no"){ Error('LOGIN_ERROR'); } ?>
+	$login_check = $mb->login_check(); 
+
+	if($_SESSION['ADMIN_CHK'] != 1){
+		Error('ADMIN_ERROR');
+	}
+	
+	if($login_check == "no"){
+		Error('LOGIN_ERROR');
+	} 
+
+?>
 <!DOCTYPE html>
 <html lang="ko" class="admin">
 	<head>
