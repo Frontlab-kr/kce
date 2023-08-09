@@ -9,13 +9,13 @@
 
 	require_once $lib_root."member.class.php";
 	$mb = new Member;
-	$login_check = $mb->login_check(); //로그인 한 사람인 경우 패스 ?>
+	$login_check = $mb->login_check(); ?>
 
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
 		<meta charset="utf-8" />
-		<title>한국보육진흥원 | KCE Korea Childcare Evaluation</title>
+		<title>한국보육진흥원</title>
 		<!-- SEO Meta Tags-->
 		<meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
 		<meta
@@ -170,9 +170,6 @@
 					class="text-nav btn btn-icon bg-light border rounded-circle position-absolute top-0 end-0 p-0 mt-3 me-3 mt-sm-4 me-sm-4"
 					style="z-index: 20"
 					href="index.html"
-					data-bs-toggle="tooltip"
-					data-bs-placement="left"
-					title="Back to home"
 					><i class="ai-home"></i
 				></a>
 				<!-- Sign in form-->
@@ -202,7 +199,7 @@
 							<div class="d-flex flex-wrap align-items-center justify-content-between pb-4">
 								<form-check class="my-1">
 									<input class="form-check-input" type="checkbox" id="keep-signedin" />
-									<label class="form-check-label ms-1" for="keep-signedin">로그인 유지</label>
+									<label class="form-check-label ms-1" for="keep-signedin">아이디 저장</label>
 								</form-check>
 								<span>
 									<a class="fs-sm fw-semibold text-decoration-none my-1" href="find-id.html">아이디 찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
@@ -237,9 +234,37 @@
 		<!-- Vendor scripts: js libraries and plugins-->
 		<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="/assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-		<script src="assets/vendor/jquery/jquery-3.1.1.min.js"></script>
+		<script src="/assets/vendor/jquery/jquery-3.1.1.min.js"></script>
 		<!-- Main theme script-->
 		<script src="/assets/js/theme.min.js"></script>
-		<script src="assets/js/member.js"></script>
+		<script src="/assets/js/member.js"></script>
+		<script src="/assets/js/cookie.js"></script>
+		<script>
+			$(document).ready(function () {
+				// 로딩 후 쿠키 불러오기
+				var getCookieId = getCookie('SaveId');
+				$("input[name='id']").val(getCookieId);
+				if ($("input[name='id']").val() != '') {
+					$("input[name='id']").addClass('on-focus');
+					$('#keep-signedin').prop('checked', true);
+				}
+				// '아이디 기억' 클릭시 쿠키값 저장 (1주일)
+				$('#keep-signedin').change(function () {
+					if ($('#keep-signedin').is(':checked') == true) {
+						var id_val = $("input[name='id']").val();
+						setCookie('SaveId', id_val, 7);
+					} else {
+						delCookie('SaveId');
+					}
+				});
+				// '아이디 기억' 클릭 후 아이다값 변경될 경우.
+				$("input[name='id']").keyup(function () {
+					if ($('#keep-signedin').is(':checked') == true) {
+						var id_val = $("input[name='id']").val();
+						setCookie('SaveId', id_val, 7);
+					}
+				});
+			});
+		</script>
 	</body>
 </html>

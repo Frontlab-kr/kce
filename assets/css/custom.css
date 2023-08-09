@@ -151,8 +151,6 @@ header.navbar .dropdown-item i {
 	z-index: 20;
 }
 .kce-main .kce-main__subtitle {
-	position: sticky;
-	top: 150px;
 }
 .kce-main-hero {
 	position: relative;
@@ -198,4 +196,89 @@ header.navbar .dropdown-item i {
 	.kce-main-hero__bg img {
 		width: 100%;
 	}
+}
+
+.kce-main-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	row-gap: 60px;
+	column-gap: 48px;
+}
+@media (max-width: 1500px) {
+	.kce-main-list {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media (max-width: 992px) {
+	.kce-main-list {
+		grid-template-columns: 1fr;
+	}
+}
+.kce-main-list__item {
+	position: relative;
+	padding: 30px;
+	border-radius: 20px;
+	border: 1px solid #b9cce0;
+	background: #fff;
+}
+.kce-main-list__item::before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 52px;
+	right: 46px;
+	width: 60px;
+	height: 60px;
+	background: url(../images/ico01.svg) no-repeat 50% 50%;
+}
+.kce-main-list__item:nth-child(2)::before {
+	background: url(../images/ico02.svg) no-repeat 50% 50%;
+}
+.kce-main-list__item:nth-child(3)::before {
+	background: url(../images/ico03.svg) no-repeat 50% 50%;
+}
+.kce-main-list__item:nth-child(4)::before {
+	background: url(../images/ico04.svg) no-repeat 50% 50%;
+}
+.kce-main-list__item:nth-child(5)::before {
+	background: url(../images/ico05.svg) no-repeat 50% 50%;
+}
+.kce-main-list__item:nth-child(6)::before {
+	background: url(../images/ico06.svg) no-repeat 50% 50%;
+}
+.kce-main-list__item:nth-child(7)::before {
+	background: url(../images/ico07.svg) no-repeat 50% 50%;
+}
+.kce-main-list__item strong {
+	color: #3b77b6;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: normal;
+}
+.kce-main-list__item h4 {
+	margin: 20px 0 10px 0;
+	color: #333;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+.kce-main-list__item span {
+	display: block;
+	color: #999;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+.kce-main-list__item ul {
+	margin: 20px 0 0 -20px;
+}
+.kce-main-list__item ul li {
+	margin-top: 10px;
+	word-break: keep-all;
+}
+.kce-main-list__item ul li:first-child {
+	margin-top: 0;
 }
