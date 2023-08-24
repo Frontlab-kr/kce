@@ -4,13 +4,13 @@
 					<!-- Page content-->
 					<div class="col-lg-9 mt-5 pt-5 pb-2">
 						<h1 class="mb-5"><mark class="cname"><?=$_SESSION['USER_CNAME']?></mark> 자체평가보고서 작성</h1>
-						<h2 class="mb-4">운영관리</h2>
+						
 
 						<!-- 6. 건강 및 안전 -->
 						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden" id="section05">
 							<div class="card-body">
 								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
-									<h2 class="h4 mb-lg-0">6. 건강 및 안전</h2>
+									<h2 class="h4 mb-lg-0">영역 6. 건강 및 안전</h2>
 								</div>
 								<!-- Basic table -->
 								<form class="ckeditor_form" name="frm" id="frm" method="POST" action="javascript:;">
@@ -24,8 +24,8 @@
 										</colgroup>
 										<thead>
 											<tr>
-												<th class="text-center align-middle" rowspan="2">항목</th>
-												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle" rowspan="2">평가<br />항목</th>
+												<th class="text-center align-middle" rowspan="2">평가내용</th>
 												<th class="text-center align-middle">어린이집의 수준</th>
 											</tr>
 											<tr>
@@ -83,10 +83,8 @@
 											</tr>
 											<tr>
 												<td style="word-break: keep-all">
-													보육실 공간, 설비·비품, 놀잇감을 청결하고 쾌적하게 관리한다.<br />
-													화장실 공간과 세면대 주변을 청결하고 쾌적하게 관리한다.<br />
-													기타실내공간, 설비·비품, 놀잇감을 청결하고 쾌적하게 관리한다.<br />
-													실외공간, 설비·비품, 놀잇감을 청결하고 쾌적하게 관리한다.
+													보육실 공간을 청결하고 쾌적하게 관리한다.<br />
+													실내외 공간을 청결하고 쾌적하게 관리한다.
 												</td>
 											</tr>
 											<tr>
@@ -132,9 +130,8 @@
 											<tr>
 												<td style="word-break: keep-all">
 													신선한 식자재 구입, 보관이 이루어지도록 관리한다.<br />
-													조리실의 공간과 비품을 청결하고 위생적으로 관리한다.<br />
-													조리과정을 청결하고 위생적으로 관리한다.<br />
-													배식과정을 청결하고 위생적으로 관리한다.
+													조리실의 공간을 청결하고 위생적으로 관리한다.<br />
+													조리 및 배식 과정을 청결하고 위생적으로 관리한다.													
 												</td>
 											</tr>
 											<tr>
@@ -180,7 +177,7 @@
 											<tr>
 												<td style="word-break: keep-all">
 													보육실과 실내외 공간 및 시설·설비를 안전하게 관리한다.<br />
-													놀잇감과 활동 자료, 위험한 물건을 안전하게 관리한다.<br />
+													놀잇감, 놀이 기구, 위험한 물건을 안전하게 관리한다.<br />
 													비상사태용 시설·설비를 상시 사용할 수 있도록 관리한다.
 												</td>
 											</tr>
@@ -227,7 +224,8 @@
 											<tr>
 												<td style="word-break: keep-all">
 													영유아의 안전한 일과 보장에 역점을 두고 관리한다.<br />
-													비상시 신속하게 대처할 수 있도록 관리한다.
+													비상시 신속하게 대처할 수 있도록 관리한다.<br />
+													등하원 차량을 운행할 경우 안전 요건을 갖추어 관리한다.
 												</td>
 											</tr>
 										</tbody>
@@ -261,12 +259,10 @@
 						</section>
 
 						<div class="d-flex justify-content-between py-4">
-							<p class="d-flex">
-								<a class="btn btn-outline-secondary" href="report01-write06.html">이전</a>
-								<a class="btn btn-outline-secondary ms-2" href="report01-write08.html">다음</a>
-							</p>
-							<p class="d-flex">
-								<button type="button" class="btn btn-primary" href="#alert01" data-bs-toggle="modal">임시저장</button>
+							<p class="d-flex justify-content-center w-100">
+								<a class="btn btn-outline-secondary mx-2" href="report01-write06.html">이전</a>
+								<button type="button" class="btn btn-primary mx-2" href="#alert01" data-bs-toggle="modal">임시저장</button>
+								<a class="btn btn-outline-secondary mx-2" href="report01-write08.html">다음</a>
 							</p>
 						</div>
 					</div>
@@ -288,7 +284,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmSubmit7()">추가</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmSubmit7()">확인</button>
 						</div>
 					</div>
 				</div>
@@ -305,7 +301,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">확인</button>
 						</div>
 					</div>
 				</div>

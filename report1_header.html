@@ -1,0 +1,253 @@
+<?php
+	session_start();
+
+	require_once $_SERVER['DOCUMENT_ROOT']."/lib/setting.php";
+
+	require_once $lib_root."util.php";
+    require_once $lib_root."mysql.class.php";
+    $db = new dbHandle();
+
+	require_once $lib_root."member.class.php";
+	$mb = new Member;
+	$login_check = $mb->login_check();
+
+	if($_SESSION['ADMIN_CHK'] != 0){
+		Error('SERVICE_ERROR2');
+		exit;
+	}
+
+	if($_SESSION['MANAGER_CHK'] != 0){
+		Error('SERVICE_ERROR2');
+		exit;
+	}
+
+	if($login_check == "no"){
+		Error('LOGIN_ERROR');
+		exit;
+	}
+
+?>
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<title>한국보육진흥원 | KCE Korea Childcare Evaluation</title>
+		<!-- SEO Meta Tags-->
+		<meta name="description" content="Around - Multipurpose Bootstrap HTML Template" />
+		<meta
+			name="keywords"
+			content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative"
+		/>
+		<meta name="author" content="Createx Studio" />
+		<!-- Viewport-->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Favicon and Touch Icons-->
+		<link rel="shortcut icon" href="/assets/favicon/favicon.ico" type="image/x-icon" />
+		<link rel="manifest" href="/assets/favicon/site.webmanifest" />
+		<link rel="mask-icon" color="#6366f1" href="/assets/favicon/safari-pinned-tab.svg" />
+		<meta name="msapplication-TileColor" content="#080032" />
+		<meta name="msapplication-config" content="assets/favicon/browserconfig.xml" />
+		<meta name="theme-color" content="white" />
+		<!-- Theme mode-->
+		<script>
+			let mode = window.localStorage.getItem('mode'),
+				root = document.getElementsByTagName('html')[0];
+			if (mode !== undefined && mode === 'dark') {
+				root.classList.add('dark-mode');
+			} else {
+				root.classList.remove('dark-mode');
+			}
+		</script>
+		<!-- Page loading styles-->
+		<style>
+			.page-loading {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				-webkit-transition: all 0.4s 0.2s ease-in-out;
+				transition: all 0.4s 0.2s ease-in-out;
+				background-color: #fff;
+				opacity: 0;
+				visibility: hidden;
+				z-index: 9999;
+			}
+			.dark-mode .page-loading {
+				background-color: #121519;
+			}
+			.page-loading.active {
+				opacity: 1;
+				visibility: visible;
+			}
+			.page-loading-inner {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				text-align: center;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				-webkit-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				opacity: 0;
+			}
+			.page-loading.active > .page-loading-inner {
+				opacity: 1;
+			}
+			.page-loading-inner > span {
+				display: block;
+				font-family: 'Inter', sans-serif;
+				font-size: 1rem;
+				font-weight: normal;
+				color: #6f788b;
+			}
+			.dark-mode .page-loading-inner > span {
+				color: #fff;
+				opacity: 0.6;
+			}
+			.page-spinner {
+				display: inline-block;
+				width: 2.75rem;
+				height: 2.75rem;
+				margin-bottom: 0.75rem;
+				vertical-align: text-bottom;
+				background-color: #d7dde2;
+				border-radius: 50%;
+				opacity: 0;
+				-webkit-animation: spinner 0.75s linear infinite;
+				animation: spinner 0.75s linear infinite;
+			}
+			.dark-mode .page-spinner {
+				background-color: rgba(255, 255, 255, 0.25);
+			}
+			@-webkit-keyframes spinner {
+				0% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				50% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@keyframes spinner {
+				0% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				50% {
+					opacity: 1;
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+		</style>
+		<!-- Page loading scripts-->
+		<script>
+			(function () {
+				window.onload = function () {
+					const preloader = document.querySelector('.page-loading');
+					preloader.classList.remove('active');
+					setTimeout(function () {
+						preloader.remove();
+					}, 1500);
+
+					var path = window.location.pathname.replace("/","");
+
+					var target_a = document.querySelector('ul.snb a[href="'+path+'"]');
+
+					if(target_a != null){
+						target_a.classList.add('active');
+						var target_parent = target_a.parentNode.parentNode.previousSibling.previousSibling;
+						target_parent.classList.add('active');
+					}
+				};
+			})();
+		</script>
+		<!-- Import Google Font-->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font" />
+
+		<!-- Vendor styles-->
+		<!-- Main Theme Styles + Bootstrap-->
+		<link rel="stylesheet" media="screen" href="/assets/css/theme.css" />
+		<link rel="stylesheet" media="screen" href="/assets/css/custom.css" />
+	</head>
+	<!-- Body-->
+	<body class="bg-secondary">
+		<!-- Page loading spinner-->
+		<div class="page-loading active">
+			<div class="page-loading-inner">
+				<div class="page-spinner"></div>
+				<span>Loading...</span>
+			</div>
+		</div>
+		<!-- Page wrapper-->
+		<main class="page-wrapper">
+			<!-- Page content-->
+			<div class="container">
+				<div class="row pt-sm-2 pt-lg-0">
+					<!-- Sidebar (offcanvas on sreens < 992px)-->
+					<aside class="col-lg-3 pe-lg-4 pe-xl-5">
+						<div class="position-lg-sticky top-0">
+							<div class="d-none d-lg-block" style="padding-top: 100px"></div>
+							<div id="sidebarAccount">
+								<div class="mt-4 mb-5">
+									<img src="/assets/images/logo.png" style="height: 40px" alt="" />
+								</div>
+								<div class="offcanvas-body">
+									<div class="pb-2 pb-lg-0 mb-4 mb-lg-5">
+										<h3 class="h5 mb-1"><?=$_SESSION['USER_CNAME']?></h3>
+										<p class="fs-sm text-muted mb-0"><?=$_SESSION['USER_ID']?></p>
+									</div>
+									<ul class="nav flex-column pb-2 pb-lg-4 mb-3 snb">
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>보육과정</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write02.html" data-scroll="data-scroll">1. 영유아 중심 일과 운영</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write03.html" data-scroll="data-scroll"
+														>2. 영유아가 주도하는 배움 지원</a
+													>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write04.html" data-scroll="data-scroll">3. 영유아 존중 상호작용 지원</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write05.html" data-scroll="data-scroll">4. 보육과정 실행과 평가</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>운영관리</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write06.html" data-scroll="data-scroll"
+														>5. 원장의 리더십과 보육교직원 역량강화</a
+													>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write07.html" data-scroll="data-scroll">6. 건강 및 안전</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<span class="nav-link px-0 py-2"><i class="ai-list fs-lg opacity-90 me-2"></i><strong>학부모위원 종합의견</strong></span>
+											<ul class="nav flex-column border-start ps-3 ms-2 mb-2">
+												<li class="nav-item">
+													<a class="nav-link fs-sm fw-normal py-2 px-0" href="report01-write08.html" data-scroll="data-scroll">학부모위원 종합의견</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</aside>

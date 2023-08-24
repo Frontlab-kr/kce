@@ -4,13 +4,13 @@
 					<!-- Page content-->
 					<div class="col-lg-9 mt-5 pt-5 pb-2">
 						<h1 class="mb-5"><mark class="cname"><?=$_SESSION['USER_CNAME']?></mark> 자체평가보고서 작성</h1>
-						<h2 class="mb-4">보육과정</h2>
+						
 
 						<!-- 3. 영유아 존중 상호작용 지원 -->
 						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden" id="section03">
 							<div class="card-body">
 								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
-									<h2 class="h4 mb-lg-0">3. 영유아 존중 상호작용 지원</h2>
+									<h2 class="h4 mb-lg-0">영역 3. 영유아 존중 상호작용 지원</h2>
 								</div>
 								<!-- Basic table -->
 								<form class="ckeditor_form" name="frm" id="frm" method="POST" action="javascript:;">
@@ -24,8 +24,8 @@
 										</colgroup>
 										<thead>
 											<tr>
-												<th class="text-center align-middle" rowspan="2">항목</th>
-												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle" rowspan="2">평가<br />항목</th>
+												<th class="text-center align-middle" rowspan="2">평가내용</th>
 												<th class="text-center align-middle">어린이집의 수준</th>
 											</tr>
 											<tr>
@@ -84,8 +84,8 @@
 											<tr>
 												<td style="word-break: keep-all">
 													영유아의 비언어적・언어적 표현을 경청하고, 있는 그대로 존중하여 반응하며 영유아와 소통되고 있는지를 확인한다.<br />
-													영유아의 놀이를 기다리고 지켜보고, 영유아와 함께 놀이하면서 경험이나 배움을 지원하는 상호작용을 한다.<br />
-													영유아 의성, 신체적 특성, 장애, 종교, 가족 및 문화적 배경 등을 존중하는 말과 행동을 한다.
+													영유아의 놀이를 기다리고 지켜보며 영유아와 함께 놀이하면서 경험이나 배움을 지원하는 상호작용을 한다.<br />
+													영유아의 성, 신체적 특성, 장애, 종교, 가족 및 문화적 배경 등을 존중하는 말과 행동을 한다.
 												</td>
 											</tr>
 											<tr>
@@ -130,8 +130,7 @@
 											</tr>
 											<tr>
 												<td style="word-break: keep-all">
-													영유아들이 서로의 관점을 있는 그대로 존중할 수 있도록 격려하고, 영유 아 또래 간에 경험과 배움을 공유할 수 있도록 격려하며, 다툼이나
-													문제 가 발생하면 영유아가 스스로 해결할 수 있도록 지원한다.
+													영유아들이 서로의 관점을 있는 그대로 존중할 수 있도록 격려하고, 영유아 또래 간에 경험 또는 배움을 공유할 수 있도록 격려하며 다툼이나 문제가 발생하면 영유아가 스스로 해결할 수 있도록 지원한다.
 												</td>
 											</tr>
 										</tbody>
@@ -165,12 +164,10 @@
 						</section>
 
 						<div class="d-flex justify-content-between py-4">
-							<p class="d-flex">
-								<a class="btn btn-outline-secondary" href="report01-write03.html">이전</a>
-								<a class="btn btn-outline-secondary ms-2" href="report01-write05.html">다음</a>
-							</p>
-							<p class="d-flex">
-								<button type="button" class="btn btn-primary" href="#alert01" data-bs-toggle="modal">임시저장</button>
+							<p class="d-flex justify-content-center w-100">
+								<a class="btn btn-outline-secondary mx-2" href="report01-write03.html">이전</a>
+								<button type="button" class="btn btn-primary mx-2" href="#alert01" data-bs-toggle="modal">임시저장</button>
+								<a class="btn btn-outline-secondary mx-2" href="report01-write05.html">다음</a>
 							</p>
 						</div>
 					</div>
@@ -192,7 +189,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmSubmit4()">추가</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmSubmit4()">확인</button>
 						</div>
 					</div>
 				</div>
@@ -209,7 +206,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">확인</button>
 						</div>
 					</div>
 				</div>

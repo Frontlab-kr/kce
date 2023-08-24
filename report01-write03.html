@@ -4,13 +4,13 @@
 					<!-- Page content-->
 					<div class="col-lg-9 mt-5 pt-5 pb-2">
 						<h1 class="mb-5"><mark class="cname"><?=$_SESSION['USER_CNAME']?></mark> 자체평가보고서 작성</h1>
-						<h2 class="mb-4">보육과정</h2>
+						
 
 						<!-- 2. 영유아가 주도하는 배움 지원 -->
 						<section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4 overflow-hidden" id="section02">
 							<div class="card-body">
 								<div class="d-flex align-items-center mt-sm-n1 pb-2 mb-0 mb-lg-1 mb-xl-3">
-									<h2 class="h4 mb-lg-0">2. 영유아가 주도하는 배움 지원</h2>
+									<h2 class="h4 mb-lg-0">영역 2. 영유아가 주도하는 배움 지원</h2>
 								</div>
 								<!-- Basic table -->
 								<form class="ckeditor_form" name="frm" id="frm" method="POST" action="javascript:;">
@@ -24,8 +24,8 @@
 										</colgroup>
 										<thead>
 											<tr>
-												<th class="text-center align-middle" rowspan="2">항목</th>
-												<th class="text-center align-middle" rowspan="2">세부항목</th>
+												<th class="text-center align-middle" rowspan="2">평가<br />항목</th>
+												<th class="text-center align-middle" rowspan="2">평가내용</th>
 												<th class="text-center align-middle">어린이집의 수준</th>
 											</tr>
 											<tr>
@@ -84,10 +84,9 @@
 											<tr>
 												<td style="word-break: keep-all">
 													영유아의 놀이 중심으로 공간을 구성하고, 놀이가 방해받지 않을 정도의 크기로 제공한다.<br />
-													실내외에서 자연 및 계절의 변화를 경험할 수 있고, 편안하게 휴식할 수 있는 공간과 분위기를 마련한다.<br />
-													영유아의 놀이와 활동 기록을 활용하여 보육실이나 복도, 실외 공간 등을 구성하고 정기적으로 교체한다.<br />
-													(장애영유아를 담당하는 경우) 장애영유아의 장애유형과 특성에 적절한 공간 및 시설, 적합한 보조 기구 등이 마련되어 있고, 장애영유아가 일과에 참여할 수 있도록 이동, 활동 참여, 의사소통 등을 다양한 형태로 지원해야 한다.<br />
-													※특수교사 및 장애영유아를 위한 보육교사가 배치되어 있는 경우에만 평정함.
+													실내외에서 자연 및 계절, 날씨의 변화를 경험할 수 있고, 편안하게 휴식할 수 있는 공간과 분위기를 마련한다.<br />
+													 영유아의 놀이와 활동 기록을 활용하여 보육실이나 복도, 실외 공간 등을 구성하고 정기적으로 교체한다.<br />
+													(장애아 전문) 장애영유아의 장애 유형과 특성에 적절한 공간 및 시설, 적합한 보조 기구 등이 마련되어 있고, 장애영유아가 일과에 참여할 수 있도록 이동, 활동 참여, 의사소통 등을 다양한 형태로 지원 한다.
 												</td>
 											</tr>
 											<tr>
@@ -166,12 +165,10 @@
 						</section>
 
 						<div class="d-flex justify-content-between py-4">
-							<p class="d-flex">
-								<a class="btn btn-outline-secondary" href="report01-write02.html">이전</a>
-								<a class="btn btn-outline-secondary ms-2" href="report01-write04.html">다음</a>
-							</p>
-							<p class="d-flex">
-								<button type="button" class="btn btn-primary" href="#alert01" data-bs-toggle="modal">임시저장</button>
+							<p class="d-flex justify-content-center w-100">
+								<a class="btn btn-outline-secondary mx-2" href="report01-write02.html">이전</a>
+								<button type="button" class="btn btn-primary mx-2" href="#alert01" data-bs-toggle="modal">임시저장</button>
+								<a class="btn btn-outline-secondary mx-2" href="report01-write04.html">다음</a>
 							</p>
 						</div>
 					</div>
@@ -193,7 +190,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmSubmit3()">추가</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal" onclick="frmSubmit3()">확인</button>
 						</div>
 					</div>
 				</div>
@@ -210,7 +207,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary w-100 w-sm-auto mb-3 mb-sm-0" data-bs-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">추가</button>
+							<button type="button" class="btn btn-primary w-100 w-sm-auto ms-sm-2" data-bs-dismiss="modal">확인</button>
 						</div>
 					</div>
 				</div>
